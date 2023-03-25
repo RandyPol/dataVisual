@@ -21,6 +21,15 @@ svg
   .data(dataset)
   .enter()
   .append('circle')
-  .attr('cx', (d) => d[0])
-  .attr('cy', (d) => h - d[1])
+  .attr('cx', (d, i) => d[0])
+  .attr('cy', (d, i) => h - d[1])
   .attr('r', 5)
+
+svg
+  .selectAll('text')
+  .data(dataset)
+  .enter()
+  .append('text')
+  .attr('x', (d, i) => d[0] + 5)
+  .attr('y', (d, i) => h - d[1])
+  .text((d) => `${d[0]}, ${d[1]}`)
