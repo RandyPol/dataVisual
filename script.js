@@ -19,3 +19,11 @@ d3.select('body')
   .text((dataPoint) => dataPoint + ' USD')
   .style('font-family', 'verdana')
   .style('color', (dataPoint) => (dataPoint < 20 ? 'red' : 'green'))
+
+//   Add Classes with D3
+d3.select('body')
+  .selectAll('div')
+  .data(dataset)
+  .enter()
+  .append('div')
+  .attr('class', 'bar')
