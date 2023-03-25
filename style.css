@@ -5,3 +5,6 @@ svg {
   background-color: pink;
 }
 
+.bar:hover {
+  fill: brown;
+}

@@ -19,6 +19,7 @@ svg
   .attr('x', (d, i) => i * 30)
   .attr('y', (d) => h - d * 3)
   .attr('fill', 'navy')
+  .attr('class', 'bar')
 
 svg
   .selectAll('text')
@@ -28,4 +29,4 @@ svg
   .attr('x', (d, i) => i * 30)
   .attr('y', (d) => h - d * 3 - 3)
   .text((d) => d)
-  .attr('style',`font-size: 25; FILL: red;`)
+  .attr('style', `font-size: 25; FILL: red;`)
