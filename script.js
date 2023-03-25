@@ -15,6 +15,6 @@ svg
   .enter()
   .append('rect')
   .attr('width', 25)
-  .attr('height', 100)
+  .attr('height', (d, i) => d * 3)
   .attr('x', (d, i) => i * 30)
   .attr('y', 0)
