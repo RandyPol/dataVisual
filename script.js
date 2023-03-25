@@ -16,5 +16,5 @@ svg
   .append('rect')
   .attr('width', 25)
   .attr('height', 100)
-  .attr('x', 0)
+  .attr('x', (d, i) => i * 30)
   .attr('y', 0)
