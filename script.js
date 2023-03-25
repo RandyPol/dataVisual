@@ -20,6 +20,8 @@ svg
   .attr('y', (d) => h - d * 3)
   .attr('fill', 'navy')
   .attr('class', 'bar')
+  .append('title')
+  .text((d) => d)
 
 svg
   .selectAll('text')
