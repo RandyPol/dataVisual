@@ -28,3 +28,13 @@ d3.select('body')
   .append('div')
   .attr('class', 'bar')
   .style('height', (dataPoint) => dataPoint * 10 + 'px')
+
+// About SVG
+// Create a Bar for Each Data Point in the Set
+const w = 500
+const h = 100
+
+const svg = d3
+  .select('body')
+  .append('svg')
+  .attr('style', `width: ${w}px; height: ${h}px;`)

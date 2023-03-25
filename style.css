@@ -1,6 +1,9 @@
 body {
   background-color: #282525;
 }
+svg {
+  background-color: pink;
+}
 
 .bar {
   width: 25px;
@@ -8,5 +11,4 @@ body {
   display: inline-block;
   background-color: blue;
   margin-right: 2px;
-  
 }
