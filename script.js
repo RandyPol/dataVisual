@@ -18,3 +18,4 @@ svg
   .attr('height', (d, i) => d * 3)
   .attr('x', (d, i) => i * 30)
   .attr('y', (d) => h - d * 3)
+  .attr('fill', 'navy')
