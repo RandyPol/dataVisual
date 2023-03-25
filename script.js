@@ -19,3 +19,12 @@ svg
   .attr('x', (d, i) => i * 30)
   .attr('y', (d) => h - d * 3)
   .attr('fill', 'navy')
+
+svg
+  .selectAll('text')
+  .data(dataset)
+  .enter()
+  .append('text')
+  .attr('x', (d, i) => i * 30)
+  .attr('y', (d) => h - d * 3 - 3)
+  .text((d) => d)
