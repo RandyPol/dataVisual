@@ -17,4 +17,4 @@ svg
   .attr('width', 25)
   .attr('height', (d, i) => d * 3)
   .attr('x', (d, i) => i * 30)
-  .attr('y', 0)
+  .attr('y', (d) => h - d * 3)
