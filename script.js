@@ -28,3 +28,4 @@ svg
   .attr('x', (d, i) => i * 30)
   .attr('y', (d) => h - d * 3 - 3)
   .text((d) => d)
+  .attr('style',`font-size: 25; FILL: red;`)
