@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', function () {
       .then((response) => response.json())
       .then((json) => {
         let html = ''
+        json = json.filter((val) => val.id !== 1)
         json.forEach(function (val) {
           const keys = Object.keys(val)
           html += "<div class = 'cat'>"
