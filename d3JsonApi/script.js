@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', function () {
       .then((response) => response.json())
       .then((json) => {
         document.getElementById('message').innerHTML = JSON.stringify(json)
+        console.log(json[2].codeNames[1])
       })
   }
 })
