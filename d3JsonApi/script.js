@@ -27,8 +27,15 @@ document.addEventListener('DOMContentLoaded', function () {
     fetch('/json/cats.json')
       .then((response) => response.json())
       .then((json) => {
-        document.getElementById('message').innerHTML = JSON.stringify(json)
-        console.log(json[2].codeNames[1])
+        let html = ''
+        json.forEach(function (val) {
+          const keys = Object.keys(val)
+          html += "<div class = 'cat'>"
+          keys.forEach(function (key) {
+            html += '<strong>' + key + '</strong>: ' + val[key] + '<br>'
+          })
+          html += '</div><br>'
+        })
       })
   }
 })
