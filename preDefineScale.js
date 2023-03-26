@@ -34,13 +34,28 @@ svg
   .append('circle')
   .attr('cx', (d) => xScale(d[0]))
   .attr('cy', (d) => yScale(d[1]))
-  .attr('r', 5)
+  .attr('r', (d) => 5)
 
 svg
   .selectAll('text')
   .data(dataset)
   .enter()
   .append('text')
-  .text((d) => d[0] + ', ' + d[1])
+  .text((d) => d[0] + ',' + d[1])
   .attr('x', (d) => xScale(d[0] + 10))
   .attr('y', (d) => yScale(d[1]))
+
+const xAxis = d3.axisBottom(xScale)
+// Add your code below this line
+const yAxis = d3.axisLeft(yScale)
+// Add your code above this line
+
+svg
+  .append('g')
+  .attr('transform', 'translate(0,' + (h - padding) + ')')
+  .call(xAxis)
+
+svg
+  .append('g')
+  .attr('transform', 'translate(' + padding + ',0)')
+  .call(yAxis)
