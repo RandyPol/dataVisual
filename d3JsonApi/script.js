@@ -33,9 +33,17 @@ document.addEventListener('DOMContentLoaded', function () {
           html += "<div class = 'cat'>"
           keys.forEach(function (key) {
             html += '<strong>' + key + '</strong>: ' + val[key] + '<br>'
+            html +=
+              "<img src = '" +
+              val.imageLink +
+              "' " +
+              "alt='" +
+              val.altText +
+              "'>"
           })
           html += '</div><br>'
         })
+        document.getElementsByClassName('message')[0].innerHTML = html
       })
   }
 })
