@@ -61,5 +61,21 @@ async function drawScatterplot() {
       'transform',
       `translate(${dimensions.margin.left}px, ${dimensions.margin.top}px)`
     )
+
+  /** ---------------------------------------------------- */
+
+  /**
+   * Step 4: Creating the scales
+   * We need to tell our scale:
+   * 1. What inputs it will need to handle (domain)
+   * 2. What outputs we want it to produce (range)
+   */
+
+  // Step 4.1: Create the xScale
+  const xScale = d3
+    .scaleLinear()
+    .domain(d3.extent(dataSet, xAccessor))
+    .range([0, dimensions.boundedWidth])
+    .nice()
 }
 drawScatterplot()
