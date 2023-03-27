@@ -77,5 +77,19 @@ async function drawScatterplot() {
     .domain(d3.extent(dataSet, xAccessor))
     .range([0, dimensions.boundedWidth])
     .nice()
+
+  // Step 4.2: Create the yScale
+  // Creating the yScale will be very similar to creating the xScale.
+  // The only difference are:
+  // 1. We'll use the yAccessor to access the humidity data
+  // 2. We want to invert the range to make sure the axis runs from bottom-to-top
+  const yScale = d3
+    .scaleLinear()
+    .domain(d3.extent(dataSet, yAccessor))
+    .range([dimensions.boundedHeight, 0])
+    .nice()
+
+  console.log(d3.extent(dataSet, yAccessor))
+  console.log(yScale.domain())
 }
 drawScatterplot()
