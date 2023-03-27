@@ -1,1 +1,4 @@
-d3.select('div').append('p').text('Hello World!')
+d3.selectAll('div')
+  .append('p')
+  .text('Hello World! Whats up?')
+  .style('color', 'red')
