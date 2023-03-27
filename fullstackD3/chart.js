@@ -65,8 +65,16 @@ async function drawLineChart() {
     .attr('stroke-width', 2)
 
   // Adding axis to our chart
+  // yAxis
   const yAxisGenerator = d3.axisLeft().scale(yScale)
   const yAxis = bounds.append('g').call(yAxisGenerator)
+
+  // xAxis
+  const xAxisGenerator = d3.axisBottom().scale(xScale)
+  const xAxis = bounds
+    .append('g')
+    .call(xAxisGenerator)
+    .style('transform', `translateY(${dimensions.boundedHeight}px)`)
 }
 
 drawLineChart()
