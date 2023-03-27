@@ -41,6 +41,16 @@ async function drawLineChart() {
       'transform',
       `translate(${dimensions.margin.left}px, ${dimensions.margin.top}px)`
     )
+  // Creating our scales
+  const yScale = d3
+    .scaleLinear()
+    .domain(d3.extent(dataSet, yAccessor))
+    .range([dimensions.boundedHeight, 0])
+
+  const xScale = d3
+    .scaleTime()
+    .domain(d3.extent(dataSet, xAccessor))
+    .range([0, dimensions.boundedWidth])
 }
 
 drawLineChart()
