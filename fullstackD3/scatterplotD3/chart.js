@@ -1,9 +1,11 @@
 // Steps in Drawing a Chart are the same for all charts
 // I'm going to show theses Steps by creating a Scotterplot
 
-// Step 1: Accessing the data
-
 async function drawScatterplot() {
+  /**
+   * Step 1: Accessing the data
+   */
+
   // Step 1.1: Utitlize d3.json to load the data file
   const dataSet = await d3.json('../my_weather_data.json')
 
@@ -11,6 +13,33 @@ async function drawScatterplot() {
   // We use console.log(dataSet[0]) to see the data structure
   const xAccessor = (d) => d.dewPoint
   const yAccessor = (d) => d.humidity
-}
 
+  /** ---------------------------------------------------- */
+
+  /**
+   * Step 2: Creating the chart dimensions
+   */
+
+  // Step 2.1: Create the Width and Height of the chart
+  const width = d3.min([window.innerWidth * 0.9, window.innerHeight * 0.9])
+  // Step 2.2: Create the width and height of the wrapper (SVG element that will contain the chart)
+  // and the margins (the space between the chart and the wrapper)
+  const dimensions = {
+    width: width,
+    height: width,
+    margin: {
+      top: 10,
+      right: 10,
+      bottom: 50,
+      left: 50,
+    },
+  }
+  // Step 2.3: Compute the size of the bounds
+  dimensions.boundedWidth =
+    dimensions.width - dimensions.margin.left - dimensions.margin.right
+  dimensions.boundedHeight =
+    dimensions.height - dimensions.margin.top - dimensions.margin.bottom
+
+  /** ---------------------------------------------------- */
+}
 drawScatterplot()
