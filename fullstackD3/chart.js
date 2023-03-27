@@ -52,18 +52,6 @@ async function drawLineChart() {
     .domain(d3.extent(dataSet, xAccessor))
     .range([0, dimensions.boundedWidth])
 
-  // Come back to this later to see the labels
-  //   const lineGenerator = d3
-  //     .line()
-  //     .x((d) => {
-  //       console.log(d.date)
-  //       return xScale(xAccessor(d))
-  //     })
-  //     .y((d) => {
-  //       console.log(yScale(yAccessor(d)))
-  //       return yScale(yAccessor(d))
-  //     })
-
   const lineGenerator = d3
     .line()
     .x((d) => xScale(xAccessor(d)))
@@ -75,6 +63,10 @@ async function drawLineChart() {
     .attr('fill', 'none')
     .attr('stroke', '#af9358')
     .attr('stroke-width', 2)
+
+  // Adding axis to our chart
+  const yAxisGenerator = d3.axisLeft().scale(yScale)
+  const yAxis = bounds.append('g').call(yAxisGenerator)
 }
 
 drawLineChart()

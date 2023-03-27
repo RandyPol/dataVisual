@@ -9,3 +9,7 @@ body {
 svg {
   background-color: rgb(147, 172, 164);
 }
+
+.tick{
+    color:blue
+}
