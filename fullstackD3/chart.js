@@ -10,6 +10,22 @@ async function drawLineChart() {
 
   console.log(dataSet[0])
   console.log(xAccessor(dataSet[0]))
+
+  let dimensions = {
+    width: window.innerWidth * 0.9,
+    height: 400,
+    margin: {
+      top: 15,
+      right: 15,
+      bottom: 40,
+      left: 60,
+    },
+  }
+  // Computing the size of our bounds and add that to our dimensions object
+  dimensions.boundedWidth =
+    dimensions.width - dimensions.margin.left - dimensions.margin.right
+  dimensions.boundedHeight =
+    dimensions.height - dimensions.margin.top - dimensions.margin.bottom
 }
 
 drawLineChart()
