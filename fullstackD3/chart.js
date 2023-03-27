@@ -57,6 +57,16 @@ async function drawLineChart() {
     .x((d) => xScale(xAccessor(d)))
     .y((d) => yScale(yAccessor(d)))
 
+  // Vizualize a threshold by adding a rectangle covering a;; temperature below freezing
+  const freezingTemperaturePlacement = yScale(32)
+  const freezingTemperatures = bounds
+    .append('rect')
+    .attr('x', 0)
+    .attr('width', dimensions.boundedWidth)
+    .attr('y', freezingTemperaturePlacement)
+    .attr('height', dimensions.boundedHeight - freezingTemperaturePlacement)
+    .attr('fill', '#e0f3f3')
+
   const line = bounds
     .append('path')
     .attr('d', lineGenerator(dataSet))
