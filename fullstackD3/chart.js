@@ -26,6 +26,11 @@ async function drawLineChart() {
     dimensions.width - dimensions.margin.left - dimensions.margin.right
   dimensions.boundedHeight =
     dimensions.height - dimensions.margin.top - dimensions.margin.bottom
+
+  // Creating Our Canvas|Wrapper
+  const wrapper = d3.select('#wrapper')
+
+  console.log(wrapper)
 }
 
 drawLineChart()
