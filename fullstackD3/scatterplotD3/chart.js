@@ -41,5 +41,25 @@ async function drawScatterplot() {
     dimensions.height - dimensions.margin.top - dimensions.margin.bottom
 
   /** ---------------------------------------------------- */
+
+  /**
+   * Step 3: Drawing the canvas
+   */
+
+  // Step 3.1: Create the wrapper (SVG element that will contain the chart)
+  const wrapper = d3
+    .select('#wrapper')
+    .append('svg')
+    .attr('width', dimensions.width)
+    .attr('height', dimensions.height)
+
+  // Step 3.2: Create the bounds (SVG group element that will contain the chart)
+  // Shift the bounds to the right and down by the margins
+  const bounds = wrapper
+    .append('g')
+    .style(
+      'transform',
+      `translate(${dimensions.margin.left}px, ${dimensions.margin.top}px)`
+    )
 }
 drawScatterplot()
