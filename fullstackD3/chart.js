@@ -34,6 +34,14 @@ async function drawLineChart() {
     .append('svg')
     .attr('width', dimensions.width)
     .attr('height', dimensions.height)
+
+  // Adding a bounds element to our svg with the SVG group element
+  const bounds = wrapper
+    .append('g')
+    .style(
+      'transform',
+      `translate(${dimensions.margin.left}px, ${dimensions.margin.top}px)`
+    )
 }
 
 drawLineChart()
