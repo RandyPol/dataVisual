@@ -127,6 +127,10 @@ async function drawScatterplot() {
     .attr('fill', 'black')
     .style('font-size', '1.4em')
     .html('Dew point (&deg;F)')
+
+  // Step 6.2: Draw the y-axis
+  const yAxisGenerator = d3.axisLeft().scale(yScale).ticks(4)
+  const yAxis = bounds.append('g').call(yAxisGenerator)
 }
 
 drawScatterplot()
