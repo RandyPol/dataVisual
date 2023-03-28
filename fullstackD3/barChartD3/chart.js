@@ -45,6 +45,17 @@ async function drawBarChart() {
     .domain(d3.extent(dataSet, metricAccessor))
     .range([0, dimensions.boundedWidth])
     .nice()
+
+  // Creating the bins using the histogram generator
+  const binsGenerator = d3
+    .histogram()
+    .domain(xScale.domain())
+    .value(metricAccessor)
+    .thresholds(12)
+
+  // Creating the bins from the dataset
+  const bins = binsGenerator(dataSet)
+  console.log(bins)
 }
 
 drawBarChart()
