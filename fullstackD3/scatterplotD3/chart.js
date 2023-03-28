@@ -91,5 +91,22 @@ async function drawScatterplot() {
 
   console.log(d3.extent(dataSet, yAccessor))
   console.log(yScale.domain())
+
+  /** ---------------------------------------------------- */
+
+  /**
+   * Step 5: Drawing the data
+   */
+  // const dots = bounds.selectAll('circle').data(dataSet)
+  const dots = bounds
+    .selectAll('circle')
+    .data(dataSet)
+    .enter()
+    .append('circle')
+    .attr('cx', (d) => xScale(xAccessor(d)))
+    .attr('cy', (d) => yScale(yAccessor(d)))
+    .attr('r', 5)
+    .attr('fill', 'cornflowerblue')
 }
+
 drawScatterplot()
