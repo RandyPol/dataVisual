@@ -106,6 +106,18 @@ async function drawScatterplot() {
     .attr('cy', (d) => yScale(yAccessor(d)))
     .attr('r', 5)
     .attr('fill', 'cornflowerblue')
+  /** ---------------------------------------------------- */
+
+  /**
+   * Step 6: Drawing the peripherals
+   */
+
+  // Step 6.1: Draw the x-axis
+  const xAxisGenerator = d3.axisBottom().scale(xScale)
+  const xAxis = bounds
+    .append('g')
+    .call(xAxisGenerator)
+    .style('transform', `translateY(${dimensions.boundedHeight}px)`)
 }
 
 drawScatterplot()
