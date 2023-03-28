@@ -4,8 +4,9 @@ async function drawBarChart() {
   // Step 1: Importing the data
   const dataSet = await d3.json('../my_weather_data.json')
   const metricAccessor = (d) => d.humidity
-  console.log(dataSet[0])
-  console.log(metricAccessor(dataSet[0]))
+
+  //   The yScale accessor now that we are using a histogram generator
+  const yAccessor = (d) => d.length
 
   // Step 2: Creating our dimensions
   const width = 600
@@ -56,6 +57,12 @@ async function drawBarChart() {
   // Creating the bins from the dataset
   const bins = binsGenerator(dataSet)
   console.log(bins)
+
+  // Creating the yScale
+  const yScale = d3
+    .scaleLinear()
+    .domain([0, d3.max(bins, yAccessor)])
+    .nice()
 }
 
 drawBarChart()
