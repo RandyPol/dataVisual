@@ -97,32 +97,15 @@ async function drawScatterplot() {
   /**
    * Step 5: Drawing the data
    */
-  // const dots = bounds.selectAll('circle').data(dataSet)
-  // const dots = bounds
-  //   .selectAll('circle')
-  //   .data(dataSet)
-  //   .enter()
-  //   .append('circle')
-  //   .attr('cx', (d) => xScale(xAccessor(d)))
-  //   .attr('cy', (d) => yScale(yAccessor(d)))
-  //   .attr('r', 5)
-  //   .attr('fill', 'cornflowerblue')
-
-  function drawDots(dataset, color) {
-    const dots = bounds.selectAll('circle').data(dataset)
-    dots
-      .join('circle')
-      .attr('cx', (d) => xScale(xAccessor(d)))
-      .attr('cy', (d) => yScale(yAccessor(d)))
-      .attr('r', 5)
-      .attr('fill', color)
-  }
-
-  drawDots(dataSet.slice(0, 200), 'darkgrey')
-
-  setTimeout(() => {
-    drawDots(dataSet, 'cornflowerblue')
-  }, 1000)
+  const dots = bounds
+    .selectAll('circle')
+    .data(dataSet)
+    .enter()
+    .append('circle')
+    .attr('cx', (d) => xScale(xAccessor(d)))
+    .attr('cy', (d) => yScale(yAccessor(d)))
+    .attr('r', 5)
+    .attr('fill', 'cornflowerblue')
 }
 
 drawScatterplot()
