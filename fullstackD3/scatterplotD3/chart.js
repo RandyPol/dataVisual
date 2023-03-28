@@ -113,6 +113,7 @@ async function drawScatterplot() {
     dots
       .enter()
       .append('circle')
+      .merge(dots)
       .attr('cx', (d) => xScale(xAccessor(d)))
       .attr('cy', (d) => yScale(yAccessor(d)))
       .attr('r', 5)
