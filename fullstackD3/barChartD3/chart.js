@@ -6,6 +6,24 @@ async function drawBarChart() {
   const metricAccessor = (d) => d.humidity
   console.log(dataSet[0])
   console.log(metricAccessor(dataSet[0]))
+
+  // Step 2: Creating our dimensions
+  const width = 600
+  let dimensions = {
+    width: width,
+    height: width * 0.6,
+    margin: {
+      top: 30,
+      right: 10,
+      bottom: 50,
+      left: 50,
+    },
+  }
+  //  Creating the bounds
+  dimensions.boundedWidth =
+    dimensions.width - dimensions.margin.left - dimensions.margin.right
+  dimensions.boundedHeight =
+    dimensions.height - dimensions.margin.top - dimensions.margin.bottom
 }
 
 drawBarChart()
