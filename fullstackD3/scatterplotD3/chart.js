@@ -131,6 +131,16 @@ async function drawScatterplot() {
   // Step 6.2: Draw the y-axis
   const yAxisGenerator = d3.axisLeft().scale(yScale).ticks(4)
   const yAxis = bounds.append('g').call(yAxisGenerator)
+  // Step 6.2.1: Draw the y-axis label
+  const yAxisLabel = yAxis
+    .append('text')
+    .attr('x', -dimensions.boundedHeight / 2)
+    .attr('y', -dimensions.margin.left + 10)
+    .attr('fill', 'black')
+    .style('font-size', '1.4em')
+    .text('Relative humidity')
+    .style('transform', 'rotate(-90deg)')
+    .style('text-anchor', 'middle')
 }
 
 drawScatterplot()
