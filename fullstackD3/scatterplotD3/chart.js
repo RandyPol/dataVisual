@@ -111,9 +111,7 @@ async function drawScatterplot() {
   function drawDots(dataset, color) {
     const dots = bounds.selectAll('circle').data(dataset)
     dots
-      .enter()
-      .append('circle')
-      .merge(dots)
+      .join('circle')
       .attr('cx', (d) => xScale(xAccessor(d)))
       .attr('cy', (d) => yScale(yAccessor(d)))
       .attr('r', 5)
