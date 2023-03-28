@@ -38,6 +38,13 @@ async function drawBarChart() {
       'transform',
       `translate(${dimensions.margin.left}px, ${dimensions.margin.top}px)`
     )
+
+  // Step 4: Creating the scales
+  const xScale = d3
+    .scaleLinear()
+    .domain(d3.extent(dataSet, metricAccessor))
+    .range([0, dimensions.boundedWidth])
+    .nice()
 }
 
 drawBarChart()
