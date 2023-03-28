@@ -118,6 +118,15 @@ async function drawScatterplot() {
     .append('g')
     .call(xAxisGenerator)
     .style('transform', `translateY(${dimensions.boundedHeight}px)`)
+
+  // Step 6.1.1: Draw the x-axis label
+  const xAxisLabel = xAxis
+    .append('text')
+    .attr('x', dimensions.boundedWidth / 2)
+    .attr('y', dimensions.margin.bottom - 10)
+    .attr('fill', 'black')
+    .style('font-size', '1.4em')
+    .html('Dew point (&deg;F)')
 }
 
 drawScatterplot()
