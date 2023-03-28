@@ -92,6 +92,13 @@ async function drawScatterplot() {
   console.log(d3.extent(dataSet, yAccessor))
   console.log(yScale.domain())
 
+  // Extra: Create the colorScale
+  const colorAccessor = (d) => d.cloudCover
+  const colorScale = d3
+    .scaleLinear()
+    .domain(d3.extent(dataSet, colorAccessor))
+    .range(['skyblue', 'darkslategrey'])
+  console.log(colorScale(0.1))
   /** ---------------------------------------------------- */
 
   /**
@@ -105,7 +112,7 @@ async function drawScatterplot() {
     .attr('cx', (d) => xScale(xAccessor(d)))
     .attr('cy', (d) => yScale(yAccessor(d)))
     .attr('r', 5)
-    .attr('fill', 'cornflowerblue')
+    .attr('fill', (d) => colorScale(colorAccessor(d)))
   /** ---------------------------------------------------- */
 
   /**
