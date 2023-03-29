@@ -62,7 +62,27 @@ async function drawBarChart() {
   const yScale = d3
     .scaleLinear()
     .domain([0, d3.max(bins, yAccessor)])
+    .range([dimensions.boundedHeight, 0])
     .nice()
+
+  // Step 5: Drawing the data
+  const binsGroup = bounds.append('g').attr('class', 'binsGroup')
+  const eachBinDataPointGroup = binsGroup
+    .selectAll('g')
+    .data(bins)
+    .enter()
+    .append('g')
+
+  const barPadding = 1
+
+  //   Drawing the bars
+  const barRects = eachBinDataPointGroup
+    .append('rect')
+    .attr('x', (d) => xScale(d.x0) + barPadding / 2)
+    .attr('y', (d) => yScale(yAccessor(d)))
+    .attr('width', (d) => d3.max([0, xScale(d.x1) - xScale(d.x0) - barPadding]))
+    .attr('height', (d) => dimensions.boundedHeight - yScale(yAccessor(d)))
+    .attr('fill', 'cornflowerblue')
 }
 
 drawBarChart()
