@@ -119,6 +119,22 @@ async function drawBarChart() {
     .attr('fill', 'maroon')
     .style('font-size', '12px')
     .style('text-anchor', 'middle')
+
+  //  Drawing the axis
+  const xAxisGenerator = d3.axisBottom().scale(xScale)
+  const xAxis = bounds
+    .append('g')
+    .call(xAxisGenerator)
+    .style('transform', `translateY(${dimensions.boundedHeight}px)`)
+
+  // Drawing the axis label
+  const xAxisLabel = xAxis
+    .append('text')
+    .attr('x', dimensions.boundedWidth / 2)
+    .attr('y', dimensions.margin.bottom - 10)
+    .attr('fill', 'black')
+    .style('font-size', '1.4em')
+    .text('Humidity')
 }
 
 drawBarChart()
