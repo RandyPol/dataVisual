@@ -38,7 +38,7 @@ async function drawBarChart() {
       .attr('role', 'figure')
       .attr('tabindex', '0')
       .append('title')
-      .text('Histogram looking at the distribution of humidity in 2016')
+      .text(`Histogram looking at the distribution of ${metric} in 2016`)
 
     const bounds = wrapper
       .append('g')
@@ -73,13 +73,27 @@ async function drawBarChart() {
       .nice()
 
     // Step 5: Drawing the data
-    const binsGroup = bounds.append('g').attr('class', 'binsGroup')
+    const binsGroup = bounds
+      .append('g')
+      .attr('role', 'list')
+      .attr('aria-label', 'histogram bars')
+      .attr('class', 'binsGroup')
+
     const eachBinDataPointGroup = binsGroup
       .selectAll('g')
       .data(bins)
       .enter()
       .append('g')
       .attr('class', 'dataPointGroup')
+      .attr('tabindex', '0')
+      .attr('role', 'listitem')
+      .attr(
+        'aria-label',
+        (d) =>
+          `There were ${yAccessor(d)} days between ${d.x0
+            .toString()
+            .slice(0, 4)} and ${d.x1.toString().slice(0, 4)} humidity levels.`
+      )
 
     const barPadding = 1
 
