@@ -72,6 +72,7 @@ async function drawBarChart() {
     .data(bins)
     .enter()
     .append('g')
+    .attr('class', 'dataPointGroup')
 
   const barPadding = 1
 
@@ -85,6 +86,8 @@ async function drawBarChart() {
     .attr('fill', 'cornflowerblue')
 
   // Step 6: Drawing the peripherals
+
+  // Drawing the axes
   const barText = eachBinDataPointGroup
     .filter(yAccessor)
     .append('text')
@@ -95,6 +98,27 @@ async function drawBarChart() {
     .attr('fill', 'darkgrey')
     .style('font-size', '12px')
     .style('font-family', 'sans-serif')
+
+  // Lets add a line to the bar chart that represents the mean
+  const mean = d3.mean(dataSet, metricAccessor)
+  const meanLine = bounds
+    .append('line')
+    .attr('class', 'klkLine')
+    .attr('x1', xScale(mean))
+    .attr('y1', -15)
+    .attr('x2', xScale(mean))
+    .attr('y2', dimensions.boundedHeight)
+    .attr('stroke', 'maroon')
+    .attr('stroke-dasharray', '2px 4px')
+
+  const meanLabel = bounds
+    .append('text')
+    .attr('x', xScale(mean))
+    .attr('y', -20)
+    .text('mean')
+    .attr('fill', 'maroon')
+    .style('font-size', '12px')
+    .style('text-anchor', 'middle')
 }
 
 drawBarChart()
