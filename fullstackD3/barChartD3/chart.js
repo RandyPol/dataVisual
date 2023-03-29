@@ -83,6 +83,16 @@ async function drawBarChart() {
     .attr('width', (d) => d3.max([0, xScale(d.x1) - xScale(d.x0) - barPadding]))
     .attr('height', (d) => dimensions.boundedHeight - yScale(yAccessor(d)))
     .attr('fill', 'cornflowerblue')
+
+  // Step 6: Drawing the peripherals
+  const barText = eachBinDataPointGroup
+    .filter(yAccessor)
+    .append('text')
+    .attr('x', (d) => xScale(d.x0) + (xScale(d.x1) - xScale(d.x0)) / 2)
+    .attr('y', (d) => yScale(yAccessor(d)) - 5)
+    .text(yAccessor)
+    .style('text-anchor', 'middle')
+
 }
 
 drawBarChart()
