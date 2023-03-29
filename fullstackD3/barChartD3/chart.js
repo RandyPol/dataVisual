@@ -92,7 +92,9 @@ async function drawBarChart() {
     .attr('y', (d) => yScale(yAccessor(d)) - 5)
     .text(yAccessor)
     .style('text-anchor', 'middle')
-
+    .attr('fill', 'darkgrey')
+    .style('font-size', '12px')
+    .style('font-family', 'sans-serif')
 }
 
 drawBarChart()
