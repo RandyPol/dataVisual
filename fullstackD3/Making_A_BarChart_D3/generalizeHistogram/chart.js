@@ -159,6 +159,12 @@ async function drawBarChart() {
       .style('font-size', '1.4em')
       .text(`${metric}`)
       .style('text-transform', 'capitalize')
+
+    // Select the axis text and hide it from screen readers
+    wrapper
+      .selectAll('text')
+      .attr('role', 'presentation')
+      .attr('aria-hidden', 'true')
   }
 
   const metrics = [
