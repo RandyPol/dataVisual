@@ -34,6 +34,12 @@ async function drawBarChart() {
       .attr('width', dimensions.width)
       .attr('height', dimensions.height)
 
+    wrapper
+      .attr('role', 'figure')
+      .attr('tabindex', '0')
+      .append('title')
+      .text('Histogram looking at the distribution of humidity in 2016')
+
     const bounds = wrapper
       .append('g')
       .style(
