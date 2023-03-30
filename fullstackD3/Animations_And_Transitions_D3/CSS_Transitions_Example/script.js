@@ -94,10 +94,9 @@ async function drawBars() {
     const mean = d3.mean(dataset, metricAccessor)
     const meanLine = bounds
       .selectAll('.mean')
-      .attr('x1', xScale(mean))
-      .attr('x2', xScale(mean))
       .attr('y1', -20)
       .attr('y2', dimensions.boundedHeight)
+      .style('transform', `translateX(${xScale(mean)}px)`)
     // 6. Draw peripherals
     const xAxisGenerator = d3.axisBottom().scale(xScale)
     const xAxis = bounds.select('.x-axis').call(xAxisGenerator)
