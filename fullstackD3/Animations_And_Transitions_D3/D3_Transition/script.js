@@ -77,6 +77,8 @@ async function drawBars() {
 
     const barPadding = 1
 
+    const updateTransition = d3.transition().duration(600).ease(d3.easeBackIn)
+
     let binGroups = bounds.select('.bins').selectAll('.bin').data(bins)
 
     const oldBinGroups = binGroups.exit()
@@ -103,9 +105,8 @@ async function drawBars() {
     binGroups = newBinGroups.merge(binGroups)
 
     const barRects = binGroups
-      .transition()
-      .duration(600)
       .select('rect')
+      .transition(updateTransition)
       .attr('x', (d) => xScale(d.x0) + barPadding)
       .attr('y', (d) => yScale(yAccessor(d)))
       .attr('height', (d) => dimensions.boundedHeight - yScale(yAccessor(d)))
@@ -117,9 +118,8 @@ async function drawBars() {
       .style('fill', 'cornflowerblue')
 
     const barText = binGroups
-      .transition()
-      .duration(600)
       .select('text')
+      .transition(updateTransition)
       .attr('x', (d) => xScale(d.x0) + (xScale(d.x1) - xScale(d.x0)) / 2)
       .attr('y', (d) => yScale(yAccessor(d)) - 5)
       .text((d) => yAccessor(d) || '')
@@ -128,6 +128,7 @@ async function drawBars() {
 
     const meanLine = bounds
       .selectAll('.mean')
+      .transition(updateTransition)
       .attr('x1', xScale(mean))
       .attr('x2', xScale(mean))
       .attr('y1', -20)
@@ -137,7 +138,10 @@ async function drawBars() {
 
     const xAxisGenerator = d3.axisBottom().scale(xScale)
 
-    const xAxis = bounds.select('.x-axis').call(xAxisGenerator)
+    const xAxis = bounds
+      .select('.x-axis')
+      .transition(updateTransition)
+      .call(xAxisGenerator)
 
     const xAxisLabel = xAxis.select('.x-axis-label').text(metric)
   }
