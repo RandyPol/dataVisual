@@ -1,6 +1,6 @@
 .bin rect {
   fill: cornflowerblue;
-  transition: all 1s ease-out;
+  transition: height 1s ease-out, y 1s ease-out;
 }
 
 .bin text {
