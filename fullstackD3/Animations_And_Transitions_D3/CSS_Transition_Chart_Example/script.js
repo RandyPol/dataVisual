@@ -30,7 +30,6 @@ async function drawBars() {
 
   const bounds = wrapper
     .append('g')
-    .attr('class', 'bounds')
     .style(
       'transform',
       `translate(${dimensions.margin.left}px, ${dimensions.margin.top}px)`
@@ -49,32 +48,45 @@ async function drawBars() {
   const drawHistogram = (metric) => {
     const metricAccessor = (d) => d[metric]
     const yAccessor = (d) => d.length
+
     // 4. Create scales
+
     const xScale = d3
       .scaleLinear()
       .domain(d3.extent(dataset, metricAccessor))
       .range([0, dimensions.boundedWidth])
       .nice()
+
     const binsGenerator = d3
       .histogram()
       .domain(xScale.domain())
       .value(metricAccessor)
       .thresholds(12)
+
     const bins = binsGenerator(dataset)
+
     const yScale = d3
       .scaleLinear()
       .domain([0, d3.max(bins, yAccessor)])
       .range([dimensions.boundedHeight, 0])
       .nice()
+
     // 5. Draw data
+
     const barPadding = 1
+
     let binGroups = bounds.select('.bins').selectAll('.bin').data(bins)
+
     binGroups.exit().remove()
+
     const newBinGroups = binGroups.enter().append('g').attr('class', 'bin')
+
     newBinGroups.append('rect')
     newBinGroups.append('text')
+
     // update binGroups to include new points
     binGroups = newBinGroups.merge(binGroups)
+
     const barRects = binGroups
       .select('rect')
       .attr('x', (d) => xScale(d.x0) + barPadding)
@@ -91,21 +103,27 @@ async function drawBars() {
       .text(yAccessor)
 
     const mean = d3.mean(dataset, metricAccessor)
+
     const meanLine = bounds
       .selectAll('.mean')
       .attr('x1', xScale(mean))
       .attr('x2', xScale(mean))
       .attr('y1', -20)
       .attr('y2', dimensions.boundedHeight)
+
     // 6. Draw peripherals
+
     const xAxisGenerator = d3.axisBottom().scale(xScale)
+
     const xAxis = bounds.select('.x-axis').call(xAxisGenerator)
+
     const xAxisLabel = xAxis
       .select('.x-axis-label')
       .attr('x', dimensions.boundedWidth / 2)
       .attr('y', dimensions.margin.bottom - 10)
       .text(metric)
   }
+
   const metrics = [
     'windSpeed',
     'moonPhase',
@@ -118,8 +136,9 @@ async function drawBars() {
   ]
   let selectedMetricIndex = 0
   drawHistogram(metrics[selectedMetricIndex])
+
   const button = d3.select('body').append('button').text('Change metric')
-  console.log(button)
+
   button.node().addEventListener('click', onClick)
   function onClick() {
     selectedMetricIndex = (selectedMetricIndex + 1) % metrics.length
