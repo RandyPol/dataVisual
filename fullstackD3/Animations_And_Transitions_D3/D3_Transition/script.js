@@ -94,7 +94,10 @@ async function drawBars() {
       .attr('y', dimensions.boundedHeight)
       .style('fill', 'yellowgreen')
 
-    newBinGroups.append('text')
+    newBinGroups
+      .append('text')
+      .attr('x', (d) => xScale(d.x0) + (xScale(d.x1) - xScale(d.x0)) / 2)
+      .attr('y', dimensions.boundedHeight)
 
     // update binGroups to include new points
     binGroups = newBinGroups.merge(binGroups)
@@ -113,8 +116,9 @@ async function drawBars() {
       .duration(600)
       .style('fill', 'cornflowerblue')
 
-    console.log(barRects)
     const barText = binGroups
+      .transition()
+      .duration(600)
       .select('text')
       .attr('x', (d) => xScale(d.x0) + (xScale(d.x1) - xScale(d.x0)) / 2)
       .attr('y', (d) => yScale(yAccessor(d)) - 5)
