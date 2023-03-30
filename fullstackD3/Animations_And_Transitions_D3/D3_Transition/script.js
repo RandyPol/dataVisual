@@ -77,12 +77,26 @@ async function drawBars() {
 
     const barPadding = 1
 
-    const updateTransition = d3.transition().duration(600).ease(d3.easeBackIn)
+    // Transitions and animations are added here
+    const exitTransition = d3.transition().duration(600)
+    const updateTransition = exitTransition.transition().duration(600)
 
     let binGroups = bounds.select('.bins').selectAll('.bin').data(bins)
-
+    // Transition the old bars to the new yScale
     const oldBinGroups = binGroups.exit()
-    oldBinGroups.remove()
+    oldBinGroups
+      .selectAll('rect')
+      .style('fill', 'red')
+      .transition(exitTransition)
+      .attr('y', dimensions.boundedHeight)
+      .attr('height', 0)
+
+    oldBinGroups
+      .selectAll('text')
+      .transition(exitTransition)
+      .attr('y', dimensions.boundedHeight)
+
+    oldBinGroups.transition(exitTransition).remove()
 
     const newBinGroups = binGroups.enter().append('g').attr('class', 'bin')
 
