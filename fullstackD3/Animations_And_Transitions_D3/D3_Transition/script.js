@@ -84,13 +84,24 @@ async function drawBars() {
 
     const newBinGroups = binGroups.enter().append('g').attr('class', 'bin')
 
-    newBinGroups.append('rect')
+    newBinGroups
+      .append('rect')
+      .attr('height', 0)
+      .attr('x', (d) => xScale(d.x0) + barPadding)
+      .attr('width', (d) =>
+        d3.max([0, xScale(d.x1) - xScale(d.x0) - barPadding])
+      )
+      .attr('y', dimensions.boundedHeight)
+      .style('fill', 'yellowgreen')
+
     newBinGroups.append('text')
 
     // update binGroups to include new points
     binGroups = newBinGroups.merge(binGroups)
 
     const barRects = binGroups
+      .transition()
+      .duration(600)
       .select('rect')
       .attr('x', (d) => xScale(d.x0) + barPadding)
       .attr('y', (d) => yScale(yAccessor(d)))
@@ -98,7 +109,11 @@ async function drawBars() {
       .attr('width', (d) =>
         d3.max([0, xScale(d.x1) - xScale(d.x0) - barPadding])
       )
+      .transition()
+      .duration(600)
+      .style('fill', 'cornflowerblue')
 
+    console.log(barRects)
     const barText = binGroups
       .select('text')
       .attr('x', (d) => xScale(d.x0) + (xScale(d.x1) - xScale(d.x0)) / 2)
