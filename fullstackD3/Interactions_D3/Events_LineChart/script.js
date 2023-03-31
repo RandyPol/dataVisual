@@ -35,6 +35,7 @@ async function drawLineChart() {
 
   const bounds = wrapper
     .append('g')
+    .attr('class', 'bounds')
     .attr(
       'transform',
       `translate(${dimensions.margin.left}, ${dimensions.margin.top})`
@@ -108,5 +109,12 @@ async function drawLineChart() {
     .call(xAxisGenerator)
 
   // 7. Set up interactions
+  const listeningRect = bounds
+    .append('rect')
+    .attr('class', 'listening-rect')
+    .attr('width', dimensions.boundedWidth)
+    .attr('height', dimensions.boundedHeight)
+    .on('mousemove', onMouseMove)
+    .on('mouseleave', onMouseLeave)
 }
 drawLineChart()

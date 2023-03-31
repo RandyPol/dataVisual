@@ -28,6 +28,7 @@ body {
 }
 
 .listening-rect {
+  fill: transparent;
 }
 
 .tooltip {
