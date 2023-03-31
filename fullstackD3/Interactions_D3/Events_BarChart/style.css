@@ -1,8 +1,12 @@
-.wrapper {
-}
+/* .wrapper {
+} */
 
 .bin rect {
   fill: cornflowerblue;
+}
+
+.bin rect:hover {
+  fill: purple;
 }
 
 .bin text {
