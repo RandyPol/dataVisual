@@ -122,6 +122,19 @@ async function drawScatter() {
   const tooltip = d3.select('#tooltip')
 
   function onMouseEnter(event, datum) {
+    // Change the color and size of the hovered dot by appending a new circle
+    // and removing it when the mouse leaves. This is a hack to make the
+    // hovered dot appear on top of the other dots since SVG doesn't have
+    // a z-index property.
+    const dayDot = bounds
+      .append('circle')
+      .attr('class', 'tooltipDot')
+      .attr('cx', xScale(xAccessor(datum)))
+      .attr('cy', yScale(yAccessor(datum)))
+      .attr('r', 7)
+      .style('fill', 'maroon')
+      .style('pointer-events', 'none')
+
     // This is the format for the date
     const dateParser = d3.timeParse('%Y-%m-%d')
     const formatDate = d3.timeFormat('%B %A %-d, %Y')
@@ -151,6 +164,7 @@ async function drawScatter() {
   }
   function onMouseLeave() {
     tooltip.style('opacity', 0)
+    d3.selectAll('.tooltipDot').remove()
   }
 }
 drawScatter()
