@@ -138,10 +138,13 @@ async function drawLineChart() {
     const closestXValue = xAccessor(closestDataPoint)
     const closestYValue = yAccessor(closestDataPoint)
 
-    // Use our closestXValue to position the tooltip
+    // Use our closestXValue to set the date in the tooltip
     const formatDate = d3.timeFormat('%B %A %-d, %Y')
- 
     tooltip.select('#date').text(formatDate(closestXValue))
+
+    // Set the temperature in the tooltip
+    const formatTemperature = (d) => `${d3.format('.1f')(d)}°F`
+    tooltip.select('#temperature').text(formatTemperature(closestYValue))
   }
   function onMouseLeave() {}
 }
