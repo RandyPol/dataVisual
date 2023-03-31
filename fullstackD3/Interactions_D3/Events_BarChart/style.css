@@ -1,6 +1,13 @@
-/* .wrapper {
-} */
-
+body {
+  display: flex;
+  justify-content: center;
+  padding: 5em 2em;
+  font-family: sans-serif;
+  background-color: grey;
+}
+.wrapper {
+  position: relative;
+}
 .bin rect {
   fill: cornflowerblue;
 }
@@ -25,13 +32,6 @@
   fill: black;
   font-size: 1.4em;
   text-transform: capitalize;
-}
-
-body {
-  display: flex;
-  justify-content: center;
-  padding: 5em 2em;
-  font-family: sans-serif;
 }
 
 .tooltip {

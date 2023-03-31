@@ -116,5 +116,35 @@ async function drawBars() {
     .text('Humidity')
 
   // 7. Set up interactions
+  binGroups
+    .select('rect')
+    .on('mouseenter', onMouseEnter)
+    .on('mouseleave', onMouseLeave)
+
+  const tooltip = d3.select('#tooltip')
+
+  function onMouseEnter(event, datum) {
+    // This is the position of the mouse relative to the top left of the chart
+    const x =
+      xScale(datum.x0) +
+      (xScale(datum.x1) - xScale(datum.x0)) / 2 +
+      dimensions.margin.left
+
+    const y = yScale(yAccessor(datum)) + dimensions.margin.top
+
+    tooltip.style(
+      'transform',
+      `translate(` + `calc( -50% + ${x}px),` + `calc(-100% + ${y}px)` + `)`
+    )
+    tooltip.style('opacity', 1)
+
+    tooltip.select('#count').text(yAccessor(datum))
+
+    tooltip.select('#range').text([datum.x0, datum.x1].join(' - '))
+  }
+
+  function onMouseLeave() {
+    tooltip.style('opacity', 0)
+  }
 }
 drawBars()
