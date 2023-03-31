@@ -118,6 +118,14 @@ async function drawLineChart() {
     .on('mouseleave', onMouseLeave)
 
   const tooltip = d3.select('#tooltip')
+  // Create a circle to follow the mouse to indicate the closest data point
+  const tooltipCircle = bounds
+    .append('circle')
+    .attr('r', 4)
+    .attr('stroke', '#af9358')
+    .attr('fill', 'white')
+    .attr('stroke-width', 2)
+    .style('opacity', 0)
 
   function onMouseMove(event) {
     const mousePosition = d3.pointer(event)
@@ -155,9 +163,15 @@ async function drawLineChart() {
       `translate(` + `calc( -50% + ${x}px),` + `calc(-100% + ${y}px)` + `)`
     )
     tooltip.style('opacity', 1)
+
+    tooltipCircle
+      .attr('cx', xScale(closestXValue))
+      .attr('cy', yScale(closestYValue))
+      .style('opacity', 1)
   }
   function onMouseLeave() {
     tooltip.style('opacity', 0)
+    tooltipCircle.style('opacity', 0)
   }
 }
 drawLineChart()
