@@ -70,6 +70,25 @@ async function drawScatter() {
   }
   drawDots(dataset)
 
+  // Create delaunay triangulation for the voronoi diagram
+  const delaunay = d3.Delaunay.from(
+    dataset,
+    (d) => xScale(xAccessor(d)),
+    (d) => yScale(yAccessor(d))
+  )
+  // Create voronoi diagram
+  const voronoi = delaunay.voronoi()
+  voronoi.xmax = dimensions.boundedWidth
+  voronoi.ymax = dimensions.boundedHeight
+  bounds
+    .selectAll('.voronoi')
+    .data(dataset)
+    .enter()
+    .append('path')
+    .attr('class', 'voronoi')
+    .attr('d', (d, i) => voronoi.renderCell(i))
+    .attr('stroke', 'salmon')
+
   // 6. Draw peripherals
 
   const xAxisGenerator = d3.axisBottom().scale(xScale)
