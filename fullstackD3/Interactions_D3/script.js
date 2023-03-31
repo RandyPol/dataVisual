@@ -14,5 +14,17 @@ async function createEvent() {
     .attr('fill', 'lightgrey')
 
   // your code here
+
+  rects
+    .on('mouseenter', function (event, datum) {
+      const nodes = rects.nodes()
+      const currentNode = d3.select(this).node()
+      const index = nodes.indexOf(currentNode)
+
+      currentNode.style.fill = datum
+    })
+    .on('mouseout', function () {
+      d3.select(this).style('fill', 'lightgrey')
+    })
 }
 createEvent()
