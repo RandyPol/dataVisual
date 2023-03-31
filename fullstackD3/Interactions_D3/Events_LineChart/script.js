@@ -116,5 +116,16 @@ async function drawLineChart() {
     .attr('height', dimensions.boundedHeight)
     .on('mousemove', onMouseMove)
     .on('mouseleave', onMouseLeave)
+
+  const tooltip = d3.select('#tooltip')
+
+  function onMouseMove(event) {
+    const mousePosition = d3.pointer(event)
+    const hoveredDate = xScale.invert(mousePosition[0])
+    console.log(
+      `mousePosition: ${mousePosition} and hoveredDate, ${hoveredDate}`
+    )
+  }
+  function onMouseLeave() {}
 }
 drawLineChart()
