@@ -145,6 +145,16 @@ async function drawLineChart() {
     // Set the temperature in the tooltip
     const formatTemperature = (d) => `${d3.format('.1f')(d)}°F`
     tooltip.select('#temperature').text(formatTemperature(closestYValue))
+
+    // Position the tooltip
+    const x = xScale(closestXValue) + dimensions.margin.left
+    const y = yScale(closestYValue) + dimensions.margin.top
+
+    tooltip.style(
+      'transform',
+      `translate(` + `calc( -50% + ${x}px),` + `calc(-100% + ${y}px)` + `)`
+    )
+    tooltip.style('opacity', 1)
   }
   function onMouseLeave() {}
 }
