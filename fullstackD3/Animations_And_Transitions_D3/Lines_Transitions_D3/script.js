@@ -39,9 +39,18 @@ async function drawLineChart() {
       `translate(${dimensions.margin.left}px, ${dimensions.margin.top}px)`
     )
 
+  bounds
+    .append('defs')
+    .append('clipPath')
+    .attr('id', 'bounds-clip-path')
+    .append('rect')
+    .attr('width', dimensions.boundedWidth)
+    .attr('height', dimensions.boundedHeight)
+
   // init static elements
   bounds.append('rect').attr('class', 'freezing')
-  bounds.append('path').attr('class', 'line')
+  const clip = bounds.append('g').attr('clip-path', 'url(#bounds-clip-path)')
+  clip.append('path').attr('class', 'line')
   bounds
     .append('g')
     .attr('class', 'x-axis')
@@ -76,7 +85,16 @@ async function drawLineChart() {
       .x((d) => xScale(xAccessor(d)))
       .y((d) => yScale(yAccessor(d)))
 
-    const line = bounds.select('.line').attr('d', lineGenerator(dataset))
+    const lastTwoPoints = dataset.slice(-2)
+    const pixelsBetweenLastPoints =
+      xScale(xAccessor(lastTwoPoints[1])) - xScale(xAccessor(lastTwoPoints[0]))
+    const line = bounds
+      .select('.line')
+      .attr('d', lineGenerator(dataset))
+      .style('transform', `translateX(${pixelsBetweenLastPoints}px)`)
+      .transition()
+      .duration(1000)
+      .style('transform', `none`)
 
     // 6. Draw peripherals
 
@@ -86,7 +104,6 @@ async function drawLineChart() {
 
     const xAxisGenerator = d3.axisBottom().scale(xScale)
 
-    // Add a transition to the xAxis
     const xAxis = bounds
       .select('.x-axis')
       .transition()
@@ -97,7 +114,6 @@ async function drawLineChart() {
 
   // update the line every 1.5 seconds
   setInterval(addNewDay, 1500)
-
   function addNewDay() {
     dataset = [...dataset.slice(1), generateNewDataPoint(dataset)]
     drawLine(dataset)
