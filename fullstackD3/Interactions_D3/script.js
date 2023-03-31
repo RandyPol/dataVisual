@@ -26,5 +26,9 @@ async function createEvent() {
     .on('mouseout', function () {
       d3.select(this).style('fill', 'lightgrey')
     })
+
+  setTimeout(() => {
+    rects.dispatch('mouseout').on('mouseenter', null).on('mouseout', null)
+  }, 3000)
 }
 createEvent()
