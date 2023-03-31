@@ -156,6 +156,8 @@ async function drawLineChart() {
     )
     tooltip.style('opacity', 1)
   }
-  function onMouseLeave() {}
+  function onMouseLeave() {
+    tooltip.style('opacity', 0)
+  }
 }
 drawLineChart()
