@@ -87,7 +87,6 @@ async function drawScatter() {
     .append('path')
     .attr('class', 'voronoi')
     .attr('d', (d, i) => voronoi.renderCell(i))
-    .attr('stroke', 'salmon')
 
   // 6. Draw peripherals
 
@@ -117,7 +116,7 @@ async function drawScatter() {
     .text('relative humidity')
   // 7. Set up interactions
 
-  const dots = bounds.selectAll('circle')
+  const dots = bounds.selectAll('.voronoi')
   dots.on('mouseenter', onMouseEnter).on('mouseleave', onMouseLeave)
 
   const tooltip = d3.select('#tooltip')
