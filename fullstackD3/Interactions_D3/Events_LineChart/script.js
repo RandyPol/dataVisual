@@ -122,9 +122,23 @@ async function drawLineChart() {
   function onMouseMove(event) {
     const mousePosition = d3.pointer(event)
     const hoveredDate = xScale.invert(mousePosition[0])
-    console.log(
-      `mousePosition: ${mousePosition} and hoveredDate, ${hoveredDate}`
+
+    // This is the closest index
+    const getDistanceFromHoveredDate = (d) =>
+      Math.abs(xAccessor(d) - hoveredDate)
+
+    const closestIndex = d3.scan(
+      dataset,
+      (a, b) => getDistanceFromHoveredDate(a) - getDistanceFromHoveredDate(b)
     )
+
+    // This is the closest data point to the hovered date
+    const closestDataPoint = dataset[closestIndex]
+    // These values are used to position the tooltip
+    const closestXValue = xAccessor(closestDataPoint)
+    const closestYValue = yAccessor(closestDataPoint)
+
+    
   }
   function onMouseLeave() {}
 }
