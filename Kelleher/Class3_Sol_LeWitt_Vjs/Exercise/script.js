@@ -75,6 +75,7 @@ for (let i = 0; i < n; i++) {
 
 for (let i = 0; i < n; i++) {
   const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect')
+  rect.setAttribute('class', 'line')
   rect.setAttribute('y', i * 20)
   rect.setAttribute('width', width)
   rect.setAttribute('height', 10)
