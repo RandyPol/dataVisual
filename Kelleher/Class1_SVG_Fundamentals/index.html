@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SVG Fundamentals</title>
+  </head>
+  <body>
+    <!-- These are just a few examples of how you can use SVG to create a variety of shapes and graphics. SVG offers a wide range of possibilities for creating vector-based graphics, and can be combined with other web technologies like HTML and CSS to create rich and interactive visual experiences on the web. -->
+
+    <!-- <rect> example: -->
+    <svg width="200" height="200">
+      <rect x="50" y="50" width="100" height="100" fill="blue" />
+    </svg>
+    <!-- <circle> example: -->
+    <svg width="200" height="200">
+      <circle cx="100" cy="100" r="50" fill="red" />
+    </svg>
+    <!-- <ellipse> example: -->
+    <svg width="200" height="200">
+      <ellipse cx="100" cy="100" rx="80" ry="50" fill="yellow" />
+    </svg>
+    <!-- <line> example: -->
+    <svg width="200" height="200">
+      <line x1="50" y1="50" x2="150" y2="150" stroke="green" stroke-width="5" />
+    </svg>
+    <!-- <polyline> example: -->
+    <svg width="200" height="200">
+      <polyline
+        points="50,50 100,100 150,50"
+        stroke="purple"
+        fill="none"
+        stroke-width="5"
+      />
+    </svg>
+    <!-- <polygon> example: -->
+    <svg width="200" height="200">
+      <polygon points="100,50 150,150 50,150" fill="orange" />
+    </svg>
+    <!-- <path> example: -->
+    <svg width="200" height="200">
+      <path
+        d="M 50,50 Q 100,150 150,50 Q 100,100 50,50"
+        stroke="black"
+        fill="none"
+        stroke-width="5"
+      />
+    </svg>
+    <!-- <text> example: -->
+    <svg width="200" height="200">
+      <text x="100" y="100" font-size="20" fill="navy">Hello SVG!</text>
+    </svg>
+    <!-- <tspan> example: -->
+    <svg width="200" height="200">
+      <text x="100" y="100" font-size="20" fill="navy">
+        Hello
+        <tspan fill="green">SVG</tspan>
+        !
+      </text>
+    </svg>
+    <!-- <textPath> example: -->
+    <svg width="200" height="200">
+      <path
+        id="path"
+        d="M 50,100 Q 100,50 150,100 Q 100,150 50,100"
+        fill="none"
+        stroke="black"
+      />
+      <text font-size="20" fill="navy">
+        <textPath href="#path">Hello SVG!</textPath>
+      </text>
+    </svg>
+    <!-- <image> example: -->
+    <svg width="200" height="200">
+      <image
+        x="50"
+        y="50"
+        width="100"
+        height="100"
+        xlink:href="https://via.placeholder.com/100"
+      />
+    </svg>
+    <!-- <use> example: -->
+    <svg width="200" height="200">
+      <rect id="myRect" x="50" y="50" width="100" height="100" fill="blue" />
+      <use href="#myRect" x="50" y="50" />
+      <use href="#myRect" x="100" y="100" />
+    </svg>
+    <!-- <defs> example: -->
+    <svg width="200" height="200">
+      <defs>
+        <rect id="myRect" x="50" y="50" width="100" height="100" fill="blue" />
+      </defs>
+      <use href="#myRect" x="50" y="50" />
+      <use href="#myRect" x="100" y="100" />
+    </svg>
+    <!-- <symbol> example: -->
+    <svg width="200" height="200">
+      <defs>
+        <symbol id="mySymbol" viewBox="0 0 100 100">
+          <rect x="10" y="10" width="80" height="80" fill="green" />
+          <circle cx="50" cy="50" r="30" fill="white" />
+        </symbol>
+      </defs>
+      <use href="#mySymbol" x="50" y="50" width="100" height="100" />
+    </svg>
+  </body>
+</html>
