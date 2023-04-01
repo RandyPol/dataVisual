@@ -13,6 +13,8 @@ async function drawLineChart() {
     xAccessor(dataset[dataset.length - 1])
   )
 
+  // Downsample data to one point per week
+  dataset = downsampleData(dataset, xAccessor, yAccessor)
   // 2. Create chart dimensions
 
   let dimensions = {
@@ -116,6 +118,7 @@ async function drawLineChart() {
     .style('transform', `translateY(${dimensions.boundedHeight}px)`)
     .call(xAxisGenerator)
 }
+
 drawLineChart()
 
 function downsampleData(data, xAccessor, yAccessor) {
