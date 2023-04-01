@@ -4,13 +4,18 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Share+Tech&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
     <title>Pseudoo</title>
   </head>
   <body>
     <!-- Pseudo ScatterPlot -->
     <svg width="960" height="500">
-      <rect width="960" height="500" fill="white" />
       <circle cx="273" cy="365" r="20" />
       <circle cx="579" cy="247" r="20" />
       <circle cx="702" cy="137" r="20" />
@@ -33,6 +38,48 @@
       <rect x="340" y="207" width="135" height="293" fill="#D9D9D9" />
       <rect x="499" y="306" width="142" height="194" fill="#2622F2" />
       <rect x="665" y="364" width="129" height="136" fill="#D9D9D9" />
+    </svg>
+    <!-- Vertical BarChart -->
+    <svg width="960" height="500">
+      <rect x="22" y="19" width="612" height="90" fill="#FD2B2B" />
+      <rect x="22" y="139" width="411" height="90" fill="#D9D9D9" />
+      <rect x="22" y="259" width="388" height="90" fill="#2622F2" />
+      <rect x="22" y="379" width="271" height="90" fill="#D9D9D9" />
+    </svg>
+    <!-- Modify so that the chart includes text, but the text are shown as path -->
+    <svg width="960" height="500">
+      <rect width="960" height="500" fill="white" />
+      <rect x="271" y="26" width="495" height="88" fill="#FD2B2B" />
+      <rect x="271" y="143" width="332" height="87" fill="#D9D9D9" />
+      <rect x="271" y="260" width="314" height="87" fill="#2622F2" />
+      <rect x="271" y="376" width="219" height="88" fill="#D9D9D9" />
+      <path
+        d="M92.792 90L90.056 77.256H76.016L73.208 90H66.8L78.968 39.6H87.248L99.2 90H92.792ZM83 44.352L77.168 71.856H88.904L83 44.352Z"
+        fill="black"
+      />
+      <path
+        d="M97.04 195.624C97.04 199.752 96.08 202.68 94.16 204.408C92.288 206.136 89.168 207 84.8 207H71.12V156.6H83.936C88.208 156.6 91.328 157.464 93.296 159.192C95.312 160.92 96.32 163.8 96.32 167.832V171.936C96.32 175.632 95 178.416 92.36 180.288C95.48 182.016 97.04 184.968 97.04 189.144V195.624ZM90.056 167.184C90.056 165.36 89.624 164.04 88.76 163.224C87.944 162.408 86.624 162 84.8 162H77.384V177.912H84.8C86.288 177.912 87.536 177.432 88.544 176.472C89.552 175.512 90.056 174.24 90.056 172.656V167.184ZM90.776 188.496C90.776 186.912 90.296 185.664 89.336 184.752C88.376 183.792 87.104 183.312 85.52 183.312H77.384V201.6H85.448C87.272 201.6 88.616 201.192 89.48 200.376C90.344 199.512 90.776 198.168 90.776 196.344V188.496Z"
+        fill="black"
+      />
+      <path
+        d="M83.36 324C79.184 324 75.968 322.992 73.712 320.976C71.504 318.912 70.4 315.84 70.4 311.76V285.84C70.4 281.76 71.504 278.712 73.712 276.696C75.968 274.632 79.184 273.6 83.36 273.6H92.144V279.072H82.64C80.864 279.072 79.424 279.6 78.32 280.656C77.216 281.712 76.664 282.984 76.664 284.472V313.128C76.664 314.616 77.216 315.888 78.32 316.944C79.424 318 80.864 318.528 82.64 318.528H92.144V324H83.36Z"
+        fill="black"
+      />
+      <path
+        d="M97.472 428.624C97.472 432.752 96.512 435.68 94.592 437.408C92.72 439.136 89.6 440 85.232 440H71.12V389.6H84.368C88.688 389.6 91.952 390.488 94.16 392.264C96.368 393.992 97.472 396.848 97.472 400.832V428.624ZM91.208 400.184C91.208 398.6 90.728 397.352 89.768 396.44C88.808 395.48 87.536 395 85.952 395H77.384V434.6H85.88C87.704 434.6 89.048 434.192 89.912 433.376C90.776 432.512 91.208 431.168 91.208 429.344V400.184Z"
+        fill="black"
+      />
+    </svg>
+    <!-- Modify so that the chart includes SVG text Elements -->
+    <svg width="960" height="500" class="svgTextElement">
+      <rect x="271" y="26" width="495" height="88" fill="#FD2B2B" />
+      <rect x="271" y="143" width="332" height="87" fill="#D9D9D9" />
+      <rect x="271" y="260" width="314" height="87" fill="#2622F2" />
+      <rect x="271" y="376" width="219" height="88" fill="#D9D9D9" />
+      <text x="120" y="100" class="textElement">A</text>
+      <text x="120" y="200" class="textElement">B</text>
+      <text x="120" y="300" class="textElement">C</text>
+      <text x="120" y="400" class="textElement">D</text>
     </svg>
   </body>
 </html>

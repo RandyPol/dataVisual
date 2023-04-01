@@ -2,6 +2,16 @@ body {
   margin: 0;
 }
 
-.changeHeight{
-    background-color: black;
+.changeHeight {
+  background-color: black;
+}
+
+.textElement {
+  color: black;
+  font-size: 72px;
+  font-family: 'Share Tech', sans-serif;
+}
+
+.svgTextElement {
+  background-color: aqua;
 }
