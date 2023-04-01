@@ -15,14 +15,14 @@ const mask = document.createElementNS('http://www.w3.org/2000/svg', 'mask')
 mask.setAttribute('id', 'circle-mask')
 svg.appendChild(mask)
 
-// Create a rectangle that will be used to create the mask
+// Create a rectangle that will be fill with white and will be used to visible the circle
 const maskRect = document.createElementNS('http://www.w3.org/2000/svg', 'rect')
 maskRect.setAttribute('width', width)
 maskRect.setAttribute('height', height)
 maskRect.setAttribute('fill', 'white')
 mask.appendChild(maskRect)
 
-// Create a circle that will be used to create the mask
+// Create a circle that will be used to hide the lines
 const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle')
 circle.setAttribute('cx', width / 2)
 circle.setAttribute('cy', height / 2)
@@ -39,14 +39,14 @@ const mask2 = document.createElementNS('http://www.w3.org/2000/svg', 'mask')
 mask2.setAttribute('id', 'circle-mask2')
 svg.appendChild(mask2)
 
-// Create a rectangle that will be used to create the mask
+//  Everything under a black pixel will be invisible
 const maskRect2 = document.createElementNS('http://www.w3.org/2000/svg', 'rect')
 maskRect2.setAttribute('width', width)
 maskRect2.setAttribute('height', height)
 maskRect2.setAttribute('fill', 'black')
 mask2.appendChild(maskRect2)
 
-// Create a circle that will be used to create the mask
+//  Everything under a white pixel will be visible
 const circle2 = document.createElementNS('http://www.w3.org/2000/svg', 'circle')
 circle2.setAttribute('cx', width / 2)
 circle2.setAttribute('cy', height / 2)
