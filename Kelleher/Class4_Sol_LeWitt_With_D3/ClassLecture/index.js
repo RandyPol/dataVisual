@@ -68,6 +68,7 @@ mask
   .attr('cy', height / 2)
   .attr('r', 200)
   .attr('fill', 'black')
+
 // /**
 //  * Create a mask for the second for loop to create the lines
 //  */
@@ -76,14 +77,18 @@ mask
 // const mask2 = document.createElementNS('http://www.w3.org/2000/svg', 'mask')
 // mask2.setAttribute('id', 'circle-mask2')
 // svg.appendChild(mask2)
-
+const mask2 = svg.append('mask').attr('id', 'circle-mask2')
 // //  Everything under a black pixel will be invisible
 // const maskRect2 = document.createElementNS('http://www.w3.org/2000/svg', 'rect')
 // maskRect2.setAttribute('width', width)
 // maskRect2.setAttribute('height', height)
 // maskRect2.setAttribute('fill', 'black')
 // mask2.appendChild(maskRect2)
-
+mask2
+  .append('rect')
+  .attr('width', width)
+  .attr('height', height)
+  .attr('fill', 'black')
 // //  Everything under a white pixel will be visible
 // const circle2 = document.createElementNS('http://www.w3.org/2000/svg', 'circle')
 // circle2.setAttribute('cx', width / 2)
@@ -91,7 +96,12 @@ mask
 // circle2.setAttribute('r', 200)
 // circle2.setAttribute('fill', 'white')
 // mask2.appendChild(circle2)
-
+mask2
+  .append('circle')
+  .attr('cx', width / 2)
+  .attr('cy', height / 2)
+  .attr('r', 200)
+  .attr('fill', 'white')
 // for (let i = 0; i < n; i++) {
 //   const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect')
 //   rect.setAttribute('y', i * 20)
