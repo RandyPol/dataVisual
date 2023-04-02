@@ -18,7 +18,7 @@ svg
   .attr('y', (d) => d * 20)
   .attr('width', width)
   .attr('height', 10)
-  .attr('mask', 'url(#circle-mask)')
+  .attr('mask', 'url(#mask-1)')
 
 svg
   .append('g')
@@ -28,13 +28,13 @@ svg
   .attr('x', (d) => d * 20)
   .attr('width', 10)
   .attr('height', height)
-  .attr('mask', 'url(#circle-mask2)')
+  .attr('mask', 'url(#mask-2)')
 
 /**
  * Create a mask that will be used to create the lines
  */
 
-const mask = svg.append('mask').attr('id', 'circle-mask')
+const mask = svg.append('mask').attr('id', 'mask-1')
 
 mask
   .append('rect')
@@ -44,6 +44,7 @@ mask
 
 // We are going to append a path to the mask that will create the lines that we want
 // We are going to use the symbol generator to create the lines
+// The fill white create the lines that we want to display on the screen and the rest of the mask will be black
 mask
   .append('g')
   .attr('transform', `translate(${width / 2}, ${height / 2})`)
@@ -55,7 +56,7 @@ mask
 //  * Create a mask for the second for loop to create the lines
 //  */
 
-const mask2 = svg.append('mask').attr('id', 'circle-mask2')
+const mask2 = svg.append('mask').attr('id', 'mask-2')
 
 mask2
   .append('rect')
@@ -64,8 +65,8 @@ mask2
   .attr('fill', 'white')
 
 mask2
-  .append('circle')
-  .attr('cx', width / 2)
-  .attr('cy', height / 2)
-  .attr('r', 200)
+  .append('g')
+  .attr('transform', `translate(${width / 2}, ${height / 2})`)
+  .append('path')
+  .attr('d', symbol(symbols[2], 100000)())
   .attr('fill', 'black')
