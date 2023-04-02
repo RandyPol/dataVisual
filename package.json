@@ -19,5 +19,8 @@
   "homepage": "https://github.com/RandyPol/dataVisual#readme",
   "dependencies": {
     "d3": "^6.6.1"
+  },
+  "devDependencies": {
+    "parcel": "^2.8.3"
   }
 }
