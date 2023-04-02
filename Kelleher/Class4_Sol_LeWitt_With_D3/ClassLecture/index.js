@@ -43,14 +43,18 @@ svg
 // const mask = document.createElementNS('http://www.w3.org/2000/svg', 'mask')
 // mask.setAttribute('id', 'circle-mask')
 // svg.appendChild(mask)
-
+const mask = svg.append('mask').attr('id', 'circle-mask')
 // // Create a rectangle that will be fill with white and will be used to visible the circle
 // const maskRect = document.createElementNS('http://www.w3.org/2000/svg', 'rect')
 // maskRect.setAttribute('width', width)
 // maskRect.setAttribute('height', height)
 // maskRect.setAttribute('fill', 'white')
 // mask.appendChild(maskRect)
-
+mask
+  .append('rect')
+  .attr('width', width)
+  .attr('height', height)
+  .attr('fill', 'white')
 // // Create a circle that will be used to hide the lines
 // const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle')
 // circle.setAttribute('cx', width / 2)
@@ -58,7 +62,12 @@ svg
 // circle.setAttribute('r', 200)
 // circle.setAttribute('fill', 'black')
 // mask.appendChild(circle)
-
+mask
+  .append('circle')
+  .attr('cx', width / 2)
+  .attr('cy', height / 2)
+  .attr('r', 200)
+  .attr('fill', 'black')
 // /**
 //  * Create a mask for the second for loop to create the lines
 //  */
