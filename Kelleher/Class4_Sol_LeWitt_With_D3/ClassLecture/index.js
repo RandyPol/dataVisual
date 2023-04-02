@@ -36,6 +36,19 @@ svg
   .attr('mask', 'url(#circle-mask)')
 
 /**
+ * Create the lines with the second mask
+ */
+svg
+  .selectAll('rect.verticalLines')
+  .data(range(n))
+  .join('rect')
+  .attr('x', (d) => d * 20)
+  .attr('width', 10)
+  .attr('height', height)
+  .attr('class', 'verticalLines')
+  .attr('mask', 'url(#circle-mask2)')
+
+/**
  * Create a mask that will be used to create the lines
  */
 
