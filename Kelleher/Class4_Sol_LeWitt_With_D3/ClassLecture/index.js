@@ -27,6 +27,7 @@ const n = 100
 // D3 Data Join Pattern
 // 1. Select the elements to bind data to
 svg
+  .append('g')
   .selectAll('rect')
   .data(range(n))
   .join('rect')
@@ -39,13 +40,13 @@ svg
  * Create the lines with the second mask
  */
 svg
-  .selectAll('rect.verticalLines')
+  .append('g')
+  .selectAll('rect')
   .data(range(n))
   .join('rect')
   .attr('x', (d) => d * 20)
   .attr('width', 10)
   .attr('height', height)
-  .attr('class', 'verticalLines')
   .attr('mask', 'url(#circle-mask2)')
 
 /**
