@@ -4,8 +4,8 @@ const width = window.innerWidth
 const height = window.innerHeight
 
 // Create a function to refactor the code
-const renderMask = (id, inverted) => {
-  const mask = svg.append('mask').attr('id', id)
+const renderMask = (selection, id, inverted) => {
+  const mask = selection.append('mask').attr('id', id)
 
   mask
     .append('rect')
@@ -36,12 +36,17 @@ const svg = select('body')
  * Create a mask for the first for loop to create the lines
  */
 
-renderMask('mask-1', true)
+// renderMask('mask-1', true)
+// The renderMask function was updated to call a function on a D3 selection
+// using the convention of passing the selection as the first argument
+svg.call(renderMask, 'mask-1', true)
+
 // /**
 //  * Create a mask for the second for loop to create the lines
 //  */
 
-renderMask('mask-2', false)
+// renderMask('mask-2', false)
+svg.call(renderMask, 'mask-2', false)
 
 const n = 100
 
