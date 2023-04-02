@@ -15,12 +15,21 @@ const renderMask = (selection, id, inverted) => {
   // We are going to append a path to the mask that will create the lines that we want
   // We are going to use the symbol generator to create the lines
   // The fill white create the lines that we want to display on the screen and the rest of the mask will be black
+  // const g = mask
+  //   .append('g')
+  //   .attr('transform', `translate(${width / 2}, ${height / 2})`)
+
   mask
-    .append('g')
-    .attr('transform', `translate(${width / 2}, ${height / 2})`)
-    .append('path')
-    .attr('d', symbol(symbols[2], 100000)())
-    .attr('fill', inverted ? 'black' : 'white')
+    .selectAll('g')
+    .data(range(symbols.length))
+    .join((enter) =>
+      enter
+        .append('g')
+        .attr('transform', (d) => `translate(${d * 125 + 100}, ${height / 2})`)
+        .append('path')
+        .attr('d', (d) => symbol(symbols[d], 10000)())
+        .attr('fill', inverted ? 'black' : 'white')
+    )
 
   return mask
 }
