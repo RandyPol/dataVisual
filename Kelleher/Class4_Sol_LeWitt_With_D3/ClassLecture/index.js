@@ -1,4 +1,4 @@
-import { select } from 'd3'
+import { select, range } from 'd3'
 
 const width = window.innerWidth
 const height = window.innerHeight
@@ -13,27 +13,27 @@ const svg = select('body')
   .attr('height', height)
 
 const n = 100
-const marks = []
+// const marks = []
 
-for (let i = 0; i < n; i++) {
-  marks.push({
-    y: i * 20,
-    width: width,
-    height: 10,
-    mask: 'url(#circle-mask)',
-  })
-}
+// for (let i = 0; i < n; i++) {
+//   marks.push({
+//     y: i * 20,
+//     width: width,
+//     height: 10,
+//     mask: 'url(#circle-mask)',
+//   })
+// }
 
 // D3 Data Join Pattern
 // 1. Select the elements to bind data to
 svg
   .selectAll('rect')
-  .data(marks)
+  .data(range(n))
   .join('rect')
-  .attr('y', (d) => d.y)
-  .attr('width', (d) => d.width)
-  .attr('height', (d) => d.height)
-  .attr('mask', (d) => d.mask)
+  .attr('y', (d) => d * 20)
+  .attr('width', width)
+  .attr('height', 10)
+  .attr('mask', 'url(#circle-mask)')
 
 /**
  * Create a mask that will be used to create the lines
