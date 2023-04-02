@@ -1,36 +1,29 @@
-import { range } from 'd3'
+import { select, range } from 'd3'
 
-const range = (n) => {
-  let arr = []
-  for (let i = 0; i < n; i++) {
-    arr.push(i)
-  }
-  return arr
-}
+const width = window.innerWidth
+const height = window.innerHeight
 
-const myArray = [
-  19, 18, 17, 16, 9, 8, 7, 6, 5, 15, 14, 13, 12, 11, 10, 4, 3, 2, 1, 0,
-]
+const svg = select('body')
+  .append('svg')
+  .attr('width', width)
+  .attr('height', height)
 
-// myArray.forEach((d) => {
-//   console.log(d)
-// })
+/**
+ * Seperation of concerns: Data manipulation
+ */
+const data = range(20).map((d) => ({
+  x: d * 50 + 10,
+  y: 250 + Math.sin(d * 0.6) * 100,
+}))
 
-// console.log(
-//   myArray.sort((a, b) => {
-//     console.log(a, b)
-//     return a - b
-//   })
-// )
-
-const entries = [
-  { key: 'a', value: 1 },
-  { key: 'b', value: 2 },
-]
-
-const result = entries.reduce((acc, entry) => {
-  acc[entry.key] = entry.value
-  return acc
-}, {})
-
-console.log(result)
+/**
+ * Seperation of concerns: DOM manipulation and rendering
+ */
+svg
+  .selectAll('circle')
+  .data(data)
+  .enter()
+  .append('circle')
+  .attr('r', 5)
+  .attr('cx', (d) => d.x)
+  .attr('cy', (d) => d.y)
