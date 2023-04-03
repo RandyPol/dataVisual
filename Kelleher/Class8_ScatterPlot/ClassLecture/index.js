@@ -34,6 +34,11 @@ const main = async () => {
   const xScale = scaleLinear().domain(extent(data, xValue)).range([0, width])
   console.log(xScale.domain())
   console.log(xScale.range())
+
+  // yScale is a function that takes a value and returns a pixel value
+  const yScale = scaleLinear().domain(extent(data, yValue)).range([height, 0])
+  console.log(yScale.domain())
+  console.log(yScale.range())
   //   svg.selectAll('circle').data(data).join('circle').attr('r', 5)
 }
 
