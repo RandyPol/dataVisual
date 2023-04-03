@@ -7,6 +7,9 @@ import {
   axisLeft,
   axisBottom,
 } from 'd3'
+/**
+ * Modifiable variables
+ */
 
 const csvUrl =
   'https://gist.githubusercontent.com/curran/a08a1080b88344b0c8a7/raw/0e7a9b0a5d22642a06d3d5b9bcbad9890c8ee534/iris.csv'
@@ -19,28 +22,31 @@ const parseRow = (row) => {
   row.petal_width = +row.petal_width
   return row
 }
+// These are the x and y accessors that we will use to get the data values
+const xValue = (d) => d.petal_length
+const yValue = (d) => d.sepal_length
+const radius = 5
+// Margin convention
+const margin = { top: 20, right: 20, bottom: 40, left: 50 }
 
 //Create chart dimensions with an SVG element
 const width = window.innerWidth
 const height = window.innerHeight
-
-// Margin convention
-const margin = { top: 20, right: 20, bottom: 40, left: 50 }
-
 const svg = select('body')
   .append('svg')
   .attr('width', width)
   .attr('height', height)
 
+/**______________________________________________________________________________*/
+
+/**
+ * This part is Generic and can be used for any chart
+ */
+
 const main = async () => {
   // csv takes a second argument which is a function that is called for each row
   const data = await csv(csvUrl, parseRow)
 
-  // We need to seperate the concerns of the data and the DOM rendering
-  // Scale the data to fit the chart dimensions and data range
-  // These are the x and y accessors that we will use to get the data values
-  const xValue = (d) => d.petal_length
-  const yValue = (d) => d.sepal_length
   // xScale is a function that takes a value and returns a pixel value
   const xScale = scaleLinear()
     .domain(extent(data, xValue))
@@ -54,8 +60,6 @@ const main = async () => {
   const yScale = scaleLinear()
     .domain(extent(data, yValue))
     .range([height - margin.bottom, margin.top])
-  console.log(yScale.domain())
-  console.log(yScale.range())
 
   // The marks are the coordinates of the data points in the chart dimensions and range
   const marks = data.map((d) => {
@@ -72,7 +76,7 @@ const main = async () => {
     .join('circle')
     .attr('cx', (d) => d.x)
     .attr('cy', (d) => d.y)
-    .attr('r', 10)
+    .attr('r', radius)
 
   // Render the axes to the DOM
   // yAxis
