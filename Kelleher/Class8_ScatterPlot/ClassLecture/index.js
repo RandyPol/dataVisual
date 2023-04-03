@@ -48,8 +48,14 @@ const main = async () => {
     }
   })
 
-  console.log(marks)
-  //   svg.selectAll('circle').data(data).join('circle').attr('r', 5)
+  // Render the marks to the DOM
+  svg
+    .selectAll('circle')
+    .data(marks)
+    .join('circle')
+    .attr('cx', (d) => d.x)
+    .attr('cy', (d) => d.y)
+    .attr('r', 5)
 }
 
 main()
