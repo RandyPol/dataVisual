@@ -1,4 +1,12 @@
-import { csv, select, selectAll, scaleLinear, extent } from 'd3'
+import {
+  csv,
+  select,
+  selectAll,
+  scaleLinear,
+  exten,
+  axisLeft,
+  axisBottom,
+} from 'd3'
 
 const csvUrl =
   'https://gist.githubusercontent.com/curran/a08a1080b88344b0c8a7/raw/0e7a9b0a5d22642a06d3d5b9bcbad9890c8ee534/iris.csv'
@@ -16,6 +24,9 @@ const parseRow = (row) => {
 const width = window.innerWidth
 const height = window.innerHeight
 
+// Margin convention
+const margin = { top: 20, right: 20, bottom: 20, left: 20 }
+
 const svg = select('body')
   .append('svg')
   .attr('width', width)
@@ -31,12 +42,16 @@ const main = async () => {
   const xValue = (d) => d.petal_length
   const yValue = (d) => d.sepal_length
   // xScale is a function that takes a value and returns a pixel value
-  const xScale = scaleLinear().domain(extent(data, xValue)).range([0, width])
+  const xScale = scaleLinear()
+    .domain(extent(data, xValue))
+    .range([margin.left, width - margin.right])
   console.log(xScale.domain())
   console.log(xScale.range())
 
   // yScale is a function that takes a value and returns a pixel value
-  const yScale = scaleLinear().domain(extent(data, yValue)).range([height, 0])
+  const yScale = scaleLinear()
+    .domain(extent(data, yValue))
+    .range([height - margin.bottom, margin.top])
   console.log(yScale.domain())
   console.log(yScale.range())
 
