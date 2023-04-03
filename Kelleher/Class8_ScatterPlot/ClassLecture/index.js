@@ -43,7 +43,9 @@ const main = async () => {
   const yValue = (d) => d.sepal_length
   // xScale is a function that takes a value and returns a pixel value
   const xScale = scaleLinear()
-    .domain(extent(data, xValue))
+    // .domain(extent(data, xValue))
+    // To make the x-axis to start from 0 we need to use the following domain instead
+    .domain([0, extent(data, yValue)[1]])
     .range([margin.left, width - margin.right])
   console.log(xScale.domain())
   console.log(xScale.range())
