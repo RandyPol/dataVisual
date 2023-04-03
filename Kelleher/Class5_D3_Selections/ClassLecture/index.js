@@ -46,8 +46,9 @@ setInterval(() => {
   circle
     .merge(circleEnter)
     .attr('cx', (d) => d.x)
-    .attr('cy', (d) => d.y)
-
+    .attr('cy', (d) => d.y) 
+  // Delete the exit selection
+  circle.exit().remove()
   circle.attr('cx', (d) => d.x).attr('cy', (d) => d.y)
 */
   // Using join
