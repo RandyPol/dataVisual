@@ -35,6 +35,8 @@ setInterval(() => {
     y: 250 + Math.sin(d * 0.5 + t) * 220,
   }))
 
+  // Using merge
+  /*
   // Create a new selection of circles
   const circle = svg.selectAll('circle').data(data)
   //Circle enter selection
@@ -47,6 +49,15 @@ setInterval(() => {
     .attr('cy', (d) => d.y)
 
   circle.attr('cx', (d) => d.x).attr('cy', (d) => d.y)
+*/
+  // Using join
+  const circle = svg
+    .selectAll('circle')
+    .data(data)
+    .join('circle')
+    .attr('cx', (d) => d.x)
+    .attr('cy', (d) => d.y)
+    .attr('r', 20)
 
-  t += 0.8
+  t += 0.5
 }, 1000)
