@@ -3,7 +3,7 @@ import {
   select,
   selectAll,
   scaleLinear,
-  exten,
+  extent,
   axisLeft,
   axisBottom,
 } from 'd3'
@@ -25,7 +25,7 @@ const width = window.innerWidth
 const height = window.innerHeight
 
 // Margin convention
-const margin = { top: 20, right: 20, bottom: 20, left: 20 }
+const margin = { top: 20, right: 20, bottom: 20, left: 50 }
 
 const svg = select('body')
   .append('svg')
@@ -71,6 +71,19 @@ const main = async () => {
     .attr('cx', (d) => d.x)
     .attr('cy', (d) => d.y)
     .attr('r', 5)
+
+  // Render the axes to the DOM
+  // yAxis
+  svg
+    .append('g')
+    .attr('transform', `translate(${margin.left}, 0)`)
+    .call(axisLeft(yScale))
+
+  // xAxis
+  svg
+    .append('g')
+    .attr('transform', `translate(0, ${height - margin.bottom})`)
+    .call(axisBottom(xScale))
 }
 
 main()
