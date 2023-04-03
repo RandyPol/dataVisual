@@ -85,6 +85,17 @@ const main = async () => {
     .attr('transform', `translate(${margin.left}, 0)`)
     .call(axisLeft(yScale))
 
+  /**
+
+     .call explains what the axis is doing:
+     const yAxis = axisLeft(yScale)
+     const yAxisGroup = svg.append('g').attr('transform', `translate(${margin.left}, 0)`)
+    //  We can then call the axis function on the group
+    yAxisGroup.call(yAxis) or yAxis(yAxisGroup)
+
+    When we use .call we are passing the group as the first argument to the function in this case the axis function yAxis and the group is the context of the function. This is the same as doing yAxis(yAxisGroup) or yAxisGroup.call(yAxis). The difference is that when we use .call we can chain the function calls and we can pass more arguments to the function. 
+      */
+
   // xAxis
   svg
     .append('g')
