@@ -39,6 +39,16 @@ const main = async () => {
   const yScale = scaleLinear().domain(extent(data, yValue)).range([height, 0])
   console.log(yScale.domain())
   console.log(yScale.range())
+
+  // The marks are the coordinates of the data points in the chart dimensions and range
+  const marks = data.map((d) => {
+    return {
+      x: xScale(xValue(d)),
+      y: yScale(yValue(d)),
+    }
+  })
+
+  console.log(marks)
   //   svg.selectAll('circle').data(data).join('circle').attr('r', 5)
 }
 
