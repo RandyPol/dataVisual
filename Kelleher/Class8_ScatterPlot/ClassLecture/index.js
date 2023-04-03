@@ -1,4 +1,4 @@
-import { csv, select, selectAll, scaleLinear, extent} from 'd3'
+import { csv, select, selectAll, scaleLinear, extent } from 'd3'
 
 const csvUrl =
   'https://gist.githubusercontent.com/curran/a08a1080b88344b0c8a7/raw/0e7a9b0a5d22642a06d3d5b9bcbad9890c8ee534/iris.csv'
@@ -30,9 +30,10 @@ const main = async () => {
   // These are the x and y accessors that we will use to get the data values
   const xValue = (d) => d.petal_length
   const yValue = (d) => d.sepal_length
-  // Xscale is a function that takes a value and returns a pixel value
-  const xScale = scaleLinear().domain(extent(data, xValue))
+  // xScale is a function that takes a value and returns a pixel value
+  const xScale = scaleLinear().domain(extent(data, xValue)).range([0, width])
   console.log(xScale.domain())
+  console.log(xScale.range())
   //   svg.selectAll('circle').data(data).join('circle').attr('r', 5)
 }
 
