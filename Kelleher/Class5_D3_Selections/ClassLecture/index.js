@@ -1,4 +1,7 @@
-import { select, range } from 'd3'
+import { select } from 'd3'
+
+import { vizData } from './vizData.js'
+import { makeData } from './makeData.js'
 
 const width = window.innerWidth
 const height = window.innerHeight
@@ -8,57 +11,12 @@ const svg = select('body')
   .attr('width', width)
   .attr('height', height)
 
-// /**
-//  * Seperation of concerns: Data manipulation
-//  */
-// const data = range(20).map((d) => ({
-//   x: d * 50 + 10,
-//   y: 250 + Math.sin(d * 0.6) * 100,
-// }))
-
-// /**
-//  * Seperation of concerns: DOM manipulation and rendering
-//  */
-// svg
-//   .selectAll('circle')
-//   .data(data)
-//   .enter()
-//   .append('circle')
-//   .attr('r', 5)
-//   .attr('cx', (d) => d.x)
-//   .attr('cy', (d) => d.y)
-
 let t = 0
 setInterval(() => {
-  const data = range(15).map((d) => ({
-    x: d * 60 + 50,
-    y: 250 + Math.sin(d * 0.5 + t) * 220,
-  }))
+  const n = 10 + Math.sin(t) * 5
+  const data = makeData(n, t)
+  svg.call(vizData, data)
+  // vizData(svg, data)
 
-  // Using merge
-  /*
-  // Create a new selection of circles
-  const circle = svg.selectAll('circle').data(data)
-  //Circle enter selection
-  const circleEnter = circle.enter().append('circle').attr('r', 20)
-  // Use merge to combine the enter and update selections into one selection
-  // Circle represents the update selection
-  circle
-    .merge(circleEnter)
-    .attr('cx', (d) => d.x)
-    .attr('cy', (d) => d.y) 
-  // Delete the exit selection
-  circle.exit().remove()
-  circle.attr('cx', (d) => d.x).attr('cy', (d) => d.y)
-*/
-  // Using join
-  const circle = svg
-    .selectAll('circle')
-    .data(data)
-    .join('circle')
-    .attr('cx', (d) => d.x)
-    .attr('cy', (d) => d.y)
-    .attr('r', 20)
-
-  t += 0.5
-}, 1000)
+  t = t + 0.01
+}, 1000 / 60)
