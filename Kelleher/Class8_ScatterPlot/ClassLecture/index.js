@@ -25,7 +25,7 @@ const width = window.innerWidth
 const height = window.innerHeight
 
 // Margin convention
-const margin = { top: 20, right: 20, bottom: 20, left: 50 }
+const margin = { top: 20, right: 20, bottom: 40, left: 50 }
 
 const svg = select('body')
   .append('svg')
@@ -43,9 +43,9 @@ const main = async () => {
   const yValue = (d) => d.sepal_length
   // xScale is a function that takes a value and returns a pixel value
   const xScale = scaleLinear()
-    // .domain(extent(data, xValue))
+    .domain(extent(data, xValue))
     // To make the x-axis to start from 0 we need to use the following domain instead
-    .domain([0, extent(data, yValue)[1]])
+    // .domain([0, extent(data, yValue)[1]])
     .range([margin.left, width - margin.right])
   console.log(xScale.domain())
   console.log(xScale.range())
@@ -72,7 +72,7 @@ const main = async () => {
     .join('circle')
     .attr('cx', (d) => d.x)
     .attr('cy', (d) => d.y)
-    .attr('r', 5)
+    .attr('r', 10)
 
   // Render the axes to the DOM
   // yAxis
