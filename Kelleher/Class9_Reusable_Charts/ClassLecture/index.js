@@ -29,8 +29,10 @@ const main = async () => {
       .data(data)
       .xValue((d) => d.petal_length)
       .yValue((d) => d.sepal_length)
-      .margin({ top: 20, right: 20, bottom: 40, left: 50 })
+      .margin({ top: 20, right: 20, bottom: 50, left: 80 })
       .radius(5)
+      .xAxisLabel('Petal Length')
+      .yAxisLabel('Sepal Length')
   )
 }
 

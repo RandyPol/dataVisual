@@ -9,7 +9,8 @@ export const scatterPlot = () => {
   let yValue
   let margin
   let radius
-
+  let xAxisLabel
+  let yAxisLabel
 
   const my = (selection) => {
     const xScale = scaleLinear()
@@ -47,6 +48,25 @@ export const scatterPlot = () => {
       .append('g')
       .attr('transform', `translate(0, ${height - margin.bottom})`)
       .call(axisBottom(xScale))
+
+    // Add x-axis label
+    selection
+      .append('text')
+      .attr('class', 'x-axis-label')
+      .attr('x', width / 2)
+      .attr('y', height - 10)
+      .attr('fill', 'black')
+      .text(xAxisLabel)
+
+    // Add y-axis label
+    selection
+      .append('text')
+      .attr('class', 'y-axis-label')
+      .attr('x', -height / 2)
+      .attr('y', margin.left / 2)
+      .attr('fill', 'black')
+      .attr('transform', 'rotate(-90)')
+      .text(yAxisLabel)
   }
 
   my.width = function (_) {
@@ -69,6 +89,13 @@ export const scatterPlot = () => {
   }
   my.radius = function (_) {
     return arguments.length ? ((radius = +_), my) : radius
+  }
+
+  my.xAxisLabel = function (_) {
+    return arguments.length ? ((xAxisLabel = _), my) : xAxisLabel
+  }
+  my.yAxisLabel = function (_) {
+    return arguments.length ? ((yAxisLabel = _), my) : yAxisLabel
   }
 
   return my
