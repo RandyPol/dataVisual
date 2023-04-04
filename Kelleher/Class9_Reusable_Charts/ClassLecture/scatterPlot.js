@@ -1,16 +1,17 @@
 import { scaleLinear, extent, axisLeft, axisBottom } from 'd3'
 
-export const scatterPlot = (config) => {
+export const scatterPlot = () => {
   // Set default values for configuration properties
-  let width = config.width || 720
-  let height = config.height || 80
-  let data = config.data || []
-  let xValue = config.xValue || ((d) => d.petal_length)
-  let yValue = config.yValue || ((d) => d.sepal_length)
-  let margin = config.margin || { top: 20, right: 20, bottom: 40, left: 50 }
-  let radius = config.radius || 5
+  let width
+  let height
+  let data
+  let xValue
+  let yValue
+  let margin
+  let radius
 
-  const my = () => {
+
+  const my = (selection) => {
     const xScale = scaleLinear()
       .domain(extent(data, xValue))
       .range([margin.left, width - margin.right])
@@ -58,10 +59,10 @@ export const scatterPlot = (config) => {
     return arguments.length ? ((data = _), my) : data
   }
   my.xValue = function (_) {
-    return arguments.length ? ((xValue = +_), my) : xValue
+    return arguments.length ? ((xValue = _), my) : xValue
   }
   my.yValue = function (_) {
-    return arguments.length ? ((yValue = +_), my) : yValue
+    return arguments.length ? ((yValue = _), my) : yValue
   }
   my.margin = function (_) {
     return arguments.length ? ((margin = _), my) : margin
