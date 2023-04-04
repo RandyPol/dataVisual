@@ -1,12 +1,4 @@
-import {
-  csv,
-  select,
-  selectAll,
-  scaleLinear,
-  extent,
-  axisLeft,
-  axisBottom,
-} from 'd3'
+import { csv, select } from 'd3'
 
 import { scatterPlot } from './scatterPlot'
 
@@ -21,16 +13,15 @@ const parseRow = (row) => {
   row.petal_width = +row.petal_width
   return row
 }
-
+const width = window.innerWidth
+const height = window.innerHeight
 const svg = select('body')
   .append('svg')
   .attr('width', width)
   .attr('height', height)
 
 const main = async () => {
-  // Asses the data
   const data = await csv(csvUrl, parseRow)
-  // Use the reusable chart function to render the data
   svg.call(
     scatterPlot()
       .width(width)
