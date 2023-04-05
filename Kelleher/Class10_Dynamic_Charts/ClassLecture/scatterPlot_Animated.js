@@ -98,6 +98,7 @@ export const scatterPlot_Animated = () => {
       .join('g')
       .attr('class', 'y-axis')
       .attr('transform', `translate(${margin.left}, 0)`)
+      .transition(t)
       .call(axisLeft(yScale))
 
     // Add x-axis
@@ -107,6 +108,7 @@ export const scatterPlot_Animated = () => {
       .join('g')
       .attr('class', 'x-axis')
       .attr('transform', `translate(0, ${height - margin.bottom})`)
+      .transition(t)
       .call(axisBottom(xScale))
 
     // Add x-axis label
