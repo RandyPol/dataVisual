@@ -8,7 +8,6 @@ export const barChart = () => {
   let y // given d in data, returns the (quantitative) y-value
   let margin // {top, right, bottom, left}
 
-
   let title // given d in data, returns the title text
   let xDomain // an array of (ordinal) x-values
   let xRange // [left, right]
@@ -20,7 +19,6 @@ export const barChart = () => {
   let color = 'currentColor' // bar fill color
 
   const my = (selection) => {
- 
     // Compute values with accessors
     const X = d3.map(data, x)
     const Y = d3.map(data, y)
@@ -51,7 +49,18 @@ export const barChart = () => {
       title = (i) => T(O[i], i, data)
     }
 
-    selection.append('g')
+    selection
+      .append('g')
+      .attr('transform', `translate(${margin.left},0)`)
+      .call(yAxis) // add the y-axis to the chart
+      .call((g) => g.select('.domain').remove()) // remove the y-axis line
+      .call((g) =>
+        g
+          .selectAll('.tick line')
+          .clone()
+          .attr('x2', width - margin.left - margin.right)
+          .attr('stroke-opacity', 0.1) // add horizontal grid lines
+      )
   }
 
   my.width = function (_) {
