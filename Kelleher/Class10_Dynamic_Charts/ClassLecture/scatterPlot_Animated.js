@@ -43,6 +43,11 @@ export const scatterPlot_Animated = () => {
     const t = transition().duration(1000)
 
     // Add the circles to the circle group and bind the data to it (the data is the marks array) and then join it to the DOM (create a new circle for each data point) and add the class 'circle' to it. This approach is used to make sure is that the circles are only created once and then the circles are added to it. Idempotent.
+
+    // Create a function to for code to be resuable for the enter and update selections of the points (circles)
+    const positionCircles = (selection) =>
+      selection.attr('cx', (d) => d.x).attr('cy', (d) => d.y)
+
     const circles = circleGroup
       .selectAll('circle')
       .data(marks)
@@ -52,8 +57,7 @@ export const scatterPlot_Animated = () => {
         ) =>
           enter
             .append('circle')
-            .attr('cx', (d) => d.x)
-            .attr('cy', (d) => d.y)
+            .call(positionCircles)
             .attr('r', 0)
             .call((enter) => enter.transition(t).attr('r', radius)),
         (
@@ -63,8 +67,7 @@ export const scatterPlot_Animated = () => {
             update
               .transition(t)
               .delay((d, i) => i * 10)
-              .attr('cx', (d) => d.x)
-              .attr('cy', (d) => d.y)
+              .call(positionCircles)
           ),
         (
           exit //Here we usually want to remove the circles that are no longer in the data. The exit selection is the selection of elements that are in the DOM but not in the data. The exit selection is created by the join function. We generally want to remove the elements that are no longer in the data.
