@@ -1,4 +1,4 @@
-import { scaleLinear, extent, axisLeft, axisBottom } from 'd3'
+import { scaleLinear, extent, axisLeft, axisBottom, transition } from 'd3'
 
 export const scatterPlot_Animated = () => {
   // Set default values for configuration properties
@@ -30,15 +30,22 @@ export const scatterPlot_Animated = () => {
     })
 
     // Render the marks to the DOM
-    selection
+    // Get the circle group and bind the data to it (the data is null) and then join it to the DOM (create a new group) and add the class 'circle-group' to it (this is the group that will contain the circles). This approach is used to make sure is that the group is only created once and then the circles are added to it. Idempotent.
+    const circleGroup = selection
       .selectAll('.circle-group')
       .data([null])
       .join('g')
       .attr('class', 'circle-group')
+
+    // Transition the circles to their new positions. Create a transition object and set the duration and ease. The transition object is passed to the attr function to set the transition for the attribute. This is a way to animate the circles to their new positions. This method of creating the object and passing it to the attr function is called a 'chained transition'. Is prefer this method over the 'chained transition' method because it is more readable and can be reused.
+    const t = transition().duration(2000)
+
+    // Add the circles to the circle group and bind the data to it (the data is the marks array) and then join it to the DOM (create a new circle for each data point) and add the class 'circle' to it. This approach is used to make sure is that the circles are only created once and then the circles are added to it. Idempotent.
+    const circles = circleGroup
       .selectAll('circle')
       .data(marks)
       .join('circle')
-      .transition()
+      .transition(t)
       .attr('cx', (d) => d.x)
       .attr('cy', (d) => d.y)
       .attr('r', radius)
