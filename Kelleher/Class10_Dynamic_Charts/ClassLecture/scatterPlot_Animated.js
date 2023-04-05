@@ -58,7 +58,13 @@ export const scatterPlot_Animated = () => {
             .call((enter) => enter.transition(t).attr('r', radius)),
         (
           update //Here we usually want to update the existing circles with the new data. The update selection is the selection of elements that are already in the DOM. The update selection is created by the join function. We generally want to modify the existing elements in the DOM and not create new ones. For example, move the circles to their new positions.
-        ) => update.attr('cx', (d) => d.x).attr('cy', (d) => d.y),
+        ) =>
+          update.call((update) =>
+            update
+              .transition(t)
+              .attr('cx', (d) => d.x)
+              .attr('cy', (d) => d.y)
+          ),
         (
           exit //Here we usually want to remove the circles that are no longer in the data. The exit selection is the selection of elements that are in the DOM but not in the data. The exit selection is created by the join function. We generally want to remove the elements that are no longer in the data.
         ) => exit.remove()
