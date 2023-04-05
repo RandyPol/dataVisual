@@ -62,14 +62,15 @@ export const barChart = () => {
             .attr('x2', width - margin.left - margin.right)
             .attr('stroke-opacity', 0.1) // add horizontal grid lines
       )
-      .call((g) =>
-        g
-          .append('text')
-          .attr('x', -margin.left + 20)
-          .attr('y', 20)
-          .attr('fill', 'currentColor')
-          .attr('text-anchor', 'start')
-          .text(yLabel)
+      .call(
+        (g) =>
+          g
+            .append('text') // add the y-axis label
+            .attr('x', -margin.left + 20) // move the label to the left
+            .attr('y', 20) // move the label up
+            .attr('fill', 'currentColor') // set the label color
+            .attr('text-anchor', 'start') // align the label to the left
+            .text(yLabel) // set the label text
       )
   }
 
