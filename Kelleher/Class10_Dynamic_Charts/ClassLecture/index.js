@@ -58,7 +58,7 @@ const main = async () => {
     svg.call(plot)
     svg2.call(plot2)
     i++
-  }, 2000)
+  }, 3000)
 }
 
 main()
