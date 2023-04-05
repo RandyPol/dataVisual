@@ -42,7 +42,7 @@ export const scatterPlot = () => {
     // Add y-axis
     selection
       .selectAll('.y-axis')
-      .data([1])
+      .data([null])
       .join('g')
       .attr('class', 'y-axis')
       .attr('transform', `translate(${margin.left}, 0)`)
@@ -51,30 +51,34 @@ export const scatterPlot = () => {
     // Add x-axis
     selection
       .selectAll('.x-axis')
-      .data([1])
+      .data([null])
       .join('g')
       .attr('class', 'x-axis')
       .attr('transform', `translate(0, ${height - margin.bottom})`)
       .call(axisBottom(xScale))
 
-    // // Add x-axis label
-    // selection
-    //   .append('text')
-    //   .attr('class', 'x-axis-label')
-    //   .attr('x', width / 2)
-    //   .attr('y', height - 10)
-    //   .attr('fill', 'black')
-    //   .text(xAxisLabel)
+    // Add x-axis label
+    selection
+      .selectAll('.x-axis-label')
+      .data([null])
+      .join('text')
+      .attr('class', 'x-axis-label')
+      .attr('x', width / 2)
+      .attr('y', height - 10)
+      .attr('fill', 'black')
+      .text(xAxisLabel)
 
-    // // Add y-axis label
-    // selection
-    //   .append('text')
-    //   .attr('class', 'y-axis-label')
-    //   .attr('x', -height / 2)
-    //   .attr('y', margin.left / 2)
-    //   .attr('fill', 'black')
-    //   .attr('transform', 'rotate(-90)')
-    //   .text(yAxisLabel)
+    // Add y-axis label
+    selection
+      .selectAll('.y-axis-label')
+      .data([null])
+      .join('text')
+      .attr('class', 'y-axis-label')
+      .attr('x', -height / 2)
+      .attr('y', margin.left / 2)
+      .attr('fill', 'black')
+      .attr('transform', 'rotate(-90)')
+      .text(yAxisLabel)
   }
 
   my.width = function (_) {
