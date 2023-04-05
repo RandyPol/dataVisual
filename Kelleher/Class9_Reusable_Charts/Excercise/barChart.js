@@ -16,7 +16,7 @@ export const barChart = () => {
   let xPadding = 0.1 // amount of x-range to reserve to separate bars
   let yFormat // a format specifier string for the y-axis
   let yLabel // a label for the y-axis
-  let color = 'currentColor' // bar fill color
+  let color = 'steelblue' // bar fill color
 
   const my = (selection) => {
     // Compute values with accessors
