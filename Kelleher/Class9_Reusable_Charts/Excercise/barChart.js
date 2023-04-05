@@ -49,6 +49,12 @@ export const barChart = () => {
       title = (i) => T(O[i], i, data)
     }
 
+    // x-axis
+    selection
+      .append('g')
+      .attr('transform', `translate(0,${height - margin.bottom})`)
+      .call(xAxis)
+
     selection
       .append('g')
       .attr('transform', `translate(${margin.left},0)`)
@@ -83,6 +89,8 @@ export const barChart = () => {
       .attr('y', (i) => yScale(Y[i]))
       .attr('height', (i) => yScale(0) - yScale(Y[i]))
       .attr('width', xScale.bandwidth())
+
+  
   }
 
   my.width = function (_) {
