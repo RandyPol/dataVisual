@@ -72,6 +72,17 @@ export const barChart = () => {
             .attr('text-anchor', 'start') // align the label to the left
             .text(yLabel) // set the label text
       )
+
+    const bar = selection
+      .append('g')
+      .attr('fill', color)
+      .selectAll('rect')
+      .data(I)
+      .join('rect')
+      .attr('x', (i) => xScale(X[i]))
+      .attr('y', (i) => yScale(Y[i]))
+      .attr('height', (i) => yScale(0) - yScale(Y[i]))
+      .attr('width', xScale.bandwidth())
   }
 
   my.width = function (_) {
