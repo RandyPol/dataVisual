@@ -54,12 +54,22 @@ export const barChart = () => {
       .attr('transform', `translate(${margin.left},0)`)
       .call(yAxis) // add the y-axis to the chart
       .call((g) => g.select('.domain').remove()) // remove the y-axis line
+      .call(
+        (g) =>
+          g
+            .selectAll('.tick line')
+            .clone()
+            .attr('x2', width - margin.left - margin.right)
+            .attr('stroke-opacity', 0.1) // add horizontal grid lines
+      )
       .call((g) =>
         g
-          .selectAll('.tick line')
-          .clone()
-          .attr('x2', width - margin.left - margin.right)
-          .attr('stroke-opacity', 0.1) // add horizontal grid lines
+          .append('text')
+          .attr('x', -margin.left + 20)
+          .attr('y', 20)
+          .attr('fill', 'currentColor')
+          .attr('text-anchor', 'start')
+          .text(yLabel)
       )
   }
 
