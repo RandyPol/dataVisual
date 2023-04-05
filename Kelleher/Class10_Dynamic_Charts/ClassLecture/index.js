@@ -14,9 +14,13 @@ const parseRow = (row) => {
   row.petal_width = +row.petal_width
   return row
 }
-const width = window.innerWidth
-const height = window.innerHeight
+const width = window.innerWidth / 2
+const height = window.innerHeight / 2
 const svg = select('body')
+  .append('svg')
+  .attr('width', width)
+  .attr('height', height)
+const svg2 = select('body')
   .append('svg')
   .attr('width', width)
   .attr('height', height)
@@ -30,16 +34,29 @@ const main = async () => {
     .xValue((d) => d.petal_length)
     .yValue((d) => d.sepal_length)
     .margin({ top: 20, right: 20, bottom: 50, left: 80 })
-    .radius(5)
+    .radius(2)
     .xAxisLabel('Petal Length')
     .yAxisLabel('Sepal Length')
 
   const columns = ['petal_length', 'sepal_length', 'petal_width', 'sepal_width']
 
+  const plot2 = scatterPlot_Animated()
+    .width(width)
+    .height(height)
+    .data(data)
+    .xValue((d) => d.petal_length)
+    .yValue((d) => d.sepal_length)
+    .margin({ top: 20, right: 20, bottom: 50, left: 80 })
+    .radius(2)
+    .xAxisLabel('Petal Length')
+    .yAxisLabel('Sepal Length')
+
   let i = 0
   setInterval(() => {
     const column = plot.xValue((d) => d[columns[i % columns.length]])
+    const column2 = plot2.xValue((d) => d[columns[i % columns.length]])
     svg.call(plot)
+    svg2.call(plot2)
     i++
   }, 2000)
 }
