@@ -31,6 +31,7 @@ export const scatterPlot = () => {
 
     // Render the marks to the DOM
     selection
+      .append('g')
       .selectAll('circle')
       .data(marks)
       .join('circle')
@@ -40,33 +41,38 @@ export const scatterPlot = () => {
 
     // Add y-axis
     selection
-      .append('g')
+      .selectAll('.y-axis')
+      .data([1])
+      .join('g')
+      .attr('class', 'y-axis')
       .attr('transform', `translate(${margin.left}, 0)`)
       .call(axisLeft(yScale))
+      
     // Add x-axis
     selection
       .append('g')
+      .attr('class', 'x-axis')
       .attr('transform', `translate(0, ${height - margin.bottom})`)
       .call(axisBottom(xScale))
 
-    // Add x-axis label
-    selection
-      .append('text')
-      .attr('class', 'x-axis-label')
-      .attr('x', width / 2)
-      .attr('y', height - 10)
-      .attr('fill', 'black')
-      .text(xAxisLabel)
+    // // Add x-axis label
+    // selection
+    //   .append('text')
+    //   .attr('class', 'x-axis-label')
+    //   .attr('x', width / 2)
+    //   .attr('y', height - 10)
+    //   .attr('fill', 'black')
+    //   .text(xAxisLabel)
 
-    // Add y-axis label
-    selection
-      .append('text')
-      .attr('class', 'y-axis-label')
-      .attr('x', -height / 2)
-      .attr('y', margin.left / 2)
-      .attr('fill', 'black')
-      .attr('transform', 'rotate(-90)')
-      .text(yAxisLabel)
+    // // Add y-axis label
+    // selection
+    //   .append('text')
+    //   .attr('class', 'y-axis-label')
+    //   .attr('x', -height / 2)
+    //   .attr('y', margin.left / 2)
+    //   .attr('fill', 'black')
+    //   .attr('transform', 'rotate(-90)')
+    //   .text(yAxisLabel)
   }
 
   my.width = function (_) {
