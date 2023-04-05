@@ -48,6 +48,9 @@ export const scatterPlot_Animated = () => {
     const positionCircles = (selection) =>
       selection.attr('cx', (d) => d.x).attr('cy', (d) => d.y)
 
+    // Making another funtion for the radius of the circles to clarify the code
+    const growRadius = (enter) => enter.transition(t).attr('r', radius)
+
     const circles = circleGroup
       .selectAll('circle')
       .data(marks)
@@ -59,7 +62,7 @@ export const scatterPlot_Animated = () => {
             .append('circle')
             .call(positionCircles)
             .attr('r', 0)
-            .call((enter) => enter.transition(t).attr('r', radius)),
+            .call(growRadius),
         (
           update //Here we usually want to update the existing circles with the new data. The update selection is the selection of elements that are already in the DOM. The update selection is created by the join function. We generally want to modify the existing elements in the DOM and not create new ones. For example, move the circles to their new positions.
         ) =>
