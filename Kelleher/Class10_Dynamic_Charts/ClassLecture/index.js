@@ -22,18 +22,25 @@ const svg = select('body')
 
 const main = async () => {
   const data = await csv(csvUrl, parseRow)
-  svg.call(
-    scatterPlot()
-      .width(width)
-      .height(height)
-      .data(data)
-      .xValue((d) => d.petal_length)
-      .yValue((d) => d.sepal_length)
-      .margin({ top: 20, right: 20, bottom: 50, left: 80 })
-      .radius(5)
-      .xAxisLabel('Petal Length')
-      .yAxisLabel('Sepal Length')
-  )
+  const plot = scatterPlot()
+    .width(width)
+    .height(height)
+    .data(data)
+    .xValue((d) => d.petal_length)
+    .yValue((d) => d.sepal_length)
+    .margin({ top: 20, right: 20, bottom: 50, left: 80 })
+    .radius(5)
+    .xAxisLabel('Petal Length')
+    .yAxisLabel('Sepal Length')
+
+  const columns = ['petal_length', 'sepal_length', 'petal_width', 'sepal_width']
+
+  let i = 0
+  setInterval(() => {
+    const column = plot.xValue((d) => d[columns[i % columns.length]])
+    svg.call(plot)
+    i++
+  }, 2000)
 }
 
 main()
