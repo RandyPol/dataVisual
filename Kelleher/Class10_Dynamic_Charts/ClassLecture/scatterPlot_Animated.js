@@ -111,16 +111,18 @@ export const scatterPlot_Animated = () => {
       .transition(t)
       .call(axisBottom(xScale))
 
-    // Add x-axis label
+    // Add x-axis label that are idempotent (only created once) and add animation to it
     selection
       .selectAll('.x-axis-label')
       .data([null])
       .join('text')
       .attr('class', 'x-axis-label')
       .attr('x', width / 2)
-      .attr('y', height - 10)
+      .attr('y', height)
       .attr('fill', 'black')
       .text(xAxisLabel)
+      .transition(t)
+      .attr('y', height - 10)
 
     // Add y-axis label
     selection

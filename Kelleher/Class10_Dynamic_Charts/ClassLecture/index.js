@@ -53,8 +53,14 @@ const main = async () => {
 
   let i = 0
   setInterval(() => {
-    const column = plot.xValue((d) => d[columns[i % columns.length]])
-    const column2 = plot2.xValue((d) => d[columns[i % columns.length]])
+    plot
+      .xValue((d) => d[columns[i % columns.length]])
+      .xAxisLabel(columns[i % columns.length])
+
+    plot2
+      .xValue((d) => d[columns[i % columns.length]])
+      .xAxisLabel(columns[i % columns.length])
+
     svg.call(plot)
     svg2.call(plot2)
     i++
