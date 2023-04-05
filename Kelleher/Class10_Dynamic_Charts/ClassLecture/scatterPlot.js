@@ -31,7 +31,10 @@ export const scatterPlot = () => {
 
     // Render the marks to the DOM
     selection
-      .append('g')
+      .selectAll('.circle-group')
+      .data([null])
+      .join('g')
+      .attr('class', 'circle-group')
       .selectAll('circle')
       .data(marks)
       .join('circle')
