@@ -90,7 +90,8 @@ export const barChart = () => {
       .attr('height', (i) => yScale(0) - yScale(Y[i]))
       .attr('width', xScale.bandwidth())
 
-  
+    // add the title attribute to each bar
+    bar.append('title').text(title)
   }
 
   my.width = function (_) {
