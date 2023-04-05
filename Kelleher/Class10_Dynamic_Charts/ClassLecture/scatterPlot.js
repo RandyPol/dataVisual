@@ -47,10 +47,12 @@ export const scatterPlot = () => {
       .attr('class', 'y-axis')
       .attr('transform', `translate(${margin.left}, 0)`)
       .call(axisLeft(yScale))
-      
+
     // Add x-axis
     selection
-      .append('g')
+      .selectAll('.x-axis')
+      .data([1])
+      .join('g')
       .attr('class', 'x-axis')
       .attr('transform', `translate(0, ${height - margin.bottom})`)
       .call(axisBottom(xScale))
