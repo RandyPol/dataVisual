@@ -22,7 +22,7 @@ export const menu = () => {
       .on('change', (event) => {
         const callback = listerners.on('change') // Retrieve the registered callback function
         if (callback) {
-          callback.call(null, event) // Execute the registered callback function with the event as the argument
+          callback.call(null, event.target.value) // Execute the registered callback function with the event target value as the argument
         }
       })
       .selectAll('option')
@@ -50,13 +50,3 @@ export const menu = () => {
 
   return my
 }
-
-// Create a label and a select menu
-// <label for="x-select">X</label>
-// <select id="x-select">
-//  <option value="petal_length">Petal Length</option>
-// <option value="sepal_length">Sepal Length</option>
-// <option value="petal_width">Petal Width</option>
-// <option value="sepal_width">Sepal Width</option>
-// </select>
-//
