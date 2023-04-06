@@ -15,26 +15,40 @@ const parseRow = (row) => {
   row.petal_width = +row.petal_width
   return row
 }
-const width = window.innerWidth / 2
-const height = window.innerHeight / 2
+const minChartWidth = 400
+const minChartHeight = 400
 
 // Create the Dive container
 const divSvgContainer = select('#svgContainer')
 // Create First SVG and the sub elements
-const div = divSvgContainer.append('div').attr('class', 'divSvg-container')
+const div = divSvgContainer
+  .append('div')
+  .attr('class', 'divSvgContainer svgOneDiv')
 const menuContainer = div.append('div').attr('class', 'menu-container')
 const xMenu = menuContainer.append('div')
 const yMenu = menuContainer.append('div')
 
-const svg = div.append('svg').attr('width', width).attr('height', height)
+const svg = div.append('svg')
 
 // Second SVG and the sub elements
-const div2 = divSvgContainer.append('div').attr('class', 'divSvgTwo-container')
+const div2 = divSvgContainer
+  .append('div')
+  .attr('class', 'divSvgContainer svgTwoDiv')
 const menuContainer2 = div2.append('div').attr('class', 'menu-container')
 const xMenu2 = menuContainer2.append('div')
 const yMenu2 = menuContainer2.append('div')
 
-const svg2 = div2.append('svg').attr('width', width).attr('height', height)
+const svg2 = div2.append('svg')
+
+// Finalize the width and height of the SVG Container
+const svgParentDivHeigh =
+  document.querySelector('.divSvgContainer').offsetHeight
+const svgParentDivWidth = document.querySelector('.divSvgContainer').offsetWidth
+
+const width = Math.max(minChartWidth, svgParentDivWidth)
+const height = Math.max(minChartHeight, svgParentDivHeigh)
+
+console.log(width)
 
 const main = async () => {
   const columns = ['petal_length', 'sepal_length', 'petal_width', 'sepal_width']
