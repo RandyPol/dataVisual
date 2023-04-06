@@ -80,7 +80,16 @@ const main = async () => {
     .yAxisLabel('Sepal Length')
 
   // Call the menu function and pass the menuContainer as the selection
-  xMenu.call(menu().id('x-menu').labelText('X:').options(options))
+  xMenu.call(
+    menu()
+      .id('x-menu')
+      .labelText('X:')
+      .options(options)
+      .on('change', (value) => {
+        console.log("In index.js")
+        console.log(`KLK wawawa ${value.target.value}`)
+      })
+  )
   yMenu.call(menu().id('y-menu').labelText('Y:').options(options))
   xMenu2.call(menu().id('x-menu2').labelText('X:').options(options))
   yMenu2.call(menu().id('y-menu2').labelText('Y:').options(options))
