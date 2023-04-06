@@ -19,8 +19,8 @@ export const menu = () => {
       .selectAll('option')
       .data(options)
       .join('option')
-      .attr('value', (d) => d)
-      .text((d) => d)
+      .attr('value', (d) => d.value)
+      .text((d) => d.text)
   }
 
   // Getter/setter functions
