@@ -91,7 +91,17 @@ const main = async () => {
         svg.call(plot)
       })
   )
-  yMenu.call(menu().id('y-menu').labelText('Y:').options(options))
+  yMenu.call(
+    menu()
+      .id('y-menu')
+      .labelText('Y:')
+      .options(options)
+      .on('change', (value) => {
+        plot.yValue((d) => d[value])
+        plot.yAxisLabel(options.find((d) => d.value === value).text)
+        svg.call(plot)
+      })
+  )
   xMenu2.call(menu().id('x-menu2').labelText('X:').options(options))
   yMenu2.call(menu().id('y-menu2').labelText('Y:').options(options))
 
