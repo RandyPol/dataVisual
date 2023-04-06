@@ -13,6 +13,9 @@ export const scatterPlot = () => {
   let yAxisLabel
 
   const my = (selection) => {
+    // Set Width and Height
+    selection.attr('width', width).attr('height', height)
+
     const xScale = scaleLinear()
       .domain(extent(data, xValue))
       .range([margin.left, width - margin.right])
