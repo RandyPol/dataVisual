@@ -14,6 +14,8 @@ export const scatterPlot = () => {
 
   const my = (selection) => {
     // Set Width and Height
+    console.log('value of width: ', width)
+    console.log('value of height: ', height)
     selection.attr('width', width).attr('height', height)
 
     const xScale = scaleLinear()

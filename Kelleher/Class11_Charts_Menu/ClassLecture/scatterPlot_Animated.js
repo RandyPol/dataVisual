@@ -35,17 +35,14 @@ export const scatterPlot_Animated = () => {
     /**
      * Render the chart to the DOM using the data and configuration properties
      */
-    // Get the circle group and bind the data to it (the data is null) and then join it to the DOM (create a new group) and add the class 'circle-group' to it (this is the group that will contain the circles). This approach is used to make sure is that the group is only created once and then the circles are added to it. Idempotent.
+
     const circleGroup = selection
       .selectAll('.circle-group')
       .data([null])
       .join('g')
       .attr('class', 'circle-group')
 
-    // Transition the circles to their new positions. Create a transition object and set the duration and ease. The transition object is passed to the attr function to set the transition for the attribute. This is a way to animate the circles to their new positions. This method of creating the object and passing it to the attr function is called a 'chained transition'. Is prefer this method over the 'chained transition' method because it is more readable and can be reused.
     const t = transition().duration(1000)
-
-    // Add the circles to the circle group and bind the data to it (the data is the marks array) and then join it to the DOM (create a new circle for each data point) and add the class 'circle' to it. This approach is used to make sure is that the circles are only created once and then the circles are added to it. Idempotent.
 
     // Create a function to for code to be resuable for the enter and update selections of the points (circles)
     const positionCircles = (selection) =>
@@ -58,47 +55,22 @@ export const scatterPlot_Animated = () => {
       .selectAll('circle')
       .data(marks)
       .join(
-        (
-          enter //Here we usually want to create a new circle for each data point by using the append function. The append function is called on the enter selection. The enter selection is the selection of elements that are not in the DOM yet. The enter selection is created by the join function.
-        ) =>
+        (enter) =>
           enter
             .append('circle')
             .call(positionCircles)
             .attr('r', 0)
             .call(growRadius),
-        (
-          update //Here we usually want to update the existing circles with the new data. The update selection is the selection of elements that are already in the DOM. The update selection is created by the join function. We generally want to modify the existing elements in the DOM and not create new ones. For example, move the circles to their new positions.
-        ) =>
+        (update) =>
           update.call((update) =>
             update
               .transition(t)
               .delay((d, i) => i * 10)
               .call(positionCircles)
           ),
-        (
-          exit //Here we usually want to remove the circles that are no longer in the data. The exit selection is the selection of elements that are in the DOM but not in the data. The exit selection is created by the join function. We generally want to remove the elements that are no longer in the data.
-        ) => exit.remove()
+        (exit) => exit.remove()
       )
     // Reference for chained transitions using observable pattern
-    /**
-      enter => enter.append("text")
-          .attr("fill", "green")
-          .attr("x", (d, i) => i * 16)
-          .attr("y", -30)
-          .text(d => d)
-        .call(enter => enter.transition(t)
-          .attr("y", 0)),
-      update => update
-          .attr("fill", "black")
-          .attr("y", 0)
-        .call(update => update.transition(t)
-          .attr("x", (d, i) => i * 16)),
-      exit => exit
-          .attr("fill", "brown")
-        .call(exit => exit.transition(t)
-          .attr("y", 30)
-          .remove())
-       */
 
     // Add y-axis
     selection

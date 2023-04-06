@@ -15,8 +15,6 @@ const parseRow = (row) => {
   row.petal_width = +row.petal_width
   return row
 }
-const minChartWidth = 400
-const minChartHeight = 400
 
 // Create the Dive container
 const divSvgContainer = select('#svgContainer')
@@ -40,20 +38,21 @@ const yMenu2 = menuContainer2.append('div')
 
 const svg2 = div2.append('svg')
 
-// Finalize the width and height of the SVG Container
-const svgParentDivHeigh =
-  document.querySelector('.divSvgContainer').offsetHeight
-const svgParentDivWidth = document.querySelector('.divSvgContainer').offsetWidth
-
-const width = Math.max(minChartWidth, svgParentDivWidth)
-const height = Math.max(minChartHeight, svgParentDivHeigh)
-
-console.log(width)
-
 const main = async () => {
-  const columns = ['petal_length', 'sepal_length', 'petal_width', 'sepal_width']
-
+  // Get the data from the csv file
   const data = await csv(csvUrl, parseRow)
+
+  // Finalize the width and height of the SVG Container
+  const { width: svgParentDivWidth, height: svgParentDivHeigh } = document
+    .querySelector('.divSvgContainer')
+    .getBoundingClientRect()
+
+  const width = Math.max(300, svgParentDivWidth)
+  const height = Math.max(300, svgParentDivHeigh)
+  console.log('width', width)
+  console.log('height', height)
+
+  const columns = ['petal_length', 'sepal_length', 'petal_width', 'sepal_width']
 
   const plot = scatterPlot()
     .width(width)
@@ -86,20 +85,31 @@ const main = async () => {
   svg.call(plot)
   svg2.call(plot2)
 
-  // let i = 0
-  // setInterval(() => {
-  //   plot
-  //     .xValue((d) => d[columns[i % columns.length]])
-  //     .xAxisLabel(columns[i % columns.length])
+  const updateChart = (plot, plot2) => {
+    // Get the dimensions of the parent container
+    const { width: svgParentDivWidth, height: svgParentDivHeigh } = document
+      .querySelector('.divSvgContainer')
+      .getBoundingClientRect()
 
-  //   plot2
-  //     .xValue((d) => d[columns[i % columns.length]])
-  //     .xAxisLabel(columns[i % columns.length])
+    // Calculate the width and height of the chart
+    const width = Math.max(300, svgParentDivWidth)
+    const height = Math.max(300, svgParentDivHeigh)
+    console.log(width)
+    console.log(height)
 
-  //   svg.call(plot)
-  //   svg2.call(plot2)
-  //   i++
-  // }, 3000)
+    // // Update the chart with the new dimensions
+    plot.width(width).height(height)
+    plot2.width(width).height(height)
+
+    // Call the chart with the updated dimensions
+    svg.call(plot)
+    svg2.call(plot2)
+  }
+
+  // Call the updateChart function when the window is resized
+  window.addEventListener('resize', () => updateChart(plot, plot2))
 }
 
 main()
+// // Call the updateChart function when the page is loaded
+// updateChart()
