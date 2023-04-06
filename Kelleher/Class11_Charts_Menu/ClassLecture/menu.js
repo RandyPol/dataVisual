@@ -1,7 +1,10 @@
+import { dispatch } from 'd3'
+
 export const menu = () => {
   let id
   let labelText
   let options = []
+  const listerners = dispatch('change')
 
   const my = (selection) => {
     selection
@@ -16,6 +19,12 @@ export const menu = () => {
       .data([null])
       .join('select')
       .attr('id', id)
+      .on('change', (event) => {
+        const callback = listerners.on('change') // Retrieve the registered callback function
+        if (callback) {
+          callback.call(null, event) // Execute the registered callback function with the event as the argument
+        }
+      })
       .selectAll('option')
       .data(options)
       .join('option')
@@ -32,6 +41,11 @@ export const menu = () => {
   }
   my.options = function (_) {
     return arguments.length ? ((options = _), my) : options
+  }
+
+  my.on = function () {
+    var value = listerners.on.apply(listerners, arguments)
+    return value === listerners ? my : value
   }
 
   return my
