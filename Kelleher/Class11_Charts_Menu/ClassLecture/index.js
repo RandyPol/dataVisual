@@ -62,22 +62,22 @@ const main = async () => {
     .height(height)
     .data(data)
     .xValue((d) => d.petal_length)
-    .yValue((d) => d.sepal_length)
+    .yValue((d) => d.petal_length)
     .margin({ top: 20, right: 20, bottom: 50, left: 80 })
     .radius(2)
     .xAxisLabel('Petal Length')
-    .yAxisLabel('Sepal Length')
+    .yAxisLabel('Petal Length')
 
   const plot2 = scatterPlot_Animated()
     .width(width)
     .height(height)
     .data(data)
     .xValue((d) => d.petal_length)
-    .yValue((d) => d.sepal_length)
+    .yValue((d) => d.petal_length)
     .margin({ top: 20, right: 20, bottom: 50, left: 80 })
     .radius(2)
     .xAxisLabel('Petal Length')
-    .yAxisLabel('Sepal Length')
+    .yAxisLabel('Petal Length')
 
   // Call the menu function and pass the menuContainer as the selection
   xMenu.call(
@@ -102,8 +102,28 @@ const main = async () => {
         svg.call(plot)
       })
   )
-  xMenu2.call(menu().id('x-menu2').labelText('X:').options(options))
-  yMenu2.call(menu().id('y-menu2').labelText('Y:').options(options))
+  xMenu2.call(
+    menu()
+      .id('x-menu2')
+      .labelText('X:')
+      .options(options)
+      .on('change', (value) => {
+        plot2.xValue((d) => d[value])
+        plot2.xAxisLabel(options.find((d) => d.value === value).text)
+        svg2.call(plot2)
+      })
+  )
+  yMenu2.call(
+    menu()
+      .id('y-menu2')
+      .labelText('Y:')
+      .options(options)
+      .on('change', (value) => {
+        plot2.yValue((d) => d[value])
+        plot2.yAxisLabel(options.find((d) => d.value === value).text)
+        svg2.call(plot2)
+      })
+  )
 
   svg.call(plot)
   svg2.call(plot2)
