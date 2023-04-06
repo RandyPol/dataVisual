@@ -86,8 +86,9 @@ const main = async () => {
       .labelText('X:')
       .options(options)
       .on('change', (value) => {
-        console.log("In index.js")
-        console.log(`KLK wawawa ${value.target.value}`)
+        plot.xValue((d) => d[value])
+        plot.xAxisLabel(options.find((d) => d.value === value).text)
+        svg.call(plot)
       })
   )
   yMenu.call(menu().id('y-menu').labelText('Y:').options(options))
