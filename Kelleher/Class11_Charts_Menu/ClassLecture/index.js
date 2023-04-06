@@ -50,7 +50,12 @@ const main = async () => {
   const width = Math.max(300, svgParentDivWidth)
   const height = Math.max(300, svgParentDivHeigh)
 
-  const columns = ['petal_length', 'sepal_length', 'petal_width', 'sepal_width']
+  const options = [
+    { value: 'petal_length', text: 'Petal Length' },
+    { value: 'sepal_length', text: 'Sepal Length' },
+    { value: 'petal_width', text: 'Petal Width' },
+    { value: 'sepal_width', text: 'Sepal Width' },
+  ]
 
   const plot = scatterPlot()
     .width(width)
@@ -75,10 +80,10 @@ const main = async () => {
     .yAxisLabel('Sepal Length')
 
   // Call the menu function and pass the menuContainer as the selection
-  xMenu.call(menu().id('x-menu').labelText('X:').options(columns))
-  yMenu.call(menu().id('y-menu').labelText('Y:').options(columns))
-  xMenu2.call(menu().id('x-menu2').labelText('X:').options(columns))
-  yMenu2.call(menu().id('y-menu2').labelText('Y:').options(columns))
+  xMenu.call(menu().id('x-menu').labelText('X:').options(options))
+  yMenu.call(menu().id('y-menu').labelText('Y:').options(options))
+  xMenu2.call(menu().id('x-menu2').labelText('X:').options(options))
+  yMenu2.call(menu().id('y-menu2').labelText('Y:').options(options))
 
   svg.call(plot)
   svg2.call(plot2)
