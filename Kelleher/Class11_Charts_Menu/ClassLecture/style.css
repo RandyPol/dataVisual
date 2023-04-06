@@ -9,6 +9,7 @@ body {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
+  row-gap: 40px;
   height: 100%;
   width: 100%;
 }

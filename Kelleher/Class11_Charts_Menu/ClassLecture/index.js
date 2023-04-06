@@ -49,8 +49,6 @@ const main = async () => {
 
   const width = Math.max(300, svgParentDivWidth)
   const height = Math.max(300, svgParentDivHeigh)
-  console.log('width', width)
-  console.log('height', height)
 
   const columns = ['petal_length', 'sepal_length', 'petal_width', 'sepal_width']
 
@@ -94,8 +92,6 @@ const main = async () => {
     // Calculate the width and height of the chart
     const width = Math.max(300, svgParentDivWidth)
     const height = Math.max(300, svgParentDivHeigh)
-    console.log(width)
-    console.log(height)
 
     // // Update the chart with the new dimensions
     plot.width(width).height(height)
@@ -111,5 +107,3 @@ const main = async () => {
 }
 
 main()
-// // Call the updateChart function when the page is loaded
-// updateChart()
