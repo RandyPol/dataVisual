@@ -30,6 +30,9 @@ const menuContainer = select('body')
   .append('div')
   .attr('class', 'menu-container')
 
+const xMenu = menuContainer.append('div')
+const yMenu = menuContainer.append('div')
+
 const main = async () => {
   const columns = ['petal_length', 'sepal_length', 'petal_width', 'sepal_width']
 
@@ -58,7 +61,8 @@ const main = async () => {
     .yAxisLabel('Sepal Length')
 
   // Call the menu function and pass the menuContainer as the selection
-  menuContainer.call(menu())
+  xMenu.call(menu())
+  yMenu.call(menu())
 
   svg.call(plot)
   svg2.call(plot2)
