@@ -75,10 +75,10 @@ const main = async () => {
     .yAxisLabel('Sepal Length')
 
   // Call the menu function and pass the menuContainer as the selection
-  xMenu.call(menu())
-  yMenu.call(menu())
-  xMenu2.call(menu())
-  yMenu2.call(menu())
+  xMenu.call(menu().id('x-menu').labelText('X:').options(columns))
+  yMenu.call(menu().id('y-menu').labelText('Y:').options(columns))
+  xMenu2.call(menu().id('x-menu2').labelText('X:').options(columns))
+  yMenu2.call(menu().id('y-menu2').labelText('Y:').options(columns))
 
   svg.call(plot)
   svg2.call(plot2)

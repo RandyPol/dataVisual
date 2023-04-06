@@ -23,6 +23,7 @@ export const menu = () => {
       .text((d) => d)
   }
 
+  // Getter/setter functions
   my.id = function (_) {
     return arguments.length ? ((id = _), my) : id
   }
