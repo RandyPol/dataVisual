@@ -2,6 +2,7 @@ import { csv, select } from 'd3'
 
 import { scatterPlot } from './scatterPlot'
 import { scatterPlot_Animated } from './scatterPlot_Animated'
+import { menu } from './menu'
 
 const csvUrl =
   'https://gist.githubusercontent.com/curran/a08a1080b88344b0c8a7/raw/0e7a9b0a5d22642a06d3d5b9bcbad9890c8ee534/iris.csv'
@@ -24,8 +25,14 @@ const svg2 = select('body')
   .append('svg')
   .attr('width', width)
   .attr('height', height)
+// Menu container is the div that will contain the menu
+const menuContainer = select('body')
+  .append('div')
+  .attr('class', 'menu-container')
 
 const main = async () => {
+  const columns = ['petal_length', 'sepal_length', 'petal_width', 'sepal_width']
+
   const data = await csv(csvUrl, parseRow)
 
   const plot = scatterPlot()
@@ -39,8 +46,6 @@ const main = async () => {
     .xAxisLabel('Petal Length')
     .yAxisLabel('Sepal Length')
 
-  const columns = ['petal_length', 'sepal_length', 'petal_width', 'sepal_width']
-
   const plot2 = scatterPlot_Animated()
     .width(width)
     .height(height)
@@ -52,20 +57,26 @@ const main = async () => {
     .xAxisLabel('Petal Length')
     .yAxisLabel('Sepal Length')
 
-  let i = 0
-  setInterval(() => {
-    plot
-      .xValue((d) => d[columns[i % columns.length]])
-      .xAxisLabel(columns[i % columns.length])
+  // Call the menu function and pass the menuContainer as the selection
+  menuContainer.call(menu())
 
-    plot2
-      .xValue((d) => d[columns[i % columns.length]])
-      .xAxisLabel(columns[i % columns.length])
+  svg.call(plot)
+  svg2.call(plot2)
 
-    svg.call(plot)
-    svg2.call(plot2)
-    i++
-  }, 3000)
+  // let i = 0
+  // setInterval(() => {
+  //   plot
+  //     .xValue((d) => d[columns[i % columns.length]])
+  //     .xAxisLabel(columns[i % columns.length])
+
+  //   plot2
+  //     .xValue((d) => d[columns[i % columns.length]])
+  //     .xAxisLabel(columns[i % columns.length])
+
+  //   svg.call(plot)
+  //   svg2.call(plot2)
+  //   i++
+  // }, 3000)
 }
 
 main()
