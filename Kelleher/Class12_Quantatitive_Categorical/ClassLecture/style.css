@@ -26,3 +26,7 @@ body {
   width: 75%;
   margin-left: 25%;
 }
+
+circle {
+  opacity: 0.5;
+}
