@@ -51,12 +51,16 @@ const main = async () => {
   const height = Math.max(300, svgParentDivHeigh)
 
   const options = [
-    { value: 'petal_length', text: 'Petal Length' },
-    { value: 'sepal_length', text: 'Sepal Length' },
-    { value: 'petal_width', text: 'Petal Width' },
-    { value: 'sepal_width', text: 'Sepal Width' },
-    { value: 'species', text: 'Species' },
+    { value: 'petal_length', text: 'Petal Length', type: 'quantitative' },
+    { value: 'sepal_length', text: 'Sepal Length', type: 'quantitative' },
+    { value: 'petal_width', text: 'Petal Width', type: 'quantitative' },
+    { value: 'sepal_width', text: 'Sepal Width', type: 'quantitative' },
+    { value: 'species', text: 'Species', type: 'categorical' },
   ]
+
+  // Create a Map to store the data for the menu
+  const myMap = new Map(options.map((option) => [option.value, option.type]))
+  const getType = (value) => myMap.get(value)
 
   const plot = scatterPlot()
     .width(width)
@@ -115,7 +119,7 @@ const main = async () => {
       .labelText('X:')
       .options(options)
       .on('change', (value) => {
-        plot2.xValue((d) => d[value])
+        plot2.xValue((d) => d[value]).xType(getType(value))
         plot2.xAxisLabel(options.find((d) => d.value === value).text)
         svg2.call(plot2)
       })

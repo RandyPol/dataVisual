@@ -1,4 +1,11 @@
-import { scaleLinear, extent, axisLeft, axisBottom, transition } from 'd3'
+import {
+  scaleLinear,
+  scalePoint,
+  extent,
+  axisLeft,
+  axisBottom,
+  transition,
+} from 'd3'
 
 export const scatterPlot_Animated = () => {
   // Set default values for configuration properties
@@ -11,14 +18,22 @@ export const scatterPlot_Animated = () => {
   let radius
   let xAxisLabel
   let yAxisLabel
+  let xType
 
   const my = (selection) => {
     // Set Width and Height
     selection.attr('width', width).attr('height', height)
 
-    const xScale = scaleLinear()
-      .domain(extent(data, xValue))
-      .range([margin.left, width - margin.right])
+    // Set the scales for the chart
+    const xScale =
+      xType === 'categorical'
+        ? scalePoint()
+            .domain(data.map(xValue))
+            .range([margin.left, width - margin.right])
+            .padding(0.2)
+        : scaleLinear()
+            .domain(extent(data, xValue))
+            .range([margin.left, width - margin.right])
 
     const yScale = scaleLinear()
       .domain(extent(data, yValue))
@@ -145,6 +160,9 @@ export const scatterPlot_Animated = () => {
   }
   my.yAxisLabel = function (_) {
     return arguments.length ? ((yAxisLabel = _), my) : yAxisLabel
+  }
+  my.xType = function (_) {
+    return arguments.length ? ((xType = _), my) : xType
   }
 
   return my

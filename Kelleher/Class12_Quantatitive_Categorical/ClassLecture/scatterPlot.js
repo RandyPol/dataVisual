@@ -21,23 +21,15 @@ export const scatterPlot = () => {
     // Set the scales by verifying if is species or not
     const xScale =
       xType === 'species'
-        ? scalePoint()
-            .domain(data.map(xValue))
-            .range([margin.left, width - margin.right])
-            .padding(0.1)
-        : scaleLinear()
-            .domain(extent(data, xValue))
-            .range([margin.left, width - margin.right])
+        ? scalePoint().domain(data.map(xValue))
+        : scaleLinear().domain(extent(data, xValue))
+    xScale.range([margin.left, width - margin.right])
 
     const yScale =
       yType === 'species'
-        ? scalePoint()
-            .domain(data.map(yValue))
-            .range([height - margin.bottom, margin.top])
-            .padding(0.1)
-        : scaleLinear()
-            .domain(extent(data, yValue))
-            .range([height - margin.bottom, margin.top])
+        ? scalePoint().domain(data.map(yValue))
+        : scaleLinear().domain(extent(data, yValue))
+    yScale.range([height - margin.bottom, margin.top])
 
     // The marks are the coordinates of the data points in the chart dimensions and range
     const marks = data.map((d) => {
