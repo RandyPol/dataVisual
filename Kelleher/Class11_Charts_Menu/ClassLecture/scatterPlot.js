@@ -1,4 +1,4 @@
-import { scaleLinear, extent, axisLeft, axisBottom } from 'd3'
+import { scaleLinear, scalePoint, extent, axisLeft, axisBottom } from 'd3'
 
 export const scatterPlot = () => {
   // Set default values for configuration properties
@@ -11,18 +11,33 @@ export const scatterPlot = () => {
   let radius
   let xAxisLabel
   let yAxisLabel
+  let xType
+  let yType
 
   const my = (selection) => {
     // Set Width and Height
     selection.attr('width', width).attr('height', height)
 
-    const xScale = scaleLinear()
-      .domain(extent(data, xValue))
-      .range([margin.left, width - margin.right])
+    // Set the scales by verifying if is species or not
+    const xScale =
+      xType === 'species'
+        ? scalePoint()
+            .domain(data.map(xValue))
+            .range([margin.left, width - margin.right])
+            .padding(0.1)
+        : scaleLinear()
+            .domain(extent(data, xValue))
+            .range([margin.left, width - margin.right])
 
-    const yScale = scaleLinear()
-      .domain(extent(data, yValue))
-      .range([height - margin.bottom, margin.top])
+    const yScale =
+      yType === 'species'
+        ? scalePoint()
+            .domain(data.map(yValue))
+            .range([height - margin.bottom, margin.top])
+            .padding(0.1)
+        : scaleLinear()
+            .domain(extent(data, yValue))
+            .range([height - margin.bottom, margin.top])
 
     // The marks are the coordinates of the data points in the chart dimensions and range
     const marks = data.map((d) => {
@@ -114,6 +129,12 @@ export const scatterPlot = () => {
   }
   my.yAxisLabel = function (_) {
     return arguments.length ? ((yAxisLabel = _), my) : yAxisLabel
+  }
+  my.xType = function (_) {
+    return arguments.length ? ((xType = _), my) : xType
+  }
+  my.yType = function (_) {
+    return arguments.length ? ((yType = _), my) : yType
   }
 
   return my

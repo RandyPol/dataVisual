@@ -55,6 +55,7 @@ const main = async () => {
     { value: 'sepal_length', text: 'Sepal Length' },
     { value: 'petal_width', text: 'Petal Width' },
     { value: 'sepal_width', text: 'Sepal Width' },
+    { value: 'species', text: 'Species' },
   ]
 
   const plot = scatterPlot()
@@ -86,6 +87,9 @@ const main = async () => {
       .labelText('X:')
       .options(options)
       .on('change', (value) => {
+        if (value === 'species') {
+          plot.xType(value)
+        }
         plot.xValue((d) => d[value])
         plot.xAxisLabel(options.find((d) => d.value === value).text)
         svg.call(plot)
@@ -97,6 +101,9 @@ const main = async () => {
       .labelText('Y:')
       .options(options)
       .on('change', (value) => {
+        if (value === 'species') {
+          plot.yType(value)
+        }
         plot.yValue((d) => d[value])
         plot.yAxisLabel(options.find((d) => d.value === value).text)
         svg.call(plot)
