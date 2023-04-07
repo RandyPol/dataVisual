@@ -91,10 +91,7 @@ const main = async () => {
       .labelText('X:')
       .options(options)
       .on('change', (value) => {
-        if (value === 'species') {
-          plot.xType(value)
-        }
-        plot.xValue((d) => d[value])
+        plot.xValue((d) => d[value]).xType(getType(value))
         plot.xAxisLabel(options.find((d) => d.value === value).text)
         svg.call(plot)
       })
@@ -105,10 +102,7 @@ const main = async () => {
       .labelText('Y:')
       .options(options)
       .on('change', (value) => {
-        if (value === 'species') {
-          plot.yType(value)
-        }
-        plot.yValue((d) => d[value])
+        plot.yValue((d) => d[value]).yType(getType(value))
         plot.yAxisLabel(options.find((d) => d.value === value).text)
         svg.call(plot)
       })
@@ -130,7 +124,7 @@ const main = async () => {
       .labelText('Y:')
       .options(options)
       .on('change', (value) => {
-        plot2.yValue((d) => d[value])
+        plot2.yValue((d) => d[value]).yType(getType(value))
         plot2.yAxisLabel(options.find((d) => d.value === value).text)
         svg2.call(plot2)
       })

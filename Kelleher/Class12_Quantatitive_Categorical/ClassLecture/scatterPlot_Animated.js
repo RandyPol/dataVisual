@@ -19,6 +19,7 @@ export const scatterPlot_Animated = () => {
   let xAxisLabel
   let yAxisLabel
   let xType
+  let yType
 
   const my = (selection) => {
     // Set Width and Height
@@ -35,9 +36,15 @@ export const scatterPlot_Animated = () => {
             .domain(extent(data, xValue))
             .range([margin.left, width - margin.right])
 
-    const yScale = scaleLinear()
-      .domain(extent(data, yValue))
-      .range([height - margin.bottom, margin.top])
+    const yScale =
+      yType === 'categorical'
+        ? scalePoint()
+            .domain(data.map(yValue))
+            .range([margin.top, height - margin.bottom])
+            .padding(0.2)
+        : scaleLinear()
+            .domain(extent(data, yValue))
+            .range([height - margin.bottom, margin.top])
 
     // The marks are the coordinates of the data points in the chart dimensions and range
     const marks = data.map((d) => {
@@ -163,6 +170,10 @@ export const scatterPlot_Animated = () => {
   }
   my.xType = function (_) {
     return arguments.length ? ((xType = _), my) : xType
+  }
+
+  my.yType = function (_) {
+    return arguments.length ? ((yType = _), my) : yType
   }
 
   return my

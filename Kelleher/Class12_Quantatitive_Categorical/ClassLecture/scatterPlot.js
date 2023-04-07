@@ -18,18 +18,26 @@ export const scatterPlot = () => {
     // Set Width and Height
     selection.attr('width', width).attr('height', height)
 
-    // Set the scales by verifying if is species or not
+    // Set the scales for the chart
     const xScale =
-      xType === 'species'
-        ? scalePoint().domain(data.map(xValue))
-        : scaleLinear().domain(extent(data, xValue))
-    xScale.range([margin.left, width - margin.right])
+      xType === 'categorical'
+        ? scalePoint()
+            .domain(data.map(xValue))
+            .range([margin.left, width - margin.right])
+            .padding(0.2)
+        : scaleLinear()
+            .domain(extent(data, xValue))
+            .range([margin.left, width - margin.right])
 
     const yScale =
-      yType === 'species'
-        ? scalePoint().domain(data.map(yValue))
-        : scaleLinear().domain(extent(data, yValue))
-    yScale.range([height - margin.bottom, margin.top])
+      yType === 'categorical'
+        ? scalePoint()
+            .domain(data.map(yValue))
+            .range([margin.top, height - margin.bottom])
+            .padding(0.2)
+        : scaleLinear()
+            .domain(extent(data, yValue))
+            .range([height - margin.bottom, margin.top])
 
     // The marks are the coordinates of the data points in the chart dimensions and range
     const marks = data.map((d) => {
