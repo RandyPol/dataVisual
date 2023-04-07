@@ -26,25 +26,17 @@ export const scatterPlot_Animated = () => {
     selection.attr('width', width).attr('height', height)
 
     // Set the scales for the chart
-    const xScale =
+    const xScale = (
       xType === 'categorical'
-        ? scalePoint()
-            .domain(data.map(xValue))
-            .range([margin.left, width - margin.right])
-            .padding(0.2)
-        : scaleLinear()
-            .domain(extent(data, xValue))
-            .range([margin.left, width - margin.right])
+        ? scalePoint().domain(data.map(xValue)).padding(0.2)
+        : scaleLinear().domain(extent(data, xValue))
+    ).range([margin.left, width - margin.right])
 
-    const yScale =
+    const yScale = (
       yType === 'categorical'
-        ? scalePoint()
-            .domain(data.map(yValue))
-            .range([margin.top, height - margin.bottom])
-            .padding(0.2)
-        : scaleLinear()
-            .domain(extent(data, yValue))
-            .range([height - margin.bottom, margin.top])
+        ? scalePoint().domain(data.map(yValue)).padding(0.2)
+        : scaleLinear().domain(extent(data, yValue))
+    ).range([height - margin.bottom, margin.top])
 
     // The marks are the coordinates of the data points in the chart dimensions and range
     const marks = data.map((d) => {
