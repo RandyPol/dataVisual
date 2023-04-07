@@ -59,7 +59,7 @@ const main = async () => {
   ]
 
   // Create a Map to store the data for the menu
-  const myMap = new Map(options.map((option) => [option.value, option.type]))
+  const myMap = new Map(options.map(({ value, type }) => [value, type]))
   const getType = (value) => myMap.get(value)
 
   const plot = scatterPlot()
