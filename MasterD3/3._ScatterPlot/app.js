@@ -13,6 +13,11 @@ const draw = async () => {
       width: 800,
       height: 800,
     }
+
+    const svg = select('#chart')
+      .append('svg')
+      .attr('width', dimensions.width)
+      .attr('height', dimensions.height)
   } catch (error) {
     console.error(error)
   }
