@@ -68,7 +68,10 @@ const draw = async () => {
 
     // Axes
     const xAxis = axisBottom(xScale)
-    ctr.append('g').call(xAxis)
+    ctr
+      .append('g')
+      .call(xAxis)
+      .style('transform', `translateY(${dimensions.boundedHeight}px)`)
   } catch (error) {
     console.error(error)
   }
