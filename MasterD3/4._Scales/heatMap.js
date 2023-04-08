@@ -22,11 +22,11 @@ async function draw(el) {
   // Rectangles
   svg
     .append('g')
+    .attr('stroke', 'black')
+    .attr('stroke', '#ddd')
     .selectAll('rect')
     .data(dataset)
     .join('rect')
-    .attr('stroke', 'black')
-    .attr('stroke', '#ddd')
 }
 
 draw('#heatmap1')
