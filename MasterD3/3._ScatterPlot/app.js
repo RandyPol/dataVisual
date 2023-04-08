@@ -72,7 +72,9 @@ const draw = async () => {
     // X axis
     // .ticks() => number of ticks to show, but it's not guaranteed to be exact number as D3 use its own algorithm to determine the ticks to show so the number pass is a suggestion
     // .tickValues() => exact number of ticks to show and the values to show
-    const xAxis = axisBottom(xScale).ticks(5)
+    const xAxis = axisBottom(xScale)
+      .ticks(5)
+      .tickFormat((d) => `${d * 100}%`)
 
     const xAxisGroup = ctr
       .append('g')
