@@ -43,13 +43,19 @@ const draw = async () => {
       .attr('fill', 'red')
 
     // Scales
+    /**
+     * rangeRound => only applies to the output range. Whereas the nice() function is applied to the domain. They both will round numeric values.
+     */
     const xScale = scaleLinear()
       .domain(extent(data, xAccessor))
-      .range([0, dimensions.boundedWidth])
+      .rangeRound([0, dimensions.boundedWidth])
+      .clamp(true)
 
     const yScale = scaleLinear()
       .domain(extent(data, yAccessor))
-      .range([0, dimensions.boundedHeight])
+      .rangeRound([0, dimensions.boundedHeight])
+      .nice() // round the domain values
+      .clamp(true)
 
     // Draw circles
     ctr
