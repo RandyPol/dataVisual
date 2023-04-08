@@ -83,6 +83,8 @@ const draw = async () => {
       .attr('fill', 'black')
       .text('Humidity')
       .style('text-anchor', 'middle')
+      .classed('x-axis-label', true)
+      
   } catch (error) {
     console.error(error)
   }

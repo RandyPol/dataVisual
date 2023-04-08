@@ -27,3 +27,9 @@ body {
 #tooltip .metric-date {
   text-decoration: underline;
 }
+
+.x-axis-label {
+  font-size: 18px;
+  /*  property will force the browser to draw the image in a specific way. */
+  shape-rendering: geometricPrecision;
+}
