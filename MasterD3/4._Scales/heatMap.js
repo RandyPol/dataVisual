@@ -12,6 +12,7 @@ async function draw(el) {
     width: 600,
     height: 150,
   }
+  const box = 30
 
   // Draw Image
   const svg = select(el)
@@ -27,6 +28,9 @@ async function draw(el) {
     .selectAll('rect')
     .data(dataset)
     .join('rect')
+    .attr('width', box-3)
+    .attr('height', box-3)
+    
 }
 
 draw('#heatmap1')
