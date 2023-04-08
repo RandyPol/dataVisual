@@ -25,12 +25,14 @@ async function draw(el) {
     .append('g')
     .attr('stroke', 'black')
     .attr('stroke', '#ddd')
+    .attr('transform', 'translate(2,2)')
     .selectAll('rect')
     .data(dataset)
     .join('rect')
-    .attr('width', box-3)
-    .attr('height', box-3)
-    
+    .attr('width', box - 3)
+    .attr('height', box - 3)
+    .attr('x', (d, i) => box * (i % 20)) // 0, 30, 60
+    .attr('y', (d, i) => box * ((i / 20) | 0))
 }
 
 draw('#heatmap1')
