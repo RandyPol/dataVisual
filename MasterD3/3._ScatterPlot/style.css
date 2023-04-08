@@ -9,7 +9,8 @@ body {
 #chart {
   width: 800px;
   height: 800px;
-  background-color: #0c0a36;
+  /* background-color: #0c0a36; */
+  background-color: #f7f7f7;
   margin: 25px auto;
   position: relative;
 }

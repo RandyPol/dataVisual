@@ -1,4 +1,4 @@
-import { select, json, scaleLinear, extent } from 'd3'
+import { select, json, scaleLinear, extent, axisBottom } from 'd3'
 
 const JSON_URL =
   'https://gist.githubusercontent.com/RandyPol/177c1498022e0afaba65e50b9f3965b3/raw/e167bdc78f43cf44de6b3295f68f39f85960be0d/weatherData.json'
@@ -65,6 +65,10 @@ const draw = async () => {
       .attr('cx', (d) => xScale(xAccessor(d)))
       .attr('cy', (d) => yScale(yAccessor(d)))
       .attr('r', 5)
+
+    // Axes
+    const xAxis = axisBottom(xScale)
+    ctr.append('g').call(xAxis)
   } catch (error) {
     console.error(error)
   }
