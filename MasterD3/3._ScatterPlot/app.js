@@ -23,9 +23,11 @@ const draw = async () => {
       },
     }
     // Inner dimensions
-    dimensions.boundedWidth = dimensions.width - dimensions.margin.left - dimensions.margin.right
-    dimensions.boundedHeight = dimensions.height - dimensions.margin.top - dimensions.margin.bottom
-    
+    dimensions.boundedWidth =
+      dimensions.width - dimensions.margin.left - dimensions.margin.right
+    dimensions.boundedHeight =
+      dimensions.height - dimensions.margin.top - dimensions.margin.bottom
+
     const svg = select('#chart')
       .append('svg')
       .attr('width', dimensions.width)
@@ -43,20 +45,19 @@ const draw = async () => {
     // Scales
     const xScale = scaleLinear()
       .domain(extent(data, xAccessor))
-      .range([0, dimensions.width])
+      .range([0, dimensions.boundedWidth])
 
-    // const yScale = scaleLinear()
-    //   .domain(extent(data, yAccessor))
-    //   .range([dimensions.height, 0])
+    const yScale = scaleLinear()
+      .domain(extent(data, yAccessor))
+      .range([0, dimensions.boundedHeight])
 
-    console.log(dimensions.width)
     // Draw circles
     ctr
       .selectAll('circle')
       .data(data)
       .join('circle')
-      .attr('cx', xAccessor)
-      .attr('cy', yAccessor)
+      .attr('cx', (d) => xScale(xAccessor(d)))
+      .attr('cy', (d) => yScale(yAccessor(d)))
       .attr('r', 5)
   } catch (error) {
     console.error(error)
