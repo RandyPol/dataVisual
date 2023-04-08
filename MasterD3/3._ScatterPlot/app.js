@@ -1,4 +1,4 @@
-import { select, json } from 'd3'
+import { select, json, scaleLinear, extent } from 'd3'
 
 const JSON_URL =
   'https://gist.githubusercontent.com/RandyPol/177c1498022e0afaba65e50b9f3965b3/raw/e167bdc78f43cf44de6b3295f68f39f85960be0d/weatherData.json'
@@ -22,6 +22,10 @@ const draw = async () => {
         left: 50,
       },
     }
+    // Inner dimensions
+    dimensions.boundedWidth = dimensions.width - dimensions.margin.left - dimensions.margin.right
+    dimensions.boundedHeight = dimensions.height - dimensions.margin.top - dimensions.margin.bottom
+    
     const svg = select('#chart')
       .append('svg')
       .attr('width', dimensions.width)
@@ -36,6 +40,16 @@ const draw = async () => {
       )
       .attr('fill', 'red')
 
+    // Scales
+    const xScale = scaleLinear()
+      .domain(extent(data, xAccessor))
+      .range([0, dimensions.width])
+
+    // const yScale = scaleLinear()
+    //   .domain(extent(data, yAccessor))
+    //   .range([dimensions.height, 0])
+
+    console.log(dimensions.width)
     // Draw circles
     ctr
       .selectAll('circle')
