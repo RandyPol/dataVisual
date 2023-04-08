@@ -5,9 +5,14 @@ const JSON_URL =
 
 const draw = async () => {
   try {
+    // Data
     const data = await json(JSON_URL)
-    console.log(data.length)
-    console.log(data[0])
+
+    // Dimensions
+    const dimensions = {
+      width: 800,
+      height: 800,
+    }
   } catch (error) {
     console.error(error)
   }
