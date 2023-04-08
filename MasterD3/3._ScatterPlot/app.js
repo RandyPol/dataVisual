@@ -53,7 +53,7 @@ const draw = async () => {
 
     const yScale = scaleLinear()
       .domain(extent(data, yAccessor))
-      .rangeRound([dimensions.boundedHeight,0])
+      .rangeRound([dimensions.boundedHeight, 0])
       .nice() // round the domain values
       .clamp(true)
 
@@ -70,7 +70,9 @@ const draw = async () => {
     // Axes
 
     // X axis
-    const xAxis = axisBottom(xScale)
+    // .ticks() => number of ticks to show, but it's not guaranteed to be exact number as D3 use its own algorithm to determine the ticks to show so the number pass is a suggestion
+    // .tickValues() => exact number of ticks to show and the values to show
+    const xAxis = axisBottom(xScale).ticks(5)
 
     const xAxisGroup = ctr
       .append('g')
