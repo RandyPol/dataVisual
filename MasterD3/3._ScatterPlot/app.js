@@ -8,6 +8,9 @@ const draw = async () => {
     // Data
     const data = await json(JSON_URL)
 
+    const xAccessor = (d) => d.currently.humidity
+    const yAccessor = (d) => d.currently.apparentTemperature
+
     // Dimensions
     const dimensions = {
       width: 800,
@@ -33,7 +36,14 @@ const draw = async () => {
       )
       .attr('fill', 'red')
 
-    ctr.append('circle').attr('r', 15)
+    // Draw circles
+    ctr
+      .selectAll('circle')
+      .data(data)
+      .join('circle')
+      .attr('cx', xAccessor)
+      .attr('cy', yAccessor)
+      .attr('r', 5)
   } catch (error) {
     console.error(error)
   }
