@@ -24,7 +24,16 @@ const draw = async () => {
       .attr('width', dimensions.width)
       .attr('height', dimensions.height)
 
-    svg.append('circle').attr('r', 15)
+    // Inner container
+    const ctr = svg
+      .append('g')
+      .attr(
+        'transform',
+        `translate(${dimensions.margin.left}, ${dimensions.margin.top})`
+      )
+      .attr('fill', 'red')
+
+    ctr.append('circle').attr('r', 15)
   } catch (error) {
     console.error(error)
   }
