@@ -18,6 +18,15 @@ async function draw(el) {
     .append('svg')
     .attr('width', dimensions.width)
     .attr('height', dimensions.height)
+
+  // Rectangles
+  svg
+    .append('g')
+    .selectAll('rect')
+    .data(dataset)
+    .join('rect')
+    .attr('stroke', 'black')
+    .attr('stroke', '#ddd')
 }
 
 draw('#heatmap1')
