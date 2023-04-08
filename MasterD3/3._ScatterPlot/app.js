@@ -12,12 +12,19 @@ const draw = async () => {
     const dimensions = {
       width: 800,
       height: 800,
+      margin: {
+        top: 50,
+        right: 50,
+        bottom: 50,
+        left: 50,
+      },
     }
-
     const svg = select('#chart')
       .append('svg')
       .attr('width', dimensions.width)
       .attr('height', dimensions.height)
+
+    svg.append('circle').attr('r', 15)
   } catch (error) {
     console.error(error)
   }
