@@ -53,7 +53,7 @@ const draw = async () => {
 
     const yScale = scaleLinear()
       .domain(extent(data, yAccessor))
-      .rangeRound([0, dimensions.boundedHeight])
+      .rangeRound([dimensions.boundedHeight,0])
       .nice() // round the domain values
       .clamp(true)
 
@@ -65,6 +65,7 @@ const draw = async () => {
       .attr('cx', (d) => xScale(xAccessor(d)))
       .attr('cy', (d) => yScale(yAccessor(d)))
       .attr('r', 5)
+      .attr('data-temp', yAccessor)
 
     // Axes
 
