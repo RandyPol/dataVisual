@@ -1,4 +1,4 @@
-import { select, json, scaleLinear, extent, axisBottom } from 'd3'
+import { select, json, scaleLinear, extent, axisBottom, axisLeft } from 'd3'
 
 const JSON_URL =
   'https://gist.githubusercontent.com/RandyPol/177c1498022e0afaba65e50b9f3965b3/raw/e167bdc78f43cf44de6b3295f68f39f85960be0d/weatherData.json'
@@ -67,14 +67,14 @@ const draw = async () => {
       .attr('r', 5)
 
     // Axes
+
+    // X axis
     const xAxis = axisBottom(xScale)
 
     const xAxisGroup = ctr
       .append('g')
       .call(xAxis)
       .style('transform', `translateY(${dimensions.boundedHeight}px)`)
-  
-
 
     xAxisGroup
       .append('text')
@@ -84,7 +84,19 @@ const draw = async () => {
       .text('Humidity')
       .style('text-anchor', 'middle')
       .classed('x-axis-label', true)
-      
+
+    // Y axis
+    const yAxis = axisLeft(yScale)
+
+    const yAxisGroup = ctr.append('g').call(yAxis).classed('axis', true)
+    yAxisGroup
+      .append('text')
+      .attr('x', -dimensions.boundedHeight / 2)
+      .attr('y', -dimensions.margin.left + 15)
+      .attr('fill', 'black')
+      .html('Temperature (&deg;F)')
+      .style('transform', 'rotate(270deg)')
+      .style('text-anchor', 'middle')
   } catch (error) {
     console.error(error)
   }
