@@ -68,10 +68,21 @@ const draw = async () => {
 
     // Axes
     const xAxis = axisBottom(xScale)
-    ctr
+
+    const xAxisGroup = ctr
       .append('g')
       .call(xAxis)
       .style('transform', `translateY(${dimensions.boundedHeight}px)`)
+  
+
+
+    xAxisGroup
+      .append('text')
+      .attr('x', dimensions.boundedWidth / 2)
+      .attr('y', dimensions.margin.bottom - 10)
+      .attr('fill', 'black')
+      .text('Humidity')
+      .style('text-anchor', 'middle')
   } catch (error) {
     console.error(error)
   }
