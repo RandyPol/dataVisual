@@ -47,7 +47,7 @@ const histogramChart = async () => {
     const padding = 1
 
     const yScale = scaleLinear()
-      .domain(extent(newData, yAccessor))
+      .domain([0, max(newData, yAccessor)])
       .range([dimensions.boundedHeight, 0])
 
     // Draw Rects
@@ -59,6 +59,7 @@ const histogramChart = async () => {
       .attr('height', (d) => dimensions.boundedHeight - yScale(yAccessor(d)))
       .attr('x', (d) => xScale(d.x0))
       .attr('y', (d) => yScale(yAccessor(d)))
+      .attr('fill', '#01c5c4')
   } catch (error) {
     console.log(error)
   }
