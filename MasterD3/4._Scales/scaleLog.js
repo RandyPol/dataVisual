@@ -34,6 +34,15 @@ async function draw() {
     .attr('r', 6)
     .attr('cx', dimensions.margin)
     .attr('cy', dimensions.margin)
+
+  // Draw Text
+  circleGroup
+    .selectAll('text')
+    .data(dataset)
+    .join('text')
+    .attr('x', dimensions.margin + 15)
+    .attr('y', dimensions.margin)
+    .text(nameAccessor)
 }
 
 draw()
