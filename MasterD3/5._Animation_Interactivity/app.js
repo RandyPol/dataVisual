@@ -7,8 +7,9 @@ const histogramChart = async () => {
   try {
     // Data
     const data = await json(JSON_URL)
-    console.log(data)
+
     const xAccessor = (d) => d.currently.humidity
+    const yAccessor = (d) => d.length
     // Dimensions
     let dimensions = {
       width: 800,
@@ -44,15 +45,20 @@ const histogramChart = async () => {
       .thresholds(10)
     const newData = binGroups(data)
     const padding = 1
+
+    const yScale = scaleLinear()
+      .domain(extent(newData, yAccessor))
+      .range([dimensions.boundedHeight, 0])
+
     // Draw Rects
     canvas
       .selectAll('rect')
       .data(newData)
       .join('rect')
       .attr('width', (d) => max([0, xScale(d.x1) - xScale(d.x0) - padding]))
-      .attr('height', 100)
+      .attr('height', (d) => dimensions.boundedHeight - yScale(yAccessor(d)))
       .attr('x', (d) => xScale(d.x0))
-      .attr('y', 0)
+      .attr('y', (d) => yScale(yAccessor(d)))
   } catch (error) {
     console.log(error)
   }
