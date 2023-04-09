@@ -12,6 +12,18 @@
     <div class="chart" id="heatmap1"></div>
     <h1>Quantize Scale</h1>
     <div class="chart" id="heatmap2"></div>
+    <h1>Quantile Scale</h1>
+    <p>
+      The quantile scale will evenly distribute the numbers across all buckets.
+      It will divide the number of items in the domain by the number of items in
+      the output range. So 100 divided by 3. It will determine that each bucket
+      can represent 33 values each. 100 divided by 3 will result in a decimal
+      value. If the domain cannot be evenly divided, it will put the remainder
+      into the final bucket.
+    </p>
+    <div class="chart" id="heatmap3"></div>
+    <h1>Threshold Scale</h1>
+    <div class="chart" id="heatmap4"></div>
     <!-- HeatMap Script -->
     <script type="module" src="./heatMap.js"></script>
     <!-- <script type="module" src="./writingScale.js"></script> -->
