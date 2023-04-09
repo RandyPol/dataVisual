@@ -1,4 +1,4 @@
-import { select, json, scaleLinear, extent, bin, max } from 'd3'
+import { select, json, scaleLinear, extent, bin, max, axisBottom } from 'd3'
 
 const JSON_URL =
   'https://gist.githubusercontent.com/RandyPol/177c1498022e0afaba65e50b9f3965b3/raw/e167bdc78f43cf44de6b3295f68f39f85960be0d/weatherData.json'
@@ -60,6 +60,14 @@ const histogramChart = async () => {
       .attr('x', (d) => xScale(d.x0))
       .attr('y', (d) => yScale(yAccessor(d)))
       .attr('fill', '#01c5c4')
+
+    //   Draw Peripherals
+    const xAxisGenerator = axisBottom(xScale)
+
+    const xAxis = canvas
+      .append('g')
+      .call(xAxisGenerator)
+      .style('transform', `translateY(${dimensions.boundedHeight}px)`)
   } catch (error) {
     console.log(error)
   }
