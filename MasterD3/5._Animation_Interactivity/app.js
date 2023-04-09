@@ -1,4 +1,4 @@
-import { select, json, scaleLinear, extent } from 'd3'
+import { select, json, scaleLinear, extent, bin } from 'd3'
 
 const JSON_URL =
   'https://gist.githubusercontent.com/RandyPol/177c1498022e0afaba65e50b9f3965b3/raw/e167bdc78f43cf44de6b3295f68f39f85960be0d/weatherData.json'
@@ -38,17 +38,21 @@ const histogramChart = async () => {
       .range([0, dimensions.boundedWidth])
       .nice()
 
-    // Draw Circles
-
+    const binGroups = bin()
+      .domain(xScale.domain())
+      .value(xAccessor)
+      .thresholds(10)
+    const newData = binGroups(data)
+    console.log(newData)
+    // Draw Rects
     canvas
       .selectAll('rect')
       .data(data)
       .join('rect')
       .attr('width', 5)
-      .attr("height", 100)
+      .attr('height', 100)
       .attr('x', (d) => xScale(xAccessor(d)))
       .attr('y', 0)
-  
   } catch (error) {
     console.log(error)
   }
