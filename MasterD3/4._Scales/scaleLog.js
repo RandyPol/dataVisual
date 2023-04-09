@@ -22,6 +22,18 @@ async function draw() {
     .append('svg')
     .attr('width', dimensions.width)
     .attr('height', dimensions.height)
+
+  // Draw Circles
+  const circleGroup = svg.append('g')
+
+  circleGroup
+    .selectAll('circle')
+    .append('g')
+    .data(dataset)
+    .join('circle')
+    .attr('r', 6)
+    .attr('cx', dimensions.margin)
+    .attr('cy', dimensions.margin)
 }
 
 draw()
