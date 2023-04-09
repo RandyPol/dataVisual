@@ -1,4 +1,4 @@
-import { select, json } from 'd3'
+import { select, json, extent, scaleLinear } from 'd3'
 
 const url =
   'https://gist.githubusercontent.com/RandyPol/2135ded73edfa16c69fa7d5ae92f9f8c/raw/1c2d92dbe4121e7b8882f3742af68f7c70827201/logData.json'
@@ -22,6 +22,11 @@ async function draw() {
     .append('svg')
     .attr('width', dimensions.width)
     .attr('height', dimensions.height)
+
+  // Scales
+  const universeScale = scaleLinear()
+    .domain(extent(dataset, sizeAccessor))
+    .range([dimensions.height - dimensions.margin, dimensions.margin])
 
   // Draw Circles
   const circleGroup = svg.append('g')
