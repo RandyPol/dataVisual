@@ -39,8 +39,12 @@ async function draw(el, scale) {
     colorScale = scaleQuantize()
       .domain(extent(dataset))
       .range(['white', 'pink', 'red'])
+    console.log('Quantize:', colorScale.thresholds())
+    // Quantize: [100192.33333333333, 200384.66666666666]
   } else if (scale === 'quantile') {
     colorScale = scaleQuantile().domain(dataset).range(['white', 'pink', 'red'])
+    console.log('Quantile:', colorScale.quantiles())
+    // Quantile: [25654, 55001]
   } else if (scale === 'threshold') {
     colorScale = scaleThreshold()
       .domain([45200, 135600])
