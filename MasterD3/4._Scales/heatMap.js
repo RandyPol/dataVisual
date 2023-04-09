@@ -1,4 +1,4 @@
-import { select, json, extent, scaleLinear } from 'd3'
+import { select, json, extent, scaleLinear, scaleQuantize } from 'd3'
 
 const heatData =
   'https://gist.githubusercontent.com/RandyPol/2135ded73edfa16c69fa7d5ae92f9f8c/raw/18934cbbe9d586654f3e565c4cb4c3ac5ac0cf66/heatMapData.json'
@@ -27,6 +27,10 @@ async function draw(el, scale) {
 
   if (scale === 'linear') {
     colorScale = scaleLinear().domain(extent(dataset)).range(['white', 'red'])
+  } else if (scale === 'quantize') {
+    colorScale = scaleQuantize()
+      .domain(extent(dataset))
+      .range(['white', 'pink', 'red'])
   }
 
   // Rectangles
@@ -46,3 +50,4 @@ async function draw(el, scale) {
 }
 
 draw('#heatmap1', 'linear')
+draw('#heatmap2', 'quantize')
