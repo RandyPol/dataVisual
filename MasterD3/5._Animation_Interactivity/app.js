@@ -62,6 +62,16 @@ const histogramChart = async () => {
       .attr('fill', '#01c5c4')
 
     //   Draw Peripherals
+    canvas
+      .append('g')
+      .classed('bar-labels', true)
+      .selectAll('text')
+      .data(newData)
+      .join('text')
+      .attr('x', (d) => xScale(d.x0) + (xScale(d.x1) - xScale(d.x0)) / 2)
+      .attr('y', (d) => yScale(yAccessor(d)) - 10)
+      .text((d) => yAccessor(d))
+
     const xAxisGenerator = axisBottom(xScale)
 
     const xAxis = canvas
