@@ -29,7 +29,10 @@ async function draw() {
     .range([dimensions.height - dimensions.margin, dimensions.margin])
 
   // Draw Circles
-  const circleGroup = svg.append('g')
+  const circleGroup = svg
+    .append('g')
+    .style('font-size', '16px')
+    .style('dominant-baseline', 'middle')
 
   circleGroup
     .selectAll('circle')
@@ -62,7 +65,10 @@ async function draw() {
     .range([dimensions.height - dimensions.margin, dimensions.margin])
 
   // Draw Circles
-  const circleGroup2 = svg2.append('g')
+  const circleGroup2 = svg2
+    .append('g')
+    .style('font-size', '16px')
+    .style('dominant-baseline', 'middle')
 
   circleGroup2
     .selectAll('circle')
