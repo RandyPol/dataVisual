@@ -5,6 +5,7 @@ import {
   scaleLinear,
   scaleQuantize,
   scaleQuantile,
+  scaleThreshold,
 } from 'd3'
 
 const heatData =
@@ -40,6 +41,10 @@ async function draw(el, scale) {
       .range(['white', 'pink', 'red'])
   } else if (scale === 'quantile') {
     colorScale = scaleQuantile().domain(dataset).range(['white', 'pink', 'red'])
+  } else if (scale === 'threshold') {
+    colorScale = scaleThreshold()
+      .domain([45200, 135600])
+      .range(['white', 'pink', 'red'])
   }
 
   // Rectangles
@@ -61,3 +66,4 @@ async function draw(el, scale) {
 draw('#heatmap1', 'linear')
 draw('#heatmap2', 'quantize')
 draw('#heatmap3', 'quantile')
+draw('#heatmap4', 'threshold')
