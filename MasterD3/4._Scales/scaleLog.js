@@ -38,7 +38,7 @@ async function draw() {
     .join('circle')
     .attr('r', 6)
     .attr('cx', dimensions.margin)
-    .attr('cy', dimensions.margin)
+    .attr('cy', (d) => universeScale(sizeAccessor(d)))
 
   // Draw Text
   circleGroup
@@ -46,7 +46,7 @@ async function draw() {
     .data(dataset)
     .join('text')
     .attr('x', dimensions.margin + 15)
-    .attr('y', dimensions.margin)
+    .attr('y', (d) => universeScale(sizeAccessor(d)))
     .text(nameAccessor)
 }
 
