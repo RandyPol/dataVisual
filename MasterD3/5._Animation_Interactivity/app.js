@@ -43,13 +43,13 @@ const histogramChart = async () => {
       .value(xAccessor)
       .thresholds(10)
     const newData = binGroups(data)
-    console.log(newData)
+    const padding = 1
     // Draw Rects
     canvas
       .selectAll('rect')
       .data(newData)
       .join('rect')
-      .attr('width', (d) => max([0, xScale(d.x1) - xScale(d.x0)]))
+      .attr('width', (d) => max([0, xScale(d.x1) - xScale(d.x0) - padding]))
       .attr('height', 100)
       .attr('x', (d) => xScale(d.x0))
       .attr('y', 0)
