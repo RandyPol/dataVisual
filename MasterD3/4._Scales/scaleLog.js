@@ -1,4 +1,4 @@
-import { select, json, extent, scaleLinear } from 'd3'
+import { select, json, extent, scaleLinear, scaleLog } from 'd3'
 
 const url =
   'https://gist.githubusercontent.com/RandyPol/2135ded73edfa16c69fa7d5ae92f9f8c/raw/1c2d92dbe4121e7b8882f3742af68f7c70827201/logData.json'
@@ -47,6 +47,38 @@ async function draw() {
     .join('text')
     .attr('x', dimensions.margin + 15)
     .attr('y', (d) => universeScale(sizeAccessor(d)))
+    .text(nameAccessor)
+
+  // Use the Log Scale
+  // Draw Image
+  const svg2 = select('#chartTwo')
+    .append('svg')
+    .attr('width', dimensions.width)
+    .attr('height', dimensions.height)
+
+  // Scales
+  const universeScaleLog = scaleLog()
+    .domain(extent(dataset, sizeAccessor))
+    .range([dimensions.height - dimensions.margin, dimensions.margin])
+
+  // Draw Circles
+  const circleGroup2 = svg2.append('g')
+
+  circleGroup2
+    .selectAll('circle')
+    .data(dataset)
+    .join('circle')
+    .attr('r', 6)
+    .attr('cx', dimensions.margin)
+    .attr('cy', (d) => universeScaleLog(sizeAccessor(d)))
+
+  // Draw Text
+  circleGroup2
+    .selectAll('text')
+    .data(dataset)
+    .join('text')
+    .attr('x', dimensions.margin + 15)
+    .attr('y', (d) => universeScaleLog(sizeAccessor(d)))
     .text(nameAccessor)
 }
 

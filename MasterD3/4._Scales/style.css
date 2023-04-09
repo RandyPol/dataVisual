@@ -21,7 +21,7 @@ h1:not(:first-child) {
   margin: 25px auto;
 }
 
-#chart {
+.logChart {
   width: 200px;
   height: 500px;
   background-color: #f7f7f7;
