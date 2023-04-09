@@ -1,4 +1,4 @@
-import { select, json, extent, scaleLinear, scaleLog } from 'd3'
+import { select, json, extent, scaleLinear, scaleLog, axisLeft } from 'd3'
 
 const url =
   'https://gist.githubusercontent.com/RandyPol/2135ded73edfa16c69fa7d5ae92f9f8c/raw/1c2d92dbe4121e7b8882f3742af68f7c70827201/logData.json'
@@ -52,6 +52,13 @@ async function draw() {
     .attr('y', (d) => universeScale(sizeAccessor(d)))
     .text(nameAccessor)
 
+  // // Draw Axis
+  const axis = axisLeft(universeScale)
+  svg
+    .append('g')
+    .attr('transform', `translate(${dimensions.margin}, 0)`)
+    .call(axis)
+
   // Use the Log Scale
   // Draw Image
   const svg2 = select('#chartTwo')
@@ -86,6 +93,12 @@ async function draw() {
     .attr('x', dimensions.margin + 15)
     .attr('y', (d) => universeScaleLog(sizeAccessor(d)))
     .text(nameAccessor)
+  // // Draw Axis
+  const axis2 = axisLeft(universeScaleLog)
+  svg2
+    .append('g')
+    .attr('transform', `translate(${dimensions.margin}, 0)`)
+    .call(axis2)
 }
 
 draw()
