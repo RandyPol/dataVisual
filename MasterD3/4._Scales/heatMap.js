@@ -6,6 +6,8 @@ const heatData =
 async function draw(el, scale) {
   // Data
   const dataset = await json(heatData)
+  // Sort data in ascending order
+  dataset.sort((a, b) => a - b)
 
   // Dimensions
   let dimensions = {
