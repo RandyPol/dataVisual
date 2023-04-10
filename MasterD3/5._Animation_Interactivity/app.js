@@ -76,6 +76,7 @@ const drawChart = async () => {
             .attr('fill', '#01c5c4')
         )
         .transition()
+        .duration(3000)
         .attr('width', (d) => max([0, xScale(d.x1) - xScale(d.x0) - padding]))
         .attr('height', (d) => dimensions.boundedHeight - yScale(yAccessor(d)))
         .attr('x', (d) => xScale(d.x0))
