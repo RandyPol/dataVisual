@@ -83,4 +83,9 @@ const histogramChart = async () => {
   }
 }
 
-histogramChart()
+select('#metric').on('change', function (e) {
+  e.preventDefault()
+
+  //   histogram(this.value)
+  console.log(this.value)
+})
