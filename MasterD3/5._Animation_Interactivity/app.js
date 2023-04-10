@@ -1,4 +1,13 @@
-import { select, json, scaleLinear, extent, bin, max, axisBottom, transition } from 'd3'
+import {
+  select,
+  json,
+  scaleLinear,
+  extent,
+  bin,
+  max,
+  axisBottom,
+  transition,
+} from 'd3'
 
 const JSON_URL =
   'https://gist.githubusercontent.com/RandyPol/177c1498022e0afaba65e50b9f3965b3/raw/e167bdc78f43cf44de6b3295f68f39f85960be0d/weatherData.json'
@@ -77,14 +86,14 @@ const drawChart = async () => {
               .attr('height', 0)
               .attr('x', (d) => xScale(d.x0))
               .attr('y', dimensions.boundedHeight)
-              .attr('fill', '#01c5c4'),
+              .attr('fill', '#b8de6f'),
           (update) => update,
           (exit) =>
             exit
               .transition(exitTransition)
               .attr('y', dimensions.boundedHeight)
               .attr('height', 0)
-              .attr('fill', 'red')
+              .attr('fill', '#f39233')
               .remove()
         )
         .transition(updateTransition)
