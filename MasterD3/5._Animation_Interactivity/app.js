@@ -61,12 +61,13 @@ const drawChart = async () => {
         .nice()
 
       // Draw Rects
-      canvas
+      const barsGroup = canvas
         .selectAll('rect')
         .data(newData)
         .join('rect')
         .attr('width', (d) => max([0, xScale(d.x1) - xScale(d.x0) - padding]))
         .attr('height', (d) => dimensions.boundedHeight - yScale(yAccessor(d)))
+        .transition()
         .attr('x', (d) => xScale(d.x0))
         .attr('y', (d) => yScale(yAccessor(d)))
         .attr('fill', '#01c5c4')
@@ -76,13 +77,14 @@ const drawChart = async () => {
         .selectAll('text')
         .data(newData)
         .join('text')
+        .transition()
         .attr('x', (d) => xScale(d.x0) + (xScale(d.x1) - xScale(d.x0)) / 2)
         .attr('y', (d) => yScale(yAccessor(d)) - 10)
         .text((d) => yAccessor(d))
 
       const xAxisGenerator = axisBottom(xScale)
 
-      xAxisGroup.call(xAxisGenerator)
+      xAxisGroup.transition().call(xAxisGenerator)
     }
 
     select('#metric').on('change', function (e) {
