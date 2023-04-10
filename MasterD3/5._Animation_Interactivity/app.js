@@ -64,10 +64,20 @@ const drawChart = async () => {
       const barsGroup = canvas
         .selectAll('rect')
         .data(newData)
-        .join('rect')
+        .join((enter) =>
+          enter
+            .append('rect')
+            .attr('width', (d) =>
+              max([0, xScale(d.x1) - xScale(d.x0) - padding])
+            )
+            .attr('height', 0)
+            .attr('x', (d) => xScale(d.x0))
+            .attr('y', dimensions.boundedHeight)
+            .attr('fill', '#01c5c4')
+        )
+        .transition()
         .attr('width', (d) => max([0, xScale(d.x1) - xScale(d.x0) - padding]))
         .attr('height', (d) => dimensions.boundedHeight - yScale(yAccessor(d)))
-        .transition()
         .attr('x', (d) => xScale(d.x0))
         .attr('y', (d) => yScale(yAccessor(d)))
         .attr('fill', '#01c5c4')
