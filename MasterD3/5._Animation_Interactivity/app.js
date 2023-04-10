@@ -1,4 +1,4 @@
-import { select, json, scaleLinear, extent, bin, max, axisBottom } from 'd3'
+import { select, json, scaleLinear, extent, bin, max, axisBottom, transition } from 'd3'
 
 const JSON_URL =
   'https://gist.githubusercontent.com/RandyPol/177c1498022e0afaba65e50b9f3965b3/raw/e167bdc78f43cf44de6b3295f68f39f85960be0d/weatherData.json'
@@ -60,6 +60,9 @@ const drawChart = async () => {
         .range([dimensions.boundedHeight, 0])
         .nice()
 
+      // Waiting for the transition to finish
+      const exitTransition = transition().duration(500)
+      const updateTransition = exitTransition.transition().duration(500)
       // Draw Rects
       const barsGroup = canvas
         .selectAll('rect')
@@ -78,15 +81,13 @@ const drawChart = async () => {
           (update) => update,
           (exit) =>
             exit
-              .transition()
-              .duration(2000)
+              .transition(exitTransition)
               .attr('y', dimensions.boundedHeight)
               .attr('height', 0)
               .attr('fill', 'red')
               .remove()
         )
-        .transition()
-        .duration(3000)
+        .transition(updateTransition)
         .attr('width', (d) => max([0, xScale(d.x1) - xScale(d.x0) - padding]))
         .attr('height', (d) => dimensions.boundedHeight - yScale(yAccessor(d)))
         .attr('x', (d) => xScale(d.x0))
