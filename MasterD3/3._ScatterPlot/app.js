@@ -77,6 +77,11 @@ const draw = async () => {
           .style('top', yScale(yAccessor(d)) - 25 + 'px')
           .style('left', xScale(xAccessor(d)) + 'px')
       })
+      .on('mouseleave', function (event, d) {
+        select(this).attr('fill', 'red').attr('r', 5)
+
+        tooltip.style('display', 'none')
+      })
 
     // Axes
 
