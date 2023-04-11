@@ -82,6 +82,18 @@ async function draw() {
     .attr('y', dimensions.margins)
     .attr('fill', 'black')
     .text('Time')
+
+  // Tooltip
+  const tooltip = select('#tooltip')
+
+  const tooltipDot = ctr
+    .append('circle')
+    .attr('r', 5)
+    .attr('fill', '#fc8781')
+    .attr('stroke', 'black')
+    .attr('stroke-width', 2)
+    .style('opacity', 0)
+    .style('pointer-events', 'none')
 }
 
 draw()
