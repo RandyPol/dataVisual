@@ -77,6 +77,11 @@ async function draw() {
     .append('g')
     .call(xAxis)
     .attr('transform', `translate(0, ${dimensions.ctrHeight})`)
+    .append('text')
+    .attr('x', dimensions.ctrWidth / 2)
+    .attr('y', dimensions.margins)
+    .attr('fill', 'black')
+    .text('Time')
 }
 
 draw()
