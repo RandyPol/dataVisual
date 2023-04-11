@@ -7,6 +7,7 @@ import {
   max,
   axisBottom,
   transition,
+  mean,
 } from 'd3'
 
 const JSON_URL =
@@ -46,6 +47,8 @@ const drawChart = async () => {
       .classed('x-axis', true)
       .style('transform', `translateY(${dimensions.boundedHeight}px)`)
 
+    const meanLine = canvas.append('line').classed('mean-line', true)
+
     function histogram(metric) {
       // Accessors
       const xAccessor = (d) => d.currently[metric]
@@ -72,6 +75,7 @@ const drawChart = async () => {
       // Waiting for the transition to finish
       const exitTransition = transition().duration(500)
       const updateTransition = exitTransition.transition().duration(500)
+
       // Draw Rects
       const barsGroup = canvas
         .selectAll('rect')
@@ -133,6 +137,17 @@ const drawChart = async () => {
         .attr('fill', '#01c5c4')
         .text((d) => yAccessor(d))
 
+      // Draw Mean Line
+      const meanValue = mean(data, xAccessor)
+      meanLine
+        .raise()
+        .transition(updateTransition)
+        .attr('x1', xScale(meanValue))
+        .attr('y1', 0)
+        .attr('x2', xScale(meanValue))
+        .attr('y2', dimensions.boundedHeight)
+
+      // Draw Axis
       const xAxisGenerator = axisBottom(xScale)
 
       xAxisGroup.transition().call(xAxisGenerator)
