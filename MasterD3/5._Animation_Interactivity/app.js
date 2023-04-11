@@ -107,10 +107,30 @@ const drawChart = async () => {
       labelsGroup
         .selectAll('text')
         .data(newData)
-        .join('text')
-        .transition()
+        .join(
+          (enter) =>
+            enter
+              .append('text')
+              .attr('width', (d) =>
+                max([0, xScale(d.x1) - xScale(d.x0) - padding])
+              )
+              .attr('height', 0)
+              .attr('x', (d) => xScale(d.x0))
+              .attr('y', dimensions.boundedHeight)
+              .attr('fill', '#b8de6f'),
+          (update) => update,
+          (exit) =>
+            exit
+              .transition(exitTransition)
+              .attr('y', dimensions.boundedHeight)
+              .attr('height', 0)
+              .attr('fill', '#f39233')
+              .remove()
+        )
+        .transition(updateTransition)
         .attr('x', (d) => xScale(d.x0) + (xScale(d.x1) - xScale(d.x0)) / 2)
         .attr('y', (d) => yScale(yAccessor(d)) - 10)
+        .attr('fill', '#01c5c4')
         .text((d) => yAccessor(d))
 
       const xAxisGenerator = axisBottom(xScale)
