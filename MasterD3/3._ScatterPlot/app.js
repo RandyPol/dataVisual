@@ -7,6 +7,7 @@ import {
   axisLeft,
   format,
   timeFormat,
+  Delaunay,
 } from 'd3'
 
 const JSON_URL =
@@ -138,6 +139,22 @@ const draw = async () => {
       .html('Temperature (&deg;F)')
       .style('transform', 'rotate(270deg)')
       .style('text-anchor', 'middle')
+
+    const delaunay = Delaunay.from(
+      data,
+      (d) => xScale(xAccessor(d)),
+      (d) => yScale(yAccessor(d))
+    )
+
+    const voronoi = delaunay.voronoi()
+    ctr
+      .append('g')
+      .selectAll('path')
+      .data(data)
+      .join('path')
+      .attr('stroke', 'black')
+      .attr('fill', 'transparent')
+      .attr('d', (d, i) => voronoi.renderCell(i))
   } catch (error) {
     console.error(error)
   }
