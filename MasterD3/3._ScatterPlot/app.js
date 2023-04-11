@@ -42,6 +42,9 @@ const draw = async () => {
       )
       .attr('fill', 'red')
 
+    // Tooltip selection
+    const tooltip = select('#tooltip')
+
     // Scales
     /**
      * rangeRound => only applies to the output range. Whereas the nice() function is applied to the domain. They both will round numeric values.
@@ -67,8 +70,12 @@ const draw = async () => {
       .attr('r', 5)
       .attr('data-temp', yAccessor)
       .on('mouseenter', function (event, d) {
-        console.log(event)
-        console.log(d)
+        select(this).attr('fill', '#120078').attr('r', 8)
+
+        tooltip
+          .style('display', 'block')
+          .style('top', yScale(yAccessor(d)) - 25 + 'px')
+          .style('left', xScale(xAccessor(d)) + 'px')
       })
 
     // Axes
