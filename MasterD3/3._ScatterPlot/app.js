@@ -145,7 +145,7 @@ const draw = async () => {
 
         tooltip
           .style('display', 'block')
-          .style('top', yScale(yAccessor(d)) - 25 + 'px')
+          .style('top', yScale(yAccessor(d)) - 40 + 'px')
           .style('left', xScale(xAccessor(d)) + 'px')
 
         const formatter = format('.2f')
