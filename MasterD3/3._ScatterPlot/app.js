@@ -6,6 +6,7 @@ import {
   axisBottom,
   axisLeft,
   format,
+  timeFormat,
 } from 'd3'
 
 const JSON_URL =
@@ -86,12 +87,15 @@ const draw = async () => {
           .style('left', xScale(xAccessor(d)) + 'px')
 
         const formatter = format('.2f')
+        const dateFormatter = timeFormat('%B %-d, %Y')
 
         tooltip.select('.metric-humidity span').text(formatter(xAccessor(d)))
 
         tooltip.select('.metric-temp span').text(formatter(yAccessor(d)))
 
-        tooltip.select('.metric-date').text(d.currently.time)
+        tooltip
+          .select('.metric-date')
+          .text(dateFormatter(d.currently.time * 1000))
       })
       .on('mouseleave', function (event, d) {
         select(this).attr('fill', 'red').attr('r', 5)
