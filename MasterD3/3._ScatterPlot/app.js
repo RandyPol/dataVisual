@@ -79,30 +79,6 @@ const draw = async () => {
       .attr('cy', (d) => yScale(yAccessor(d)))
       .attr('r', 5)
       .attr('data-temp', yAccessor)
-      .on('mouseenter', function (event, d) {
-        select(this).attr('fill', '#120078').attr('r', 8)
-
-        tooltip
-          .style('display', 'block')
-          .style('top', yScale(yAccessor(d)) - 25 + 'px')
-          .style('left', xScale(xAccessor(d)) + 'px')
-
-        const formatter = format('.2f')
-        const dateFormatter = timeFormat('%B %-d, %Y')
-
-        tooltip.select('.metric-humidity span').text(formatter(xAccessor(d)))
-
-        tooltip.select('.metric-temp span').text(formatter(yAccessor(d)))
-
-        tooltip
-          .select('.metric-date')
-          .text(dateFormatter(d.currently.time * 1000))
-      })
-      .on('mouseleave', function (event, d) {
-        select(this).attr('fill', 'red').attr('r', 5)
-
-        tooltip.style('display', 'none')
-      })
 
     // Axes
 
@@ -154,9 +130,33 @@ const draw = async () => {
       .selectAll('path')
       .data(data)
       .join('path')
-      .attr('stroke', 'black')
+      // .attr('stroke', 'black')
       .attr('fill', 'transparent')
       .attr('d', (d, i) => voronoi.renderCell(i))
+      .on('mouseenter', function (event, d) {
+        select(this).attr('fill', '#120078').attr('r', 8)
+
+        tooltip
+          .style('display', 'block')
+          .style('top', yScale(yAccessor(d)) - 25 + 'px')
+          .style('left', xScale(xAccessor(d)) + 'px')
+
+        const formatter = format('.2f')
+        const dateFormatter = timeFormat('%B %-d, %Y')
+
+        tooltip.select('.metric-humidity span').text(formatter(xAccessor(d)))
+
+        tooltip.select('.metric-temp span').text(formatter(yAccessor(d)))
+
+        tooltip
+          .select('.metric-date')
+          .text(dateFormatter(d.currently.time * 1000))
+      })
+      .on('mouseleave', function (event, d) {
+        select(this).attr('fill', 'red').attr('r', 5)
+
+        tooltip.style('display', 'none')
+      })
   } catch (error) {
     console.error(error)
   }
