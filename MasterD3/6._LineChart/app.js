@@ -1,11 +1,4 @@
-import {
-  select,
-  csv,
-  scaleLinear,
-  extent,
-  timeParse,
-  scaleUtc,
-} from 'd3'
+import { select, csv, scaleLinear, extent, timeParse, scaleUtc, line } from 'd3'
 
 async function draw() {
   // Data
@@ -50,7 +43,11 @@ async function draw() {
     .domain(extent(dataset, xAccessor))
     .range([0, dimensions.ctrWidth])
 
-  console.log(xScale(xAccessor(dataset[0])), dataset[0])
+  const lineGenerator = line()
+    .x((d) => xScale(xAccessor(d)))
+    .y((d) => yScale(yAccessor(d)))
+
+  console.log(lineGenerator(dataset))
 }
 
 draw()
