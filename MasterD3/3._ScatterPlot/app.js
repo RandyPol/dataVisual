@@ -76,6 +76,12 @@ const draw = async () => {
           .style('display', 'block')
           .style('top', yScale(yAccessor(d)) - 25 + 'px')
           .style('left', xScale(xAccessor(d)) + 'px')
+
+        tooltip.select('.metric-humidity span').text(xAccessor(d))
+
+        tooltip.select('.metric-temp span').text(yAccessor(d))
+
+        tooltip.select('.metric-date').text(d.currently.time)
       })
       .on('mouseleave', function (event, d) {
         select(this).attr('fill', 'red').attr('r', 5)
