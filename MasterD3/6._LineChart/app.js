@@ -66,11 +66,6 @@ async function draw() {
     .attr('fill', 'none')
     .attr('stroke', '#30475e')
     .attr('stroke-width', 2)
-    .on('touchmouse mousemove', function (event) {
-      const mousePos = pointer(event, this)
-      console.log(mousePos)
-    })
-    .on('mouseleave', function (event) {})
 
   // Axes
   const yAxis = axisLeft(yScale)
@@ -100,6 +95,18 @@ async function draw() {
     .attr('stroke-width', 2)
     .style('opacity', 0)
     .style('pointer-events', 'none')
+
+  // Invisible rect to capture mouse movements
+  ctr
+    .append('rect')
+    .style('opacity', 0)
+    .attr('width', dimensions.ctrWidth)
+    .attr('height', dimensions.ctrHeight)
+    .on('touchmouse mousemove', function (event) {
+      const mousePos = pointer(event, this)
+      console.log(mousePos)
+    })
+    .on('mouseleave', function (event) {})
 }
 
 draw()
