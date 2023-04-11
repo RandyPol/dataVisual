@@ -104,7 +104,11 @@ async function draw() {
     .attr('height', dimensions.ctrHeight)
     .on('touchmouse mousemove', function (event) {
       const mousePos = pointer(event, this)
-      console.log(mousePos)
+      // Using the mouse position to find the date in the xScale domain using the invert function
+      const date = xScale.invert(mousePos[0])
+      // Using a bisector to find the index of the date in the dataset
+      const index = d3.bisect(dataset, date)
+      console.log(index)
     })
     .on('mouseleave', function (event) {})
 }
