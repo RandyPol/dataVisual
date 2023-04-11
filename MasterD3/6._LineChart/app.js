@@ -47,7 +47,14 @@ async function draw() {
     .x((d) => xScale(xAccessor(d)))
     .y((d) => yScale(yAccessor(d)))
 
-  console.log(lineGenerator(dataset))
+  // Draw Line
+  ctr
+    .append('path')
+    .datum(dataset)
+    .attr('d', lineGenerator)
+    .attr('fill', 'none')
+    .attr('stroke', '#30475e')
+    .attr('stroke-width', 2)
 }
 
 draw()
