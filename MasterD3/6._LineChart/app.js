@@ -1,4 +1,14 @@
-import { select, csv, scaleLinear, extent, timeParse, scaleUtc, line } from 'd3'
+import {
+  select,
+  csv,
+  scaleLinear,
+  extent,
+  timeParse,
+  scaleUtc,
+  line,
+  axisLeft,
+  axisBottom,
+} from 'd3'
 
 async function draw() {
   // Data
@@ -55,6 +65,18 @@ async function draw() {
     .attr('fill', 'none')
     .attr('stroke', '#30475e')
     .attr('stroke-width', 2)
+
+  // Axes
+  const yAxis = axisLeft(yScale)
+  yAxis.tickFormat((d) => `$${d}`)
+
+  const xAxis = axisBottom(xScale)
+
+  ctr.append('g').call(yAxis)
+  ctr
+    .append('g')
+    .call(xAxis)
+    .attr('transform', `translate(0, ${dimensions.ctrHeight})`)
 }
 
 draw()
