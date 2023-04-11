@@ -9,6 +9,7 @@ import {
   axisLeft,
   axisBottom,
   pointer,
+  bisector
 } from 'd3'
 
 async function draw() {
@@ -107,8 +108,12 @@ async function draw() {
       // Using the mouse position to find the date in the xScale domain using the invert function
       const date = xScale.invert(mousePos[0])
       // Using a bisector to find the index of the date in the dataset
-      const index = d3.bisect(dataset, date)
-      console.log(index)
+      // Custom Bisector - left, center, right
+      const weatherBisect = bisector(xAccessor).left
+      const index = weatherBisect(dataset, date)
+      const weather = dataset[index - 1]
+
+      console.log(weather)
     })
     .on('mouseleave', function (event) {})
 }
