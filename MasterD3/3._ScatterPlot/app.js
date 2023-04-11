@@ -134,7 +134,13 @@ const draw = async () => {
       .attr('fill', 'transparent')
       .attr('d', (d, i) => voronoi.renderCell(i))
       .on('mouseenter', function (event, d) {
-        select(this).attr('fill', '#120078').attr('r', 8)
+        ctr
+          .append('circle')
+          .classed('dot-hovered', true)
+          .attr('fill', '#120078')
+          .attr('r', 8)
+          .attr('cx', xScale(xAccessor(d)))
+          .attr('cy', yScale(yAccessor(d)))
 
         tooltip
           .style('display', 'block')
