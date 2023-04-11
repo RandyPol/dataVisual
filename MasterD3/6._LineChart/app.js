@@ -1,4 +1,11 @@
-import { select, csv, scaleLinear, extent, scaleTime, timeParse } from 'd3'
+import {
+  select,
+  csv,
+  scaleLinear,
+  extent,
+  timeParse,
+  scaleUtc,
+} from 'd3'
 
 async function draw() {
   // Data
@@ -39,7 +46,7 @@ async function draw() {
     .range([dimensions.ctrHeight, 0])
     .nice()
 
-  const xScale = scaleTime()
+  const xScale = scaleUtc()
     .domain(extent(dataset, xAccessor))
     .range([0, dimensions.ctrWidth])
 
