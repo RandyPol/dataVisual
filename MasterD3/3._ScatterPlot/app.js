@@ -66,6 +66,10 @@ const draw = async () => {
       .attr('cy', (d) => yScale(yAccessor(d)))
       .attr('r', 5)
       .attr('data-temp', yAccessor)
+      .on('mouseenter', function (event, d) {
+        console.log(event)
+        console.log(d)
+      })
 
     // Axes
 
