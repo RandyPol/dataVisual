@@ -1,4 +1,4 @@
-import { select, csv, scaleLinear, extent, scaleTime } from 'd3'
+import { select, csv, scaleLinear, extent, scaleTime, timeParse } from 'd3'
 
 async function draw() {
   // Data
@@ -6,8 +6,9 @@ async function draw() {
     'https://gist.githubusercontent.com/RandyPol/2b3a261ddeb3c737eb0cb14e2517968a/raw/10192473b7fb4e7e205ef7e25f2cd6719d2f89ed/appleStock.csv'
   )
 
-  const xAccessor = (d) => d.date
-  const yAccessor = (d) => d.close
+  const parseData = timeParse('%Y-%m-%d')
+  const xAccessor = (d) => parseData(d.date)
+  const yAccessor = (d) => parseInt(d.close)
 
   // Dimensions
   let dimensions = {
@@ -41,6 +42,8 @@ async function draw() {
   const xScale = scaleTime()
     .domain(extent(dataset, xAccessor))
     .range([0, dimensions.ctrWidth])
+
+  console.log(xScale(xAccessor(dataset[0])), dataset[0])
 }
 
 draw()
