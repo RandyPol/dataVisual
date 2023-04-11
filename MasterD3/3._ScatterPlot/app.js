@@ -141,6 +141,7 @@ const draw = async () => {
           .attr('r', 8)
           .attr('cx', xScale(xAccessor(d)))
           .attr('cy', yScale(yAccessor(d)))
+          .style('pointer-events', 'none')
 
         tooltip
           .style('display', 'block')
@@ -159,7 +160,7 @@ const draw = async () => {
           .text(dateFormatter(d.currently.time * 1000))
       })
       .on('mouseleave', function (event, d) {
-        select(this).attr('fill', 'red').attr('r', 5)
+        select('.dot-hovered').remove()
 
         tooltip.style('display', 'none')
       })
