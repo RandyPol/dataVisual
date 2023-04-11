@@ -1,4 +1,12 @@
-import { select, json, scaleLinear, extent, axisBottom, axisLeft } from 'd3'
+import {
+  select,
+  json,
+  scaleLinear,
+  extent,
+  axisBottom,
+  axisLeft,
+  format,
+} from 'd3'
 
 const JSON_URL =
   'https://gist.githubusercontent.com/RandyPol/177c1498022e0afaba65e50b9f3965b3/raw/e167bdc78f43cf44de6b3295f68f39f85960be0d/weatherData.json'
@@ -77,9 +85,11 @@ const draw = async () => {
           .style('top', yScale(yAccessor(d)) - 25 + 'px')
           .style('left', xScale(xAccessor(d)) + 'px')
 
-        tooltip.select('.metric-humidity span').text(xAccessor(d))
+        const formatter = format('.2f')
 
-        tooltip.select('.metric-temp span').text(yAccessor(d))
+        tooltip.select('.metric-humidity span').text(formatter(xAccessor(d)))
+
+        tooltip.select('.metric-temp span').text(formatter(yAccessor(d)))
 
         tooltip.select('.metric-date').text(d.currently.time)
       })
