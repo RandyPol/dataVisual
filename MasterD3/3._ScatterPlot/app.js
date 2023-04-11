@@ -147,6 +147,8 @@ const draw = async () => {
     )
 
     const voronoi = delaunay.voronoi()
+    voronoi.xmax = dimensions.boundedWidth
+    voronoi.ymax = dimensions.boundedHeight
     ctr
       .append('g')
       .selectAll('path')
