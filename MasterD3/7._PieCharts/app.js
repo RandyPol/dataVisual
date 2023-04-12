@@ -1,4 +1,4 @@
-import { select, csv, pie } from 'd3'
+import { select, csv, pie, arc } from 'd3'
 async function draw() {
   // Data
   const dataset = await csv(
@@ -14,6 +14,8 @@ async function draw() {
 
   dimensions.ctrWidth = dimensions.width - dimensions.margins * 2
   dimensions.ctrHeight = dimensions.height - dimensions.margins * 2
+
+  const radius = dimensions.ctrWidth / 2
 
   // Draw Image
   const svg = select('#chart')
@@ -32,7 +34,17 @@ async function draw() {
   const populationPie = pie().value((d) => d.value)
   const slices = populationPie(dataset)
 
-  console.log(slices)
+  const arcFunc = arc().outerRadius(radius).innerRadius(0)
+
+  // Draw Shapes
+  const arcsGroup = ctr
+    .append('g')
+    .attr(
+      'transform',
+      `translate(${dimensions.ctrHeight / 2}, ${dimensions.ctrWidth / 2})`
+    )
+
+  arcsGroup.selectAll('path').data(slices).join('path').attr('d', arcFunc)
 }
 
 draw()
