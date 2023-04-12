@@ -1,4 +1,12 @@
-import { select, csv, pie, arc } from 'd3'
+import {
+  select,
+  csv,
+  pie,
+  arc,
+  scaleOrdinal,
+  quantize,
+  interpolateSpectral,
+} from 'd3'
 async function draw() {
   // Data
   const dataset = await csv(
@@ -36,6 +44,11 @@ async function draw() {
 
   const arcFunc = arc().outerRadius(radius).innerRadius(0)
 
+  const colors = quantize(interpolateSpectral, dataset.length)
+  const colorScale = scaleOrdinal()
+    .domain(dataset.map((element) => element.name))
+    .range(colors)
+
   // Draw Shapes
   const arcsGroup = ctr
     .append('g')
@@ -44,7 +57,12 @@ async function draw() {
       `translate(${dimensions.ctrHeight / 2}, ${dimensions.ctrWidth / 2})`
     )
 
-  arcsGroup.selectAll('path').data(slices).join('path').attr('d', arcFunc)
+  arcsGroup
+    .selectAll('path')
+    .data(slices)
+    .join('path')
+    .attr('d', arcFunc)
+    .attr('fill', (d) => colorScale(d.data.name))
 }
 
 draw()
