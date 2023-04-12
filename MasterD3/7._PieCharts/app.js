@@ -76,6 +76,13 @@ async function draw() {
     .data(slices)
     .join('text')
     .attr('transform', (d) => `translate(${arcFunc.centroid(d)})`)
+    .call((text) =>
+      text
+        .append('tspan')
+        .attr('font-weight', 'bold')
+        .text((d) => d.data.name)
+    )
+    .call((text) => text.append('tspan').text((d) => d.data.value))
 }
 
 draw()
