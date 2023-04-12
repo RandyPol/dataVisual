@@ -56,6 +56,13 @@ async function draw() {
       'transform',
       `translate(${dimensions.ctrHeight / 2}, ${dimensions.ctrWidth / 2})`
     )
+  const labelsGroup = ctr
+    .append('g')
+    .attr(
+      'transform',
+      `translate(${dimensions.ctrHeight / 2}, ${dimensions.ctrWidth / 2})`
+    )
+    .classed('labels', true)
 
   arcsGroup
     .selectAll('path')
@@ -63,6 +70,12 @@ async function draw() {
     .join('path')
     .attr('d', arcFunc)
     .attr('fill', (d) => colorScale(d.data.name))
+
+  labelsGroup
+    .selectAll('text')
+    .data(slices)
+    .join('text')
+    .attr('transform', (d) => `translate(${arcFunc.centroid(d)})`)
 }
 
 draw()
