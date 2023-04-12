@@ -10,6 +10,7 @@ import {
   axisBottom,
   pointer,
   bisector,
+  timeFormat
 } from 'd3'
 
 async function draw() {
@@ -125,6 +126,13 @@ async function draw() {
         .style('display', 'block')
         .style('top', `${yScale(yAccessor(weather)) - 20}px`)
         .style('left', `${xScale(xAccessor(weather))}px`)
+
+      tooltip.select('.price').text(`$${yAccessor(weather)}`)
+
+      const dateFormatter = timeFormat('%B %-d, %Y')
+
+      tooltip.select('.date').text(dateFormatter(xAccessor(weather)))
+   
     })
     .on('mouseleave', function (event) {})
 }
