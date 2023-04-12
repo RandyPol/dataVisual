@@ -9,7 +9,7 @@ import {
   axisLeft,
   axisBottom,
   pointer,
-  bisector
+  bisector,
 } from 'd3'
 
 async function draw() {
@@ -113,7 +113,12 @@ async function draw() {
       const index = weatherBisect(dataset, date)
       const weather = dataset[index - 1]
 
-      console.log(weather)
+      // Update Image
+      tooltipDot
+        .style('opacity', 1)
+        .attr('cx', xScale(xAccessor(weather)))
+        .attr('cy', yScale(yAccessor(weather)))
+        .raise()
     })
     .on('mouseleave', function (event) {})
 }
