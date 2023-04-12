@@ -119,6 +119,12 @@ async function draw() {
         .attr('cx', xScale(xAccessor(weather)))
         .attr('cy', yScale(yAccessor(weather)))
         .raise()
+
+      // Update Tooltip
+      tooltip
+        .style('display', 'block')
+        .style('top', `${yScale(yAccessor(weather)) - 20}px`)
+        .style('left', `${xScale(xAccessor(weather))}px`)
     })
     .on('mouseleave', function (event) {})
 }
