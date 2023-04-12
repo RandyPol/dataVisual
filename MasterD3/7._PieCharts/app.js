@@ -1,6 +1,10 @@
+import { select, csv } from 'd3'
 async function draw() {
   // Data
-  const dataset = await d3.csv('/udata/GXLJYMnMegW/data-7-10.csv')
+  const dataset = await csv(
+    'https://gist.githubusercontent.com/RandyPol/a6f7cf4b2471f0ca189cfe0cb0681168/raw/e48af0e07289f7a7cb2e250f94d32e825dccf91e/population.csv'
+  )
+
 
   // Dimensions
   let dimensions = {
@@ -13,8 +17,7 @@ async function draw() {
   dimensions.ctrHeight = dimensions.height - dimensions.margins * 2
 
   // Draw Image
-  const svg = d3
-    .select('#chart')
+  const svg = select('#chart')
     .append('svg')
     .attr('width', dimensions.width)
     .attr('height', dimensions.height)
