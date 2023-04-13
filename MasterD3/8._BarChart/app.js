@@ -1,4 +1,4 @@
-import { csv, select, autoType } from 'd3'
+import { csv, select, autoType, stack } from 'd3'
 
 async function draw() {
   // Data
@@ -35,6 +35,8 @@ async function draw() {
     )
 
   // Scales
+  const stackGenerator = stack().keys(dataset.columns.slice(1))
+  console.log(dataset.columns.slice(1))
 }
 
 draw()
