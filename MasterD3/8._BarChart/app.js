@@ -1,11 +1,16 @@
-import { csv, select } from 'd3'
+import { csv, select, autoType } from 'd3'
 
 async function draw() {
   // Data
   const dataset = await csv(
-    'https://gist.githubusercontent.com/RandyPol/79d3de93f8d429c9e28918aa31c425db/raw/81afee6e4de3148d068cb46412e36de8df1f23f9/statePopulation.csv'
+    'https://gist.githubusercontent.com/RandyPol/79d3de93f8d429c9e28918aa31c425db/raw/81afee6e4de3148d068cb46412e36de8df1f23f9/statePopulation.csv',
+    (d) => {
+      autoType(d)
+      return d
+    }
   )
 
+  console.log(dataset)
   // Dimensions
   let dimensions = {
     width: 1000,
