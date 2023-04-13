@@ -39,7 +39,9 @@ async function draw() {
     )
 
   // Scales
-  const populationPie = pie().value((d) => d.value)
+  const populationPie = pie()
+    .value((d) => d.value)
+    .sort(null)
   const slices = populationPie(dataset)
 
   const arcFunc = arc().outerRadius(radius).innerRadius(0)
