@@ -43,6 +43,7 @@ async function draw() {
   const slices = populationPie(dataset)
 
   const arcFunc = arc().outerRadius(radius).innerRadius(0)
+  const arcLabels = arc().outerRadius(radius).innerRadius(200)
 
   const colors = quantize(interpolateSpectral, dataset.length)
   const colorScale = scaleOrdinal()
@@ -75,7 +76,7 @@ async function draw() {
     .selectAll('text')
     .data(slices)
     .join('text')
-    .attr('transform', (d) => `translate(${arcFunc.centroid(d)})`)
+    .attr('transform', (d) => `translate(${arcLabels.centroid(d)})`)
     .call((text) =>
       text
         .append('tspan')
