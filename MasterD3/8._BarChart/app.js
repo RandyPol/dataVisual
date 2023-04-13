@@ -61,6 +61,9 @@ async function draw() {
   const xScale = scaleBand()
     .domain(dataset.map((state) => state.name))
     .range([dimensions.margins, dimensions.ctrWidth])
+    // .paddingInner(0.1)
+    // .paddingOuter(0.1)
+    .padding(0.1) // paddingInner + paddingOuter
 
   const colorScale = scaleOrdinal()
     .domain(stackData.map((d) => d.key))
