@@ -8,6 +8,8 @@ import {
   scaleBand,
   scaleOrdinal,
   schemeSpectral,
+  axisLeft,
+  axisBottom,
 } from 'd3'
 
 async function draw() {
@@ -82,6 +84,20 @@ async function draw() {
     .attr('y', (d) => yScale(d[1]))
     .attr('height', (d) => yScale(d[0]) - yScale(d[1]))
     .attr('width', xScale.bandwidth())
+
+  // Draw Axis
+  const xAxis = axisBottom(xScale).tickSizeOuter(0)
+  const yAxis = axisLeft(yScale).ticks(null, 's')
+
+  ctr
+    .append('g')
+    .attr('transform', `translate(0,${dimensions.ctrHeight})`)
+    .call(xAxis)
+
+  ctr
+    .append('g')
+    .attr('transform', `translate(${dimensions.margins}, 0)`)
+    .call(yAxis)
 }
 
 draw()
