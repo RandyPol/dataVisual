@@ -1,4 +1,4 @@
-import { csv, select, autoType, stack, scaleLinear, max } from 'd3'
+import { csv, select, autoType, stack, scaleLinear, max, scaleBand } from 'd3'
 
 async function draw() {
   // Data
@@ -44,6 +44,11 @@ async function draw() {
   const yScale = scaleLinear()
     .domain([0, max(stackData, (ag) => max(ag, (s) => s[1]))])
     .rangeRound([dimensions.ctrHeight, dimensions.margins])
+
+  // xScale
+  const xScale = scaleBand()
+    .domain(dataset.map((state) => state.name))
+    .range([dimensions.margins, dimensions.ctrWidth])
 }
 
 draw()
