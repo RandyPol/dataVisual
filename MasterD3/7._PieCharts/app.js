@@ -79,10 +79,18 @@ async function draw() {
     .call((text) =>
       text
         .append('tspan')
+        .attr('y', '-4')
         .attr('font-weight', 'bold')
         .text((d) => d.data.name)
     )
-    .call((text) => text.append('tspan').text((d) => d.data.value))
+    .call((text) =>
+      text
+        .filter((d) => d.endAngle - d.startAngle > 0.25)
+        .append('tspan')
+        .attr('x', 0)
+        .attr('y', 9)
+        .text((d) => d.data.value)
+    )
 }
 
 draw()
