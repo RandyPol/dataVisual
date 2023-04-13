@@ -9,8 +9,6 @@ async function draw() {
       return d
     }
   )
-
-  console.log(dataset)
   // Dimensions
   let dimensions = {
     width: 1000,
@@ -36,7 +34,13 @@ async function draw() {
 
   // Scales
   const stackGenerator = stack().keys(dataset.columns.slice(1))
-  console.log(dataset.columns.slice(1))
+
+  const stackData = stackGenerator(dataset).map(ageGroup => {
+    ageGroup.forEach(state => state.key = ageGroup.key)
+    return ageGroup
+})
+
+  console.log(stackData)
 }
 
 draw()
