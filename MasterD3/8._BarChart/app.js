@@ -10,17 +10,21 @@ import {
   schemeSpectral,
   axisLeft,
   axisBottom,
+  sum,
 } from 'd3'
 
 async function draw() {
   // Data
   const dataset = await csv(
     'https://gist.githubusercontent.com/RandyPol/79d3de93f8d429c9e28918aa31c425db/raw/81afee6e4de3148d068cb46412e36de8df1f23f9/statePopulation.csv',
-    (d) => {
+    (d, i, columns) => {
       autoType(d)
+      d.total = sum(columns, (c) => d[c])
       return d
     }
   )
+
+  dataset.sort((a, b) => b.total - a.total)
   // Dimensions
   let dimensions = {
     width: 1000,
