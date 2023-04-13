@@ -1,4 +1,4 @@
-import { csv, select, autoType, stack } from 'd3'
+import { csv, select, autoType, stack, scaleLinear, max } from 'd3'
 
 async function draw() {
   // Data
@@ -35,12 +35,15 @@ async function draw() {
   // Scales
   const stackGenerator = stack().keys(dataset.columns.slice(1))
 
-  const stackData = stackGenerator(dataset).map(ageGroup => {
-    ageGroup.forEach(state => state.key = ageGroup.key)
+  const stackData = stackGenerator(dataset).map((ageGroup) => {
+    ageGroup.forEach((state) => (state.key = ageGroup.key))
     return ageGroup
-})
+  })
 
-  console.log(stackData)
+  // yScale
+  const yScale = scaleLinear()
+    .domain([0, max(stackData, (ag) => max(ag, (s) => s[1]))])
+    .rangeRound([dimensions.ctrHeight, dimensions.margins])
 }
 
 draw()
